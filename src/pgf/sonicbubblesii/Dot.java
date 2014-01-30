@@ -14,6 +14,7 @@ public class Dot {
 	
 	// constructors
 	public Dot() {
+		//limitX = DrawingView.
 		Random random = new Random();
 		posX = random.nextInt(500); // TODO: use dimensions of view as random limits
 		posY = random.nextInt(500);

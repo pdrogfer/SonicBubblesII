@@ -26,7 +26,9 @@ public class DrawingView extends View {
 	private Paint drawPaint, canvasPaint, dotPaint;
 	// drawing path
 	private Path drawPath;
-	Dot[] dots = new Dot[10];
+	// game size
+	private int gameSize = 4;
+	Dot[] dots = new Dot[gameSize + 1];
 	// Log tags
 	private final String SB = "Sonic Bubbles II";
 
@@ -71,7 +73,7 @@ public class DrawingView extends View {
 	}
 
 	void setupDots() {
-		for (int n = 0; n < 5; n++) {
+		for (int n = 0; n < dots.length; n++) {
 			dots[n] = new Dot();
 			Log.i(SB, "new Dot created");
 		}
