@@ -1,5 +1,7 @@
 package pgf.sonicbubblesii;
 
+import java.util.Random;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -7,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,12 +26,15 @@ public class DrawingView extends View {
 	private Paint drawPaint, canvasPaint, dotPaint;
 	// drawing path
 	private Path drawPath;
-	private float[] dots = {25, 66, 343, 555, 432, 767, 443, 999}; 
-	
+	Dot[] dots = new Dot[10];
+	// Log tags
+	private final String SB = "Sonic Bubbles II";
+
 	// constructors
 	public DrawingView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setupDrawing();
+		setupDots();
 	}
 
 	// methods
@@ -48,12 +54,11 @@ public class DrawingView extends View {
 		// configure the style for the dots with dotPaint
 		dotPaint = new Paint();
 		dotPaint.setColor(dotColor);
-		dotPaint.setStrokeWidth(brushSize*2);
+		dotPaint.setStrokeWidth(brushSize * 2);
 		dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 		drawPaint.setStrokeJoin(Paint.Join.ROUND);
 		drawPaint.setStrokeCap(Paint.Cap.ROUND);
-		
-		
+
 	}
 
 	@Override
@@ -65,16 +70,24 @@ public class DrawingView extends View {
 
 	}
 
+	void setupDots() {
+		for (int n = 0; n < 5; n++) {
+			dots[n] = new Dot();
+			Log.i(SB, "new Dot created");
+		}
+	}
+
 	@Override
 	protected void onDraw(Canvas canvas) {
 		// draw DrawingView
 		canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
-		canvas.drawCircle(dots[0], dots[1], 30, dotPaint);
-		canvas.drawCircle(dots[2], dots[3], 30, dotPaint);
-		canvas.drawCircle(dots[4], dots[5], 30, dotPaint);
-		canvas.drawCircle(dots[6], dots[7], 30, dotPaint);
+		// draw the dot objects
+		for (int d = 0; d < 4; d++) {
+			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), 30,
+					dotPaint);
+		}
 		canvas.drawPath(drawPath, drawPaint);
-		
+
 	}
 
 	@Override
@@ -82,11 +95,10 @@ public class DrawingView extends View {
 		// handle user touch, and proximity to Dots for sound triggering
 		float touchX = event.getX();
 		float touchY = event.getY();
-		
-		// TODO: if touchX, touchY is close enough to each Dot... 
-		
-		
-		switch(event.getAction()) {
+
+		// TODO: if touchX, touchY is close enough to each Dot...
+
+		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			drawPath.moveTo(touchX, touchY);
 			break;
@@ -97,16 +109,16 @@ public class DrawingView extends View {
 			drawCanvas.drawPath(drawPath, drawPaint);
 			drawPath.reset();
 			break;
-			default:
-				return false;
+		default:
+			return false;
 		}
 		invalidate();
 		return true;
 	}
-	
+
 	public void startNew() {
 		drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
 		invalidate();
 	}
-	
+
 }
