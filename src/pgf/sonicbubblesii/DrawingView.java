@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -17,6 +18,7 @@ import android.view.View;
 public class DrawingView extends View {
 
 	// native variables:
+	private String width, height;
 	private Canvas drawCanvas;
 	private Bitmap canvasBitmap;
 	private int paintColor = 0xffff0000;
@@ -26,6 +28,10 @@ public class DrawingView extends View {
 	private Paint drawPaint, canvasPaint, dotPaint;
 	// drawing path
 	private Path drawPath;
+	// canvas size
+	public static int w;
+	public static int h;
+	public float scale;
 	// game size
 	private int gameSize = 4;
 	Dot[] dots = new Dot[gameSize + 1];
@@ -36,6 +42,7 @@ public class DrawingView extends View {
 	public DrawingView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setupDrawing();
+		measures();
 		setupDots();
 	}
 
@@ -72,10 +79,23 @@ public class DrawingView extends View {
 
 	}
 
+	void measures() {
+		DisplayMetrics metrics = this.getResources().getDisplayMetrics();
+		w = metrics.widthPixels;
+		h = metrics.heightPixels;
+		scale = metrics.scaledDensity;
+
+		width = Integer.toString(w);
+		height = Integer.toString(h);
+		Log.i(SB, "Canvas is " + width + "*" + height);
+	}
+
 	void setupDots() {
 		for (int n = 0; n < dots.length; n++) {
-			dots[n] = new Dot();
-			Log.i(SB, "new Dot created");
+			Dot dot = new Dot();
+			dots[n] = dot;
+			Log.i(SB, "new Dot at x" + Integer.toString(dot.getPosX()) + ", "
+					+ "y" + Integer.toString(dot.getPosY()));
 		}
 	}
 
