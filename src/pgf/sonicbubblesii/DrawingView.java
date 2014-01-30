@@ -81,8 +81,8 @@ public class DrawingView extends View {
 
 	void measures() {
 		DisplayMetrics metrics = this.getResources().getDisplayMetrics();
-		w = metrics.widthPixels;
-		h = metrics.heightPixels;
+		this.w = metrics.widthPixels;
+		this.h = metrics.heightPixels;
 		scale = metrics.scaledDensity;
 
 		width = Integer.toString(w);
@@ -105,7 +105,7 @@ public class DrawingView extends View {
 		canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
 		// draw the dot objects
 		for (int d = 0; d < 4; d++) {
-			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), 30,
+			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRadius(),
 					dotPaint);
 		}
 		canvas.drawPath(drawPath, drawPaint);

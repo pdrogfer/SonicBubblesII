@@ -10,15 +10,16 @@ public class Dot {
 
 	// native variables
 	int posX, posY;
-	int radius = 10;
+	int radius = 30; // TODO make it relative to canvas width
 
 	// constructors
 	public Dot() {
 		// allocate the dot somewhere within the canvas limits, and away from
 		// the borders
 		Random random = new Random();
-		posX = random.nextInt((DrawingView.w - radius) + 1) + radius;
-		posY = random.nextInt((DrawingView.h - radius) + 1) + radius;
+		// TODO Canvas dimensions are not true. 
+		posX = random.nextInt((DrawingView.w - radius*2) + 1) + radius*2;
+		posY = random.nextInt((DrawingView.h - radius*4) + 1) + radius*4;
 	}
 
 	// methods
