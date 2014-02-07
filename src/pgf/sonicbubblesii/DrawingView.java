@@ -1,7 +1,5 @@
 package pgf.sonicbubblesii;
 
-import java.util.Random;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -9,16 +7,13 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
 public class DrawingView extends View {
 
 	// native variables:
-	private String width, height;
 	private Canvas drawCanvas;
 	private Bitmap canvasBitmap;
 	private int paintColor = 0xffff0000;
@@ -29,8 +24,7 @@ public class DrawingView extends View {
 	// drawing path
 	private Path drawPath;
 	// canvas size
-	public static int w;
-	public static int h;
+	static int width, height;
 	public float scale;
 	// game size
 	private int gameSize = 4;
@@ -42,8 +36,6 @@ public class DrawingView extends View {
 	public DrawingView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setupDrawing();
-		measures();
-		setupDots();
 	}
 
 	// methods
@@ -57,7 +49,6 @@ public class DrawingView extends View {
 		drawPaint.setStyle(Paint.Style.STROKE);
 		drawPaint.setStrokeJoin(Paint.Join.ROUND);
 		drawPaint.setStrokeCap(Paint.Cap.ROUND);
-
 		canvasPaint = new Paint(Paint.DITHER_FLAG);
 
 		// configure the style for the dots with dotPaint
@@ -76,26 +67,25 @@ public class DrawingView extends View {
 
 		canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
 		drawCanvas = new Canvas(canvasBitmap);
+		width = w;
+		height = h;
+		Log.i(SB, "inside onSizeChanged Canvas in " + width + "x" + height);
 
-	}
+		// Funny and crazy that setUpDots() must be placed here to get it
+		// working properly!!
+		setupDots();
 
-	void measures() {
-		DisplayMetrics metrics = this.getResources().getDisplayMetrics();
-		this.w = metrics.widthPixels;
-		this.h = metrics.heightPixels;
-		scale = metrics.scaledDensity;
-
-		width = Integer.toString(w);
-		height = Integer.toString(h);
-		Log.i(SB, "Canvas is " + width + "*" + height);
 	}
 
 	void setupDots() {
 		for (int n = 0; n < dots.length; n++) {
 			Dot dot = new Dot();
+			dot.setPosX();
+			dot.setPosY();
 			dots[n] = dot;
-			Log.i(SB, "new Dot at x" + Integer.toString(dot.getPosX()) + ", "
-					+ "y" + Integer.toString(dot.getPosY()));
+			Log.i(SB,
+					"new Dot at x" + Integer.toString(dot.getPosX()) + ", " + "y"
+							+ Integer.toString(dot.getPosY()));
 		}
 	}
 
@@ -103,10 +93,12 @@ public class DrawingView extends View {
 	protected void onDraw(Canvas canvas) {
 		// draw DrawingView
 		canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
+
+		Log.i(SB, "inside onDraw Canvas in " + width + "x" + height);
+
 		// draw the dot objects
 		for (int d = 0; d < 4; d++) {
-			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRadius(),
-					dotPaint);
+			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRadius(), dotPaint);
 		}
 		canvas.drawPath(drawPath, drawPaint);
 
@@ -140,6 +132,7 @@ public class DrawingView extends View {
 
 	public void startNew() {
 		drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
+		setupDots();
 		invalidate();
 	}
 
