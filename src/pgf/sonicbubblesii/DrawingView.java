@@ -28,7 +28,7 @@ public class DrawingView extends View {
 	public float scale;
 	// game size
 	private int gameSize = 4;
-	Dot[] dots = new Dot[gameSize + 1];
+	Dot[] dots = new Dot[gameSize];
 	// Log tags
 	private final String SB = "Sonic Bubbles II";
 
@@ -80,13 +80,59 @@ public class DrawingView extends View {
 	void setupDots() {
 		for (int n = 0; n < dots.length; n++) {
 			Dot dot = new Dot();
-			dot.setPosX();
-			dot.setPosY();
+			// place the dot correctly in the canvas
+			do {
+				dot.setPosX();
+
+			} while (dot.getPosX() < dot.getRadius() * 1.5
+					|| dot.getPosX() > (width - dot.getRadius() * 1.5)
+					|| checkCollisionX(n, dot.getPosX()));
+			do {
+				dot.setPosY();
+			} while (dot.getPosY() < dot.getRadius() * 1.5
+					|| dot.getPosY() > (height - dot.getRadius() * 1.5)
+					|| checkCollisionY(n, dot.getPosY()));
 			dots[n] = dot;
 			Log.i(SB,
 					"new Dot at x" + Integer.toString(dot.getPosX()) + ", " + "y"
 							+ Integer.toString(dot.getPosY()));
 		}
+	}
+
+	private boolean checkCollisionX(int n, int tempPosX) {
+		// check collisions with other dots
+		if (n == 0) {
+			return false;
+		} else {
+			for (int i = 0; i < n; i++) {
+				int dotsDistX = Math.abs(tempPosX - dots[i].getPosX());
+				Log.i(SB, "X distance: " + dotsDistX);
+				if (dotsDistX <= Dot.radius*2) {
+					Log.i(SB, "too close!! repeat");
+					return true;
+				}
+			}
+			return false;
+		}
+
+	}
+
+	private boolean checkCollisionY(int n, int tempPosY) {
+		// check collisions with other dots
+		if (n == 0) {
+			return false;
+		} else {
+			for (int i = 0; i < n; i++) {
+				int dotsDistY = Math.abs(tempPosY - dots[i].getPosY());
+				Log.i(SB, "Y distance: " + dotsDistY);
+				if (dotsDistY <= Dot.radius*2) {
+					Log.i(SB, "too close!! repeat");
+					return true;
+				}
+			}
+			return false;
+		}
+
 	}
 
 	@Override

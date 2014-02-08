@@ -9,8 +9,8 @@ import java.util.Random;
 public class Dot {
 
 	// native variables
-	int posX, posY;
-	int radius = 30; // TODO make it relative to canvas width
+	private int posX, posY;
+	static int radius = DrawingView.width / 25; // TO make it relative to canvas width
 	Random random = new Random();
 
 	// constructors
