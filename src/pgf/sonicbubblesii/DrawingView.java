@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
+import android.media.SoundPool;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -26,11 +27,13 @@ public class DrawingView extends View {
 	// canvas size
 	static int width, height;
 	public float scale;
-	// game size
+	// game size, as the number of dots. Init = 4
 	private int gameSize = 4;
 	Dot[] dots = new Dot[gameSize];
 	// Log tags
 	private final String SB = "Sonic Bubbles II";
+
+
 
 	// constructors
 	public DrawingView(Context context, AttributeSet attrs) {
@@ -83,7 +86,6 @@ public class DrawingView extends View {
 			// place the dot correctly in the canvas
 			do {
 				dot.setPosX();
-
 			} while (dot.getPosX() < dot.getRadius() * 1.5
 					|| dot.getPosX() > (width - dot.getRadius() * 1.5)
 					|| checkCollisionX(n, dot.getPosX()));
@@ -92,6 +94,7 @@ public class DrawingView extends View {
 			} while (dot.getPosY() < dot.getRadius() * 1.5
 					|| dot.getPosY() > (height - dot.getRadius() * 1.5)
 					|| checkCollisionY(n, dot.getPosY()));
+			dot.setSample(GameActivity.levels);
 			dots[n] = dot;
 			Log.i(SB,
 					"new Dot at x" + Integer.toString(dot.getPosX()) + ", " + "y"
@@ -107,7 +110,7 @@ public class DrawingView extends View {
 			for (int i = 0; i < n; i++) {
 				int dotsDistX = Math.abs(tempPosX - dots[i].getPosX());
 				Log.i(SB, "X distance: " + dotsDistX);
-				if (dotsDistX <= Dot.radius*2) {
+				if (dotsDistX <= Dot.radius * 2) {
 					Log.i(SB, "too close!! repeat");
 					return true;
 				}
@@ -125,7 +128,7 @@ public class DrawingView extends View {
 			for (int i = 0; i < n; i++) {
 				int dotsDistY = Math.abs(tempPosY - dots[i].getPosY());
 				Log.i(SB, "Y distance: " + dotsDistY);
-				if (dotsDistY <= Dot.radius*2) {
+				if (dotsDistY <= Dot.radius * 2) {
 					Log.i(SB, "too close!! repeat");
 					return true;
 				}
@@ -140,10 +143,10 @@ public class DrawingView extends View {
 		// draw DrawingView
 		canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
 
-		Log.i(SB, "inside onDraw Canvas in " + width + "x" + height);
+		// Log.i(SB, "inside onDraw Canvas in " + width + "x" + height);
 
 		// draw the dot objects
-		for (int d = 0; d < 4; d++) {
+		for (int d = 0; d < dots.length; d++) {
 			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRadius(), dotPaint);
 		}
 		canvas.drawPath(drawPath, drawPaint);
@@ -161,9 +164,11 @@ public class DrawingView extends View {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			drawPath.moveTo(touchX, touchY);
+			sound(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_MOVE:
 			drawPath.lineTo(touchX, touchY);
+			sound(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_UP:
 			drawCanvas.drawPath(drawPath, drawPaint);
@@ -174,6 +179,15 @@ public class DrawingView extends View {
 		}
 		invalidate();
 		return true;
+	}
+
+	private void sound(float touchX, float touchY) {
+		/*
+		 * Handle sound events and also associated animations like changing the
+		 * color of the dots, size... Consider also using images and png based
+		 * animations
+		 */
+
 	}
 
 	public void startNew() {

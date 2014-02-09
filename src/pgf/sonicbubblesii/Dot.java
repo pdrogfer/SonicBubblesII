@@ -6,18 +6,24 @@ package pgf.sonicbubblesii;
 
 import java.util.Random;
 
+import android.util.Log;
+
 public class Dot {
 
 	// native variables
+	private final String SBDot = "Sonic Bubbles II-Dot";
+
 	private int posX, posY;
-	static int radius = DrawingView.width / 25; // TO make it relative to canvas width
+	private int sampleInd; // index of the sample corresponding to the dot
+	static int radius = DrawingView.width / 25; // TO make it relative to canvas
+												// width
 	Random random = new Random();
 
 	// constructors
 	public Dot() {
 		// allocate the dot somewhere within the canvas limits, and away from
 		// the borders
-		
+
 	}
 
 	// methods
@@ -50,4 +56,18 @@ public class Dot {
 		this.radius = radius;
 	}
 
+	/* That is: as the soundpool objects are represented by it's index (int),
+	 * each new dot created will have a random int associated ("sampleInd"), in the range of the 
+	 * actual game-level(represented here by the amount of possible sounds, "samplesSize") 
+	 * used to fire the sample
+	 */
+	public void setSample(int samplesSize) {
+		sampleInd = random.nextInt(samplesSize);
+		Log.i(SBDot, "This dot sample index is: " + sampleInd);
+		
+	}
+
+	public int getSample() {
+		return sampleInd;
+	}
 }
