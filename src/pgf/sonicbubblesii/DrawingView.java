@@ -162,7 +162,7 @@ public class DrawingView extends View {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			drawPath.moveTo(touchX, touchY);
-			checkBubble(touchX, touchY);
+			//checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_MOVE:
 			drawPath.lineTo(touchX, touchY);
@@ -170,7 +170,6 @@ public class DrawingView extends View {
 			break;
 		case MotionEvent.ACTION_UP:
 			drawCanvas.drawPath(drawPath, drawPaint);
-			checkBubble(touchX, touchY);
 			drawPath.reset();
 			break;
 		default:
@@ -187,6 +186,10 @@ public class DrawingView extends View {
 		 * animations
 		 */
 		for (Dot eachDot: dots) {
+			/* TODO: improve performance, by checking if a former finger position is still
+			 * within the radius of the dot, to not compute it and avoid duplicated
+			 * sound triggerings
+			 */
 			double x, y;
 			x = touchX - eachDot.getPosX();
 			y = touchY - eachDot.getPosY();
