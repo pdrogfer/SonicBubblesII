@@ -31,13 +31,10 @@ public class DrawingView extends View {
 	private int gameSize = 4;
 	Dot[] dots = new Dot[gameSize];
 	// to help with movement
-	private double oldTime = 0;
-	private double newTime = 0;
+	private boolean onTheDot = false;
 
 	// Log tags
 	private final String SB = "Sonic Bubbles II";
-
-
 
 	// constructors
 	public DrawingView(Context context, AttributeSet attrs) {
@@ -102,14 +99,15 @@ public class DrawingView extends View {
 			dots[n] = dot;
 			Log.i(SB,
 					"new Dot at (x" + Integer.toString(dot.getPosX()) + ", " + "y"
-							+ Integer.toString(dot.getPosY()) + ") and sampleIndex " + dot.getSample());
+							+ Integer.toString(dot.getPosY()) + ") and sampleIndex "
+							+ dot.getSample());
 		}
 	}
 
 	private boolean checkCollisionX(int n, int tempPosX) {
-		/* check collisions with other dots. 
-		 * This is a poor implementation. Use Math.hypoth to simplify and 
-		 * reduce the number of functions
+		/*
+		 * check collisions with other dots. This is a poor implementation. Use
+		 * Math.hypoth to simplify and reduce the number of functions
 		 */
 		if (n == 0) {
 			return false;
@@ -163,23 +161,16 @@ public class DrawingView extends View {
 		// handle user touch, and proximity to Dots for sound triggering
 		float touchX = event.getX();
 		float touchY = event.getY();
-		newTime = event.getEventTime();
-
-		// TODO: if touchX, touchY is close enough to each Dot...
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			drawPath.moveTo(touchX, touchY);
-			//checkBubble(touchX, touchY);
+			// checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_MOVE:
 			drawPath.lineTo(touchX, touchY);
-			Log.i(SB, "time of touch event: " + newTime);
-			if (newTime - oldTime > 0.000001) {
-				// checkBubble at 0.1 seconds periods
-				checkBubble(touchX, touchY);
-				oldTime = newTime;
-			}
+			Log.i(SB, "");
+			checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_UP:
 			drawCanvas.drawPath(drawPath, drawPaint);
@@ -194,26 +185,32 @@ public class DrawingView extends View {
 
 	private void checkBubble(float touchX, float touchY) {
 		/*
-		 * Handle proximity events and also associated animations like changing the
-		 * color of the dots, size... Consider also using images and png based
-		 * animations
+		 * Handle proximity events and also associated animations like changing
+		 * the color of the dots, size... Consider also using images and png
+		 * based animations
 		 */
-		for (Dot eachDot: dots) {
-			/* TODO: improve performance, by checking if a former finger position is still
-			 * within the radius of the dot, to not compute it and avoid duplicated
-			 * sound triggerings
+		for (Dot eachDot : dots) {
+			/*
+			 * TODO: improve performance, by checking if a former finger
+			 * position is still within the radius of the dot, to not compute it
+			 * and avoid duplicated sound triggerings
 			 */
 			double x, y;
 			x = touchX - eachDot.getPosX();
 			y = touchY - eachDot.getPosY();
-			if ((Math.hypot(x, y) < Dot.radius)) { 
-				// TODO If finger is close enough to dot, fire the associated sample
+			if ((Math.hypot(x, y) < Dot.radius) && onTheDot == false) {
+				// If finger is close enough to dot, fire it's sample
 				Log.i(SB, "The finger is near dot with sampleIndex " + eachDot.getSample());
 				GameActivity.doSound(eachDot.getSample());
+				onTheDot = true;
 				break;
 			}
-			
-		};
+			else if ((Math.hypot(x, y) > Dot.radius*1.5) && onTheDot == true) {
+				onTheDot = false;
+			}
+
+		}
+		;
 	}
 
 	public void startNew() {
