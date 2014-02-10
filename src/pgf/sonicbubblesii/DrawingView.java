@@ -30,6 +30,10 @@ public class DrawingView extends View {
 	// game size, as the number of dots. Init = 4
 	private int gameSize = 4;
 	Dot[] dots = new Dot[gameSize];
+	// to help with movement
+	private double oldTime = 0;
+	private double newTime = 0;
+
 	// Log tags
 	private final String SB = "Sonic Bubbles II";
 
@@ -103,7 +107,10 @@ public class DrawingView extends View {
 	}
 
 	private boolean checkCollisionX(int n, int tempPosX) {
-		// check collisions with other dots
+		/* check collisions with other dots. 
+		 * This is a poor implementation. Use Math.hypoth to simplify and 
+		 * reduce the number of functions
+		 */
 		if (n == 0) {
 			return false;
 		} else {
@@ -156,6 +163,7 @@ public class DrawingView extends View {
 		// handle user touch, and proximity to Dots for sound triggering
 		float touchX = event.getX();
 		float touchY = event.getY();
+		newTime = event.getEventTime();
 
 		// TODO: if touchX, touchY is close enough to each Dot...
 
@@ -166,7 +174,12 @@ public class DrawingView extends View {
 			break;
 		case MotionEvent.ACTION_MOVE:
 			drawPath.lineTo(touchX, touchY);
-			checkBubble(touchX, touchY);
+			Log.i(SB, "time of touch event: " + newTime);
+			if (newTime - oldTime > 0.000001) {
+				// checkBubble at 0.1 seconds periods
+				checkBubble(touchX, touchY);
+				oldTime = newTime;
+			}
 			break;
 		case MotionEvent.ACTION_UP:
 			drawCanvas.drawPath(drawPath, drawPaint);
@@ -193,10 +206,11 @@ public class DrawingView extends View {
 			double x, y;
 			x = touchX - eachDot.getPosX();
 			y = touchY - eachDot.getPosY();
-			if (Math.hypot(x, y) < Dot.radius) {
+			if ((Math.hypot(x, y) < Dot.radius)) { 
 				// TODO If finger is close enough to dot, fire the associated sample
 				Log.i(SB, "The finger is near dot with sampleIndex " + eachDot.getSample());
 				GameActivity.doSound(eachDot.getSample());
+				break;
 			}
 			
 		};

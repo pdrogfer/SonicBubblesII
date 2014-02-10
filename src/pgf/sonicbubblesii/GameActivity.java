@@ -8,6 +8,7 @@ import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -135,6 +136,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		float volume = 1;
 		if (loaded) {
 			soundPool.play(levelSamples.get(sndId) + 1, volume, volume, 1, 0, 1f);
+			Log.i("tag", "sampleTriggered");
 		}
 	}
 
