@@ -63,7 +63,7 @@ public class Dot {
 	 */
 	public void setSample(int samplesSize) {
 		sampleInd = random.nextInt(samplesSize);
-		Log.i(SBDot, "This dot sample index is: " + sampleInd);
+		//Log.i(SBDot, "This dot sample index is: " + sampleInd);
 		
 	}
 

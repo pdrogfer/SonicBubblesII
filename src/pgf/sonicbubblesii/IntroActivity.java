@@ -11,6 +11,7 @@ import android.widget.Button;
 public class IntroActivity extends Activity implements OnClickListener {
 	
 	Button startGame;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

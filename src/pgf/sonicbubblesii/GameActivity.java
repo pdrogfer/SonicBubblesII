@@ -20,14 +20,14 @@ public class GameActivity extends Activity implements OnClickListener {
 	DrawingView drawView;
 
 	// for sound
-	private SoundPool soundPool;
+	private static SoundPool soundPool;
 	private int soundC, soundCS, soundD, soundDS, soundE, soundF, soundFS, soundG, soundGS, soundA,
 			soundAS, soundB;
-	boolean loaded = false;
+	static boolean loaded = false;
 	// the level of difficulty, as the number of possible samples. Init = 4
 	static int levels = 4;
 	// an arraylist of int to define wich samples are used in each level
-	List<Integer> levelSamples = new ArrayList<Integer>();
+	static List<Integer> levelSamples = new ArrayList<Integer>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -131,8 +131,17 @@ public class GameActivity extends Activity implements OnClickListener {
 
 	}
 
-	public void doSound() {
+	public static void doSound(int sndId) {
+		float volume = 1;
+		if (loaded) {
+			soundPool.play(levelSamples.get(sndId) + 1, volume, volume, 1, 0, 1f);
+		}
+	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		soundPool.release();
 	}
 
 }

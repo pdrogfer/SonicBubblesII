@@ -97,8 +97,8 @@ public class DrawingView extends View {
 			dot.setSample(GameActivity.levels);
 			dots[n] = dot;
 			Log.i(SB,
-					"new Dot at x" + Integer.toString(dot.getPosX()) + ", " + "y"
-							+ Integer.toString(dot.getPosY()));
+					"new Dot at (x" + Integer.toString(dot.getPosX()) + ", " + "y"
+							+ Integer.toString(dot.getPosY()) + ") and sampleIndex " + dot.getSample());
 		}
 	}
 
@@ -109,9 +109,9 @@ public class DrawingView extends View {
 		} else {
 			for (int i = 0; i < n; i++) {
 				int dotsDistX = Math.abs(tempPosX - dots[i].getPosX());
-				Log.i(SB, "X distance: " + dotsDistX);
+				// Log.i(SB, "X distance: " + dotsDistX);
 				if (dotsDistX <= Dot.radius * 2) {
-					Log.i(SB, "too close!! repeat");
+					// Log.i(SB, "too close!! repeat");
 					return true;
 				}
 			}
@@ -127,9 +127,9 @@ public class DrawingView extends View {
 		} else {
 			for (int i = 0; i < n; i++) {
 				int dotsDistY = Math.abs(tempPosY - dots[i].getPosY());
-				Log.i(SB, "Y distance: " + dotsDistY);
+				// Log.i(SB, "Y distance: " + dotsDistY);
 				if (dotsDistY <= Dot.radius * 2) {
-					Log.i(SB, "too close!! repeat");
+					// Log.i(SB, "too close!! repeat");
 					return true;
 				}
 			}
@@ -142,8 +142,6 @@ public class DrawingView extends View {
 	protected void onDraw(Canvas canvas) {
 		// draw DrawingView
 		canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
-
-		// Log.i(SB, "inside onDraw Canvas in " + width + "x" + height);
 
 		// draw the dot objects
 		for (int d = 0; d < dots.length; d++) {
@@ -164,14 +162,15 @@ public class DrawingView extends View {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			drawPath.moveTo(touchX, touchY);
-			sound(touchX, touchY);
+			checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_MOVE:
 			drawPath.lineTo(touchX, touchY);
-			sound(touchX, touchY);
+			checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_UP:
 			drawCanvas.drawPath(drawPath, drawPaint);
+			checkBubble(touchX, touchY);
 			drawPath.reset();
 			break;
 		default:
@@ -181,13 +180,23 @@ public class DrawingView extends View {
 		return true;
 	}
 
-	private void sound(float touchX, float touchY) {
+	private void checkBubble(float touchX, float touchY) {
 		/*
-		 * Handle sound events and also associated animations like changing the
+		 * Handle proximity events and also associated animations like changing the
 		 * color of the dots, size... Consider also using images and png based
 		 * animations
 		 */
-
+		for (Dot eachDot: dots) {
+			double x, y;
+			x = touchX - eachDot.getPosX();
+			y = touchY - eachDot.getPosY();
+			if (Math.hypot(x, y) < Dot.radius) {
+				// TODO If finger is close enough to dot, fire the associated sample
+				Log.i(SB, "The finger is near dot with sampleIndex " + eachDot.getSample());
+				GameActivity.doSound(eachDot.getSample());
+			}
+			
+		};
 	}
 
 	public void startNew() {
