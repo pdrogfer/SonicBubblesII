@@ -13,6 +13,7 @@ public class Dot {
 	// native variables
 	private final String SBDot = "Sonic Bubbles II-Dot";
 
+	private boolean trig;
 	private int posX, posY;
 	private int sampleInd; // index of the sample corresponding to the dot
 	static int radius = DrawingView.width / 25; // TO make it relative to canvas
@@ -27,10 +28,6 @@ public class Dot {
 	}
 
 	// methods
-
-	public void onDraw() {
-
-	}
 
 	public int getPosX() {
 		return posX;
@@ -69,5 +66,15 @@ public class Dot {
 
 	public int getSample() {
 		return sampleInd;
+	}
+	
+	public void setSampleTriggered(boolean trig) {
+		/* returns true if sample has been played in current hand
+		 * (hand = gesture between finger down and finger up)
+		 */
+		this.trig = trig;
+	}
+	public boolean getSampleTriggered() {
+		return trig;
 	}
 }

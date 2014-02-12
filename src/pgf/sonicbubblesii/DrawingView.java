@@ -30,8 +30,6 @@ public class DrawingView extends View {
 	// game size, as the number of dots. Init = 4
 	private int gameSize = 4;
 	Dot[] dots = new Dot[gameSize];
-	// to help with movement
-	private boolean onTheDot = false;
 
 	// Log tags
 	private final String SB = "Sonic Bubbles II";
@@ -96,11 +94,12 @@ public class DrawingView extends View {
 					|| dot.getPosY() > (height - dot.getRadius() * 1.5)
 					|| checkCollisionY(n, dot.getPosY()));
 			dot.setSample(GameActivity.levels);
+			dot.setSampleTriggered(false);
 			dots[n] = dot;
 			Log.i(SB,
 					"new Dot at (x" + Integer.toString(dot.getPosX()) + ", " + "y"
 							+ Integer.toString(dot.getPosY()) + ") and sampleIndex "
-							+ dot.getSample());
+							+ dot.getSample() + " trig=" + dot.getSampleTriggered());
 		}
 	}
 
@@ -161,6 +160,7 @@ public class DrawingView extends View {
 		// handle user touch, and proximity to Dots for sound triggering
 		float touchX = event.getX();
 		float touchY = event.getY();
+		float time = event.getEventTime();
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
@@ -175,12 +175,21 @@ public class DrawingView extends View {
 		case MotionEvent.ACTION_UP:
 			drawCanvas.drawPath(drawPath, drawPaint);
 			drawPath.reset();
+			restartHand();
 			break;
 		default:
 			return false;
 		}
 		invalidate();
 		return true;
+	}
+
+	private void restartHand() {
+		// sets all dots samples trigger values to false again
+		for (Dot oneDot : dots) {
+			oneDot.setSampleTriggered(false);
+		}
+		
 	}
 
 	private void checkBubble(float touchX, float touchY) {
@@ -191,26 +200,24 @@ public class DrawingView extends View {
 		 */
 		for (Dot eachDot : dots) {
 			/*
-			 * TODO: improve performance, by checking if a former finger
-			 * position is still within the radius of the dot, to not compute it
-			 * and avoid duplicated sound triggerings
+			 * TODO: improve performance, by avoiding duplicated sound
+			 * triggerings
 			 */
 			double x, y;
 			x = touchX - eachDot.getPosX();
 			y = touchY - eachDot.getPosY();
-			if ((Math.hypot(x, y) < Dot.radius) && onTheDot == false) {
-				// If finger is close enough to dot, fire it's sample
-				Log.i(SB, "The finger is near dot with sampleIndex " + eachDot.getSample());
+			double dist = Math.hypot(x, y);
+			if ((dist < Dot.radius) && (eachDot.getSampleTriggered() == false)) {
+				/*
+				 * If finger is close enough to the dot, and it's the first time
+				 * in this hand, fire it's sample
+				 */
+				Log.i(SB, "The finger is in dot with sample " + eachDot.getSample()
+						+ " for the first time");
 				GameActivity.doSound(eachDot.getSample());
-				onTheDot = true;
-				break;
+				eachDot.setSampleTriggered(true);
 			}
-			else if ((Math.hypot(x, y) > Dot.radius*1.5) && onTheDot == true) {
-				onTheDot = false;
-			}
-
 		}
-		;
 	}
 
 	public void startNew() {
