@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 public class DrawingView extends View {
 
@@ -18,7 +19,7 @@ public class DrawingView extends View {
 	private Canvas drawCanvas;
 	private Bitmap canvasBitmap;
 	private int paintColor = 0xffff0000;
-	private int dotColor = 0xff000000;
+	private int dotColor;
 	private float brushSize = (float) 20.0;
 	// drawing and canvas paint
 	private Paint drawPaint, canvasPaint, dotPaint;
@@ -55,7 +56,7 @@ public class DrawingView extends View {
 
 		// configure the style for the dots with dotPaint
 		dotPaint = new Paint();
-		dotPaint.setColor(dotColor);
+		// dotPaint.setARGB(255, 255, 255, 0);
 		dotPaint.setStrokeWidth(brushSize * 2);
 		dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 		drawPaint.setStrokeJoin(Paint.Join.ROUND);
@@ -95,6 +96,7 @@ public class DrawingView extends View {
 					|| checkCollisionY(n, dot.getPosY()));
 			dot.setSample(GameActivity.levels);
 			dot.setSampleTriggered(false);
+			dot.setColor();
 			dots[n] = dot;
 			Log.i(SB,
 					"new Dot at (x" + Integer.toString(dot.getPosX()) + ", " + "y"
@@ -149,6 +151,7 @@ public class DrawingView extends View {
 
 		// draw the dot objects
 		for (int d = 0; d < dots.length; d++) {
+			dotPaint.setColor(dots[d].getColor());
 			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRadius(), dotPaint);
 		}
 		canvas.drawPath(drawPath, drawPaint);
@@ -173,7 +176,8 @@ public class DrawingView extends View {
 			checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_UP:
-			drawCanvas.drawPath(drawPath, drawPaint);
+			// to erase the hand on finger up
+			//drawCanvas.drawPath(drawPath, drawPaint);
 			drawPath.reset();
 			restartHand();
 			break;

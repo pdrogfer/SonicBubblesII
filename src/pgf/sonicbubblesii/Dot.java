@@ -6,6 +6,7 @@ package pgf.sonicbubblesii;
 
 import java.util.Random;
 
+import android.graphics.Color;
 import android.util.Log;
 
 public class Dot {
@@ -14,7 +15,7 @@ public class Dot {
 	private final String SBDot = "Sonic Bubbles II-Dot";
 
 	private boolean trig;
-	private int posX, posY;
+	private int posX, posY, colorDot;
 	private int sampleInd; // index of the sample corresponding to the dot
 	static int radius = DrawingView.width / 25; // TO make it relative to canvas
 												// width
@@ -28,6 +29,12 @@ public class Dot {
 	}
 
 	// methods
+	public int getColor() {
+		return colorDot;
+	}
+	public void setColor() {
+		colorDot = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
+	}
 
 	public int getPosX() {
 		return posX;
@@ -77,4 +84,5 @@ public class Dot {
 	public boolean getSampleTriggered() {
 		return trig;
 	}
+	
 }
