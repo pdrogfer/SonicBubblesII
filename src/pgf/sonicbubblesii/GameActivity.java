@@ -21,11 +21,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	DrawingView drawView;
 	Theme theme;
 
-	// for sound
-	private static SoundPool soundPool;
-	private int soundC, soundCS, soundD, soundDS, soundE, soundF, soundFS, soundG, soundGS, soundA,
-			soundAS, soundB;
-	static boolean loaded = false;
+
 	// the level of difficulty, as the number of possible samples. Init = 4
 	static int levels = 4;
 	// an arraylist of int to define wich samples are used in each level
@@ -42,7 +38,6 @@ public class GameActivity extends Activity implements OnClickListener {
 		listenAgain.setOnClickListener(this);
 		newGame.setOnClickListener(this);
 
-		soundSetup();
 		levelSetup(levels);
 		themeSetup();
 	}
@@ -55,31 +50,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		return true;
 	}
 
-	private void soundSetup() {
-		// Set the hardware buttons to control the app volume
-		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
-		// Load the sounds
-		soundPool = new SoundPool(12, AudioManager.STREAM_MUSIC, 0);
-		soundPool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
-			@Override
-			public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-				loaded = true;
-			}
-		});
-		// the load function returns an int, the index of the loaded sound
-		soundC = soundPool.load(this, R.raw.c, 1);
-		soundCS = soundPool.load(this, R.raw.c_s, 1);
-		soundD = soundPool.load(this, R.raw.d, 1);
-		soundDS = soundPool.load(this, R.raw.d_s, 1);
-		soundE = soundPool.load(this, R.raw.e, 1);
-		soundF = soundPool.load(this, R.raw.f, 1);
-		soundFS = soundPool.load(this, R.raw.f_s, 1);
-		soundG = soundPool.load(this, R.raw.g, 1);
-		soundGS = soundPool.load(this, R.raw.g_s, 1);
-		soundA = soundPool.load(this, R.raw.a, 1);
-		soundAS = soundPool.load(this, R.raw.a_s, 1);
-		soundB = soundPool.load(this, R.raw.b, 1);
-	}
+
 
 	private void themeSetup() {
 		// generate a theme
@@ -143,8 +114,8 @@ public class GameActivity extends Activity implements OnClickListener {
 
 	public static void doSound(int sndId) {
 		float volume = 1;
-		if (loaded) {
-			soundPool.play(levelSamples.get(sndId) + 1, volume, volume, 1, 0, 1f);
+		if (IntroActivity.loaded) {
+			IntroActivity.soundPool.play(levelSamples.get(sndId) + 1, volume, volume, 1, 0, 1f);
 			Log.i("tag", "sampleTriggered");
 		}
 	}
@@ -152,7 +123,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		soundPool.release();
+		IntroActivity.soundPool.release();
 	}
 
 }
