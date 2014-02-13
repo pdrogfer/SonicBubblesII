@@ -23,9 +23,9 @@ public class GameActivity extends Activity implements OnClickListener {
 
 
 	// the level of difficulty, as the number of possible samples. Init = 4
-	static int levels = 4;
+	static int difficulty = 4;
 	// an arraylist of int to define wich samples are used in each level
-	static List<Integer> levelSamples = new ArrayList<Integer>();
+	static List<Integer> chosenSamples = new ArrayList<Integer>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		listenAgain.setOnClickListener(this);
 		newGame.setOnClickListener(this);
 
-		levelSetup(levels);
+		levelSetup(difficulty);
 		themeSetup();
 	}
 
@@ -81,20 +81,20 @@ public class GameActivity extends Activity implements OnClickListener {
 		 */
 		switch (levels) {
 		case 4:
-			levelSamples.clear();
-			levelSamples.add(0);
-			levelSamples.add(2);
-			levelSamples.add(4);
-			levelSamples.add(7);
+			chosenSamples.clear();
+			chosenSamples.add(0);
+			chosenSamples.add(2);
+			chosenSamples.add(4);
+			chosenSamples.add(7);
 			break;
 
 		case 5:
-			levelSamples.clear();
-			levelSamples.add(0);
-			levelSamples.add(2);
-			levelSamples.add(4);
-			levelSamples.add(7);
-			levelSamples.add(9);
+			chosenSamples.clear();
+			chosenSamples.add(0);
+			chosenSamples.add(2);
+			chosenSamples.add(4);
+			chosenSamples.add(7);
+			chosenSamples.add(9);
 			break;
 
 		case 6:
@@ -115,7 +115,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	public static void doSound(int sndId) {
 		float volume = 1;
 		if (IntroActivity.loaded) {
-			IntroActivity.soundPool.play(levelSamples.get(sndId) + 1, volume, volume, 1, 0, 1f);
+			IntroActivity.soundPool.play(chosenSamples.get(sndId) + 1, volume, volume, 1, 0, 1f);
 			Log.i("tag", "sampleTriggered");
 		}
 	}

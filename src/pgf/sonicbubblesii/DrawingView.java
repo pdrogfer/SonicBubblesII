@@ -90,7 +90,7 @@ public class DrawingView extends View {
 				dot.setPosY();
 			} while (checkDotLimits(dot.getPosX(), dot.getPosY(), dot.getRadius())
 					|| checkDotCollision(n, dot.getPosX(), dot.getPosY()));
-			dot.setSample(GameActivity.levels);
+			dot.setSample(GameActivity.difficulty);
 			dot.setSampleTriggered(false);
 			dot.setColor();
 			dots[n] = dot;

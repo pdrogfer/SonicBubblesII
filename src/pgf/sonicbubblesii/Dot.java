@@ -23,8 +23,6 @@ public class Dot {
 
 	// constructors
 	public Dot() {
-		// allocate the dot somewhere within the canvas limits, and away from
-		// the borders
 
 	}
 
@@ -32,6 +30,7 @@ public class Dot {
 	public int getColor() {
 		return colorDot;
 	}
+
 	public void setColor() {
 		colorDot = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
 	}
@@ -60,29 +59,32 @@ public class Dot {
 		this.radius = radius;
 	}
 
-	/* That is: as the soundpool objects are represented by it's index (int),
-	 * each new dot created will have a random int associated ("sampleInd"), in the range of the 
-	 * actual game-level(represented here by the amount of possible sounds, "samplesSize") 
-	 * used to fire the sample
+	/*
+	 * That is: as the soundpool objects are represented by it's index (int),
+	 * each new dot created will have a random int associated ("sampleInd"), in
+	 * the range of the actual game-level(represented here by the amount of
+	 * possible sounds, "samplesSize") used to fire the sample
 	 */
 	public void setSample(int samplesSize) {
 		sampleInd = random.nextInt(samplesSize);
-		//Log.i(SBDot, "This dot sample index is: " + sampleInd);
-		
+		// Log.i(SBDot, "This dot sample index is: " + sampleInd);
+
 	}
 
 	public int getSample() {
 		return sampleInd;
 	}
-	
+
 	public void setSampleTriggered(boolean trig) {
-		/* returns true if sample has been played in current hand
-		 * (hand = gesture between finger down and finger up)
+		/*
+		 * returns true if sample has been played in current hand (hand =
+		 * gesture between finger down and finger up)
 		 */
 		this.trig = trig;
 	}
+
 	public boolean getSampleTriggered() {
 		return trig;
 	}
-	
+
 }
