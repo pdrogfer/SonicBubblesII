@@ -87,14 +87,9 @@ public class DrawingView extends View {
 			// place the dot correctly in the canvas
 			do {
 				dot.setPosX();
-			} while (dot.getPosX() < dot.getRadius() * 1.5
-					|| dot.getPosX() > (width - dot.getRadius() * 1.5)
-					|| checkCollisionX(n, dot.getPosX()));
-			do {
 				dot.setPosY();
-			} while (dot.getPosY() < dot.getRadius() * 1.5
-					|| dot.getPosY() > (height - dot.getRadius() * 1.5)
-					|| checkCollisionY(n, dot.getPosY()));
+			} while (checkDotLimits(dot.getPosX(), dot.getPosY(), dot.getRadius())
+					|| checkDotCollision(n, dot.getPosX(), dot.getPosY()));
 			dot.setSample(GameActivity.levels);
 			dot.setSampleTriggered(false);
 			dot.setColor();
@@ -106,43 +101,30 @@ public class DrawingView extends View {
 		}
 	}
 
-	private boolean checkCollisionX(int n, int tempPosX) {
-		/*
-		 * check collisions with other dots. This is a poor implementation. Use
-		 * Math.hypoth to simplify and reduce the number of functions
-		 */
-		if (n == 0) {
-			return false;
-		} else {
-			for (int i = 0; i < n; i++) {
-				int dotsDistX = Math.abs(tempPosX - dots[i].getPosX());
-				// Log.i(SB, "X distance: " + dotsDistX);
-				if (dotsDistX <= Dot.radius * 2) {
-					// Log.i(SB, "too close!! repeat");
-					return true;
-				}
-			}
-			return false;
-		}
-
+	private boolean checkDotLimits(int tempPosX, int tempPosY, int dotRadius) {
+		// returns true if dot is OUTSIDE the canvas
+		if (tempPosX < dotRadius * 1.5) return true;
+		else if (tempPosY < dotRadius * 1.5) return true;
+		else if (tempPosX > (width - dotRadius * 1.5)) return true;
+		else if (tempPosY > (width - dotRadius * 1.5)) return true;
+		else return false;
 	}
-
-	private boolean checkCollisionY(int n, int tempPosY) {
-		// check collisions with other dots
+	private boolean checkDotCollision(int n, int tempPosX, int tempPosY) {
+		// returns true if there is COLLISION
 		if (n == 0) {
 			return false;
 		} else {
 			for (int i = 0; i < n; i++) {
-				int dotsDistY = Math.abs(tempPosY - dots[i].getPosY());
-				// Log.i(SB, "Y distance: " + dotsDistY);
-				if (dotsDistY <= Dot.radius * 2) {
-					// Log.i(SB, "too close!! repeat");
+				double distX, distY;
+				distX = tempPosX - dots[i].getPosX();
+				distY = tempPosY - dots[i].getPosY();
+				double distXY = Math.hypot(distX, distY);
+				if (distXY < dots[i].getRadius() * 3) {
 					return true;
 				}
 			}
 			return false;
 		}
-
 	}
 
 	@Override
@@ -203,10 +185,7 @@ public class DrawingView extends View {
 		 * based animations
 		 */
 		for (Dot eachDot : dots) {
-			/*
-			 * TODO: improve performance, by avoiding duplicated sound
-			 * triggerings
-			 */
+			// To avoid duplicated sound triggerings
 			double x, y;
 			x = touchX - eachDot.getPosX();
 			y = touchY - eachDot.getPosY();
