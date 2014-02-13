@@ -19,6 +19,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	// GUI
 	Button listenAgain, newGame;
 	DrawingView drawView;
+	Theme theme;
 
 	// for sound
 	private static SoundPool soundPool;
@@ -43,7 +44,9 @@ public class GameActivity extends Activity implements OnClickListener {
 
 		soundSetup();
 		levelSetup(levels);
+		themeSetup();
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,6 +79,12 @@ public class GameActivity extends Activity implements OnClickListener {
 		soundA = soundPool.load(this, R.raw.a, 1);
 		soundAS = soundPool.load(this, R.raw.a_s, 1);
 		soundB = soundPool.load(this, R.raw.b, 1);
+	}
+
+	private void themeSetup() {
+		// generate a theme
+		theme = new Theme(2, 3);
+		
 	}
 
 	@Override

@@ -11,6 +11,23 @@ public class Theme {
 		this.numSamples = nSamples;
 		
 	}
+
+	public int getNumDots() {
+		return numDots;
+	}
+
+	public void setNumDots(int numDots) {
+		this.numDots = numDots;
+	}
+
+	public int getNumSamples() {
+		return numSamples;
+	}
+
+	public void setNumSamples(int numSamples) {
+		this.numSamples = numSamples;
+	}
 	
 	// methods
+	
 }

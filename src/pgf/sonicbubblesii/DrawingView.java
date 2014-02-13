@@ -54,9 +54,10 @@ public class DrawingView extends View {
 		drawPaint.setStrokeCap(Paint.Cap.ROUND);
 		canvasPaint = new Paint(Paint.DITHER_FLAG);
 
-		// configure the style for the dots with dotPaint
+		/* configure the style for the dots with dotPaint, except color
+		 * which is individual and configured below
+		 */
 		dotPaint = new Paint();
-		// dotPaint.setARGB(255, 255, 255, 0);
 		dotPaint.setStrokeWidth(brushSize * 2);
 		dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 		drawPaint.setStrokeJoin(Paint.Join.ROUND);
@@ -163,12 +164,11 @@ public class DrawingView extends View {
 		// handle user touch, and proximity to Dots for sound triggering
 		float touchX = event.getX();
 		float touchY = event.getY();
-		float time = event.getEventTime();
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			drawPath.moveTo(touchX, touchY);
-			// checkBubble(touchX, touchY);
+			checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_MOVE:
 			drawPath.lineTo(touchX, touchY);
