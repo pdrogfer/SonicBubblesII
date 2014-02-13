@@ -6,12 +6,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
-import android.media.SoundPool;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 public class DrawingView extends View {
 
@@ -28,9 +26,8 @@ public class DrawingView extends View {
 	// canvas size
 	static int width, height;
 	public float scale;
-	// game size, as the number of dots. Init = 4
-	private int gameSize = 4;
-	Dot[] dots = new Dot[gameSize];
+
+	public static Dot[] dots = new Dot[Theme.nDots];
 
 	// Log tags
 	private final String SB = "Sonic Bubbles II";
@@ -90,7 +87,7 @@ public class DrawingView extends View {
 				dot.setPosY();
 			} while (checkDotLimits(dot.getPosX(), dot.getPosY(), dot.getRadius())
 					|| checkDotCollision(n, dot.getPosX(), dot.getPosY()));
-			dot.setSample(GameActivity.difficulty);
+			dot.setSample(Theme.nSamples);
 			dot.setSampleTriggered(false);
 			dot.setColor();
 			dots[n] = dot;

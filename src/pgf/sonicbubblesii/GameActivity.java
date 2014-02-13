@@ -3,11 +3,8 @@ package pgf.sonicbubblesii;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.media.AudioManager;
-import android.media.SoundPool;
-import android.media.SoundPool.OnLoadCompleteListener;
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -22,8 +19,6 @@ public class GameActivity extends Activity implements OnClickListener {
 	Theme theme;
 
 
-	// the level of difficulty, as the number of possible samples. Init = 4
-	static int difficulty = 4;
 	// an arraylist of int to define wich samples are used in each level
 	static List<Integer> chosenSamples = new ArrayList<Integer>();
 
@@ -38,8 +33,9 @@ public class GameActivity extends Activity implements OnClickListener {
 		listenAgain.setOnClickListener(this);
 		newGame.setOnClickListener(this);
 
-		levelSetup(difficulty);
-		themeSetup();
+		levelSetup(Theme.nSamples);
+		themeSetup(4, 4);
+		// theme.playTheme(2000);
 	}
 
 
@@ -52,9 +48,9 @@ public class GameActivity extends Activity implements OnClickListener {
 
 
 
-	private void themeSetup() {
+	private void themeSetup(int nDots, int nSamples) {
 		// generate a theme
-		theme = new Theme(2, 3);
+		theme = new Theme(nDots, nSamples);
 		
 	}
 
@@ -63,6 +59,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.btnListenAgain:
 			// play again the sequence
+			theme.playTheme(1000);
 			break;
 		case R.id.btnNewGame:
 			// start a new game
