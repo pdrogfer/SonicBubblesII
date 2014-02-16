@@ -1,8 +1,5 @@
 package pgf.sonicbubblesii;
 
-import java.util.Timer;
-
-import android.os.Handler;
 
 public class Theme {
 
@@ -18,11 +15,9 @@ public class Theme {
 	public Theme(int nDots, int nSamples) {
 		this.nDots = nDots;
 		this.nSamples = nSamples;
-
 	}
 
 	// methods
-
 	public int getNumDots() {
 		return nDots;
 	}
