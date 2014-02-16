@@ -5,11 +5,13 @@ import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.GetChars;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class GameActivity extends Activity implements OnClickListener {
 
@@ -35,7 +37,8 @@ public class GameActivity extends Activity implements OnClickListener {
 
 		levelSetup(Theme.nSamples);
 		themeSetup(4, 4);
-		// theme.playTheme(2000);
+		//theme.playTheme(1000);
+		
 	}
 
 
@@ -51,6 +54,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	private void themeSetup(int nDots, int nSamples) {
 		// generate a theme
 		theme = new Theme(nDots, nSamples);
+		Log.i(DrawingView.SB, "New Theme created"); 
 		
 	}
 
@@ -71,6 +75,15 @@ public class GameActivity extends Activity implements OnClickListener {
 
 	}
 
+	public static void messages(int msg, boolean bool) {
+		if (msg == 1) {
+			String text = bool ? "You got it" : "Nope! try again?";
+			// Problems here!!!!
+			// Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+			//return toast;
+			Log.i(DrawingView.SB, text);
+		}
+	}
 	private void levelSetup(int levels) {
 		/*
 		 * Define the level to play in by setting the amount of sounds to use
@@ -113,7 +126,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		float volume = 1;
 		if (IntroActivity.loaded) {
 			IntroActivity.soundPool.play(chosenSamples.get(sndId) + 1, volume, volume, 1, 0, 1f);
-			Log.i("tag", "sampleTriggered");
+			Log.i(DrawingView.SB, "sampleTriggered");
 		}
 	}
 

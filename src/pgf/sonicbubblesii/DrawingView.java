@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 public class DrawingView extends View {
 
@@ -28,9 +29,11 @@ public class DrawingView extends View {
 	public float scale;
 
 	public static Dot[] dots = new Dot[Theme.nDots];
+	public static int[] theTheme = new int[dots.length];
+	public static int[] theHand = new int[dots.length];
 
 	// Log tags
-	private final String SB = "Sonic Bubbles II";
+	public final static String SB = "Sonic Bubbles II";
 
 	// constructors
 	public DrawingView(Context context, AttributeSet attrs) {
@@ -51,8 +54,9 @@ public class DrawingView extends View {
 		drawPaint.setStrokeCap(Paint.Cap.ROUND);
 		canvasPaint = new Paint(Paint.DITHER_FLAG);
 
-		/* configure the style for the dots with dotPaint, except color
-		 * which is individual and configured below
+		/*
+		 * configure the style for the dots with dotPaint, except color which is
+		 * individual and configured below
 		 */
 		dotPaint = new Paint();
 		dotPaint.setStrokeWidth(brushSize * 2);
@@ -91,6 +95,9 @@ public class DrawingView extends View {
 			dot.setSampleTriggered(false);
 			dot.setColor();
 			dots[n] = dot;
+			// populate both the Theme and the hand(this, with default 999)
+			theTheme[n] = dot.getSample();
+			theHand[n] = 999;
 			Log.i(SB,
 					"new Dot at (x" + Integer.toString(dot.getPosX()) + ", " + "y"
 							+ Integer.toString(dot.getPosY()) + ") and sampleIndex "
@@ -100,12 +107,18 @@ public class DrawingView extends View {
 
 	private boolean checkDotLimits(int tempPosX, int tempPosY, int dotRadius) {
 		// returns true if dot is OUTSIDE the canvas
-		if (tempPosX < dotRadius * 1.5) return true;
-		else if (tempPosY < dotRadius * 1.5) return true;
-		else if (tempPosX > (width - dotRadius * 1.5)) return true;
-		else if (tempPosY > (width - dotRadius * 1.5)) return true;
-		else return false;
+		if (tempPosX < dotRadius * 1.5)
+			return true;
+		else if (tempPosY < dotRadius * 1.5)
+			return true;
+		else if (tempPosX > (width - dotRadius * 1.5))
+			return true;
+		else if (tempPosY > (width - dotRadius * 1.5))
+			return true;
+		else
+			return false;
 	}
+
 	private boolean checkDotCollision(int n, int tempPosX, int tempPosY) {
 		// returns true if there is COLLISION
 		if (n == 0) {
@@ -146,6 +159,7 @@ public class DrawingView extends View {
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
+			restartHand();
 			drawPath.moveTo(touchX, touchY);
 			checkBubble(touchX, touchY);
 			break;
@@ -156,9 +170,9 @@ public class DrawingView extends View {
 			break;
 		case MotionEvent.ACTION_UP:
 			// to erase the hand on finger up
-			//drawCanvas.drawPath(drawPath, drawPaint);
+			// drawCanvas.drawPath(drawPath, drawPaint);
+			checkHand();
 			drawPath.reset();
-			restartHand();
 			break;
 		default:
 			return false;
@@ -167,12 +181,29 @@ public class DrawingView extends View {
 		return true;
 	}
 
+	public void checkHand() {
+		// Check if the theHand is equal to theTheme
+		boolean check = false;
+		for (int i = 0; i < theTheme.length; i++) {
+			if (theHand[i] != theTheme[i]) {
+				check = false;
+				break;
+			}
+			check = true;
+		}
+		GameActivity.messages(1, check);
+		
+	}
+
 	private void restartHand() {
 		// sets all dots samples trigger values to false again
+		// sets theHand to default value again
 		for (Dot oneDot : dots) {
 			oneDot.setSampleTriggered(false);
 		}
-		
+		for (int i = 0; i < dots.length; i++) {
+			theHand[i] = 999;
+		}
 	}
 
 	private void checkBubble(float touchX, float touchY) {
@@ -192,6 +223,12 @@ public class DrawingView extends View {
 				 * If finger is close enough to the dot, and it's the first time
 				 * in this hand, fire it's sample
 				 */
+				for (int i = 0; i < dots.length; i++) {
+					if (theHand[i] == 999) {
+						theHand[i] = eachDot.getSample();
+						break;
+					}
+				}
 				Log.i(SB, "The finger is in dot with sample " + eachDot.getSample()
 						+ " for the first time");
 				GameActivity.doSound(eachDot.getSample());
