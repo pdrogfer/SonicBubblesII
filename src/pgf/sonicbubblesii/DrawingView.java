@@ -21,7 +21,7 @@ public class DrawingView extends View {
 	private int dotColor;
 	private float brushSize = (float) 20.0;
 	// drawing and canvas paint
-	private Paint drawPaint, canvasPaint, dotPaint;
+	private Paint drawPaint, canvasPaint, dotPaint, animDot;
 	// drawing path
 	private Path drawPath;
 	// canvas size
@@ -63,6 +63,12 @@ public class DrawingView extends View {
 		dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 		drawPaint.setStrokeJoin(Paint.Join.ROUND);
 		drawPaint.setStrokeCap(Paint.Cap.ROUND);
+		
+		animDot = new Paint();
+		dotPaint.setStrokeWidth(brushSize);
+		dotPaint.setStyle(Paint.Style.STROKE);
+		//drawPaint.setStrokeJoin(Paint.Join.ROUND);
+		//drawPaint.setStrokeCap(Paint.Cap.ROUND);
 
 	}
 
@@ -148,7 +154,14 @@ public class DrawingView extends View {
 		// draw the dot objects
 		for (int d = 0; d < dots.length; d++) {
 			dotPaint.setColor(dots[d].getColor());
+			animDot.setColor(dots[d].getColor());
+			animDot.setStyle(Paint.Style.STROKE);
+			// draw the dot animation
+			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRadius() * 3, animDot);
+			//draw the dot
+			dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRadius(), dotPaint);
+			
 		}
 		canvas.drawPath(drawPath, drawPaint);
 
