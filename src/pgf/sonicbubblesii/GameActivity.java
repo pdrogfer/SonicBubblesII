@@ -18,7 +18,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	// GUI
 	Button listenAgain, newGame;
 	DrawingView drawView;
-	Theme theme;
+	static Theme theme;
 
 
 	// an arraylist of int to define wich samples are used in each level
@@ -35,9 +35,10 @@ public class GameActivity extends Activity implements OnClickListener {
 		listenAgain.setOnClickListener(this);
 		newGame.setOnClickListener(this);
 
-		levelSetup(Theme.nSamples);
-		themeSetup(4, 4);
-		//theme.playTheme(1000);
+		// Number of Dots initialized here
+		themeSetup(8, 4);
+		levelSetup(theme.getNumSamples());
+		
 		
 	}
 
@@ -55,6 +56,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		// generate a theme
 		theme = new Theme(nDots, nSamples);
 		Log.i(DrawingView.SB, "New Theme created"); 
+		//theme.playTheme(1000);
 		
 	}
 

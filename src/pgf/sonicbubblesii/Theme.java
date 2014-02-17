@@ -4,11 +4,10 @@ package pgf.sonicbubblesii;
 public class Theme {
 
 	// variables
-	int numDots, numSamples;
 	// game size, as the number of dots. Init = 4
-	public static int nDots = 4;
+	public int nDots;
 	// the level of difficulty, as the number of possible samples. Init = 4
-	public static int nSamples = 4;
+	public int nSamples;
 	private static int i = 0;
 
 	// constructors

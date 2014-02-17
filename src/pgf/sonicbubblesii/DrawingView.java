@@ -28,9 +28,9 @@ public class DrawingView extends View {
 	static int width, height;
 	public float scale;
 
-	public static Dot[] dots = new Dot[Theme.nDots];
-	public static int[] theTheme = new int[dots.length];
-	public static int[] theHand = new int[dots.length];
+	public static Dot[] dots;
+	public static int[] theTheme;
+	public static int[] theHand;
 
 	// Log tags
 	public final static String SB = "Sonic Bubbles II";
@@ -83,6 +83,9 @@ public class DrawingView extends View {
 	}
 
 	void setupDots() {
+		dots = new Dot[GameActivity.theme.getNumDots()];
+		theTheme = new int[dots.length];
+		theHand = new int[dots.length];
 		for (int n = 0; n < dots.length; n++) {
 			Dot dot = new Dot();
 			// place the dot correctly in the canvas
@@ -91,7 +94,7 @@ public class DrawingView extends View {
 				dot.setPosY();
 			} while (checkDotLimits(dot.getPosX(), dot.getPosY(), dot.getRadius())
 					|| checkDotCollision(n, dot.getPosX(), dot.getPosY()));
-			dot.setSample(Theme.nSamples);
+			dot.setSample(GameActivity.theme.getNumSamples());
 			dot.setSampleTriggered(false);
 			dot.setColor();
 			dots[n] = dot;
