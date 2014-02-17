@@ -14,16 +14,17 @@ public class Dot {
 	// native variables
 	private final String SBDot = "Sonic Bubbles II-Dot";
 
-	private boolean trig;
+	private boolean trig, waveOn;
 	private int posX, posY, colorDot;
 	private int sampleInd; // index of the sample corresponding to the dot
 	static int radius = DrawingView.width / 25; // TO make it relative to canvas
-												// width
+	private int	ringRadius = radius;										// width
 	Random random = new Random();
 
 	// constructors
 	public Dot() {
-
+		waveOn = false;
+		trig = false;
 	}
 
 	// methods
@@ -57,6 +58,20 @@ public class Dot {
 
 	public void setRadius(int radius) {
 		this.radius = radius;
+	}
+	public int getRingRadius() {
+		return ringRadius;
+	}
+	
+	public void setRingRadius(int ringRadius) {
+		this.ringRadius = ringRadius;
+	}
+	
+	public boolean getWaveOn() {
+		return waveOn;
+	}
+	public void setWaveOn(boolean waveOn) {
+		this.waveOn = waveOn;
 	}
 
 	/*

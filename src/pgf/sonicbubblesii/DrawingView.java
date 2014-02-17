@@ -61,14 +61,14 @@ public class DrawingView extends View {
 		dotPaint = new Paint();
 		dotPaint.setStrokeWidth(brushSize * 2);
 		dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-		drawPaint.setStrokeJoin(Paint.Join.ROUND);
-		drawPaint.setStrokeCap(Paint.Cap.ROUND);
-		
+		// drawPaint.setStrokeJoin(Paint.Join.ROUND);
+		// drawPaint.setStrokeCap(Paint.Cap.ROUND);
+
 		animDot = new Paint();
-		dotPaint.setStrokeWidth(brushSize);
-		dotPaint.setStyle(Paint.Style.STROKE);
-		//drawPaint.setStrokeJoin(Paint.Join.ROUND);
-		//drawPaint.setStrokeCap(Paint.Cap.ROUND);
+		animDot.setStrokeWidth(brushSize);
+		animDot.setStyle(Paint.Style.STROKE);
+		// animDot.setStrokeJoin(Paint.Join.ROUND);
+		// animDot.setStrokeCap(Paint.Cap.ROUND);
 
 	}
 
@@ -153,18 +153,35 @@ public class DrawingView extends View {
 
 		// draw the dot objects
 		for (int d = 0; d < dots.length; d++) {
-			dotPaint.setColor(dots[d].getColor());
+			int radius = dots[d].getRadius();
+			int wave = dots[d].getRingRadius();
+			// draw the dot animation
+			/* TODO The ring stops drawing if the user lifts finger and touches the screen again,
+			 * because this calls the restartHand method wich sets all sample-triggered to false
+			 * again, so it's neccesary to add a second condition
+			 */
 			animDot.setColor(dots[d].getColor());
 			animDot.setStyle(Paint.Style.STROKE);
-			// draw the dot animation
-			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRadius() * 3, animDot);
-			//draw the dot
+			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), wave,
+					animDot);
+			// increase ring size
+			if (dots[d].getSampleTriggered() || dots[d].getWaveOn()) {
+			dots[d].setRingRadius(wave + 1);
+			dots[d].setWaveOn(true);
+			}
+			// return ring to dot size
+			if (wave > radius * 6) {
+				dots[d].setRingRadius(radius);
+				dots[d].setWaveOn(false);
+			}
+			// draw the dot
+			dotPaint.setColor(dots[d].getColor());
 			dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRadius(), dotPaint);
-			
+			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), radius, dotPaint);
+
 		}
 		canvas.drawPath(drawPath, drawPaint);
-
+		invalidate(); 
 	}
 
 	@Override
@@ -208,7 +225,7 @@ public class DrawingView extends View {
 			check = true;
 		}
 		GameActivity.messages(1, check);
-		
+
 	}
 
 	private void restartHand() {
@@ -247,6 +264,7 @@ public class DrawingView extends View {
 				}
 				Log.i(SB, "The finger is in dot with sample " + eachDot.getSample()
 						+ " for the first time");
+
 				GameActivity.doSound(eachDot.getSample());
 				eachDot.setSampleTriggered(true);
 			}
