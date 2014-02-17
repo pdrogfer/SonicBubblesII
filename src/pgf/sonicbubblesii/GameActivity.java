@@ -36,7 +36,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		newGame.setOnClickListener(this);
 
 		// Number of Dots initialized here
-		themeSetup(8, 4);
+		themeSetup(4, 7);
 		levelSetup(theme.getNumSamples());
 		
 		
@@ -89,10 +89,11 @@ public class GameActivity extends Activity implements OnClickListener {
 	private void levelSetup(int levels) {
 		/*
 		 * Define the level to play in by setting the amount of sounds to use
-		 * and wich ones
+		 * and wich ones. Create more levels: minor, pentatonic, blues, whole-tone, etc 
 		 */
 		switch (levels) {
 		case 4:
+			// C, D, E, G
 			chosenSamples.clear();
 			chosenSamples.add(0);
 			chosenSamples.add(2);
@@ -101,6 +102,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			break;
 
 		case 5:
+			// C, D, E, G, A
 			chosenSamples.clear();
 			chosenSamples.add(0);
 			chosenSamples.add(2);
@@ -110,15 +112,29 @@ public class GameActivity extends Activity implements OnClickListener {
 			break;
 
 		case 6:
-
+			// C, D, E, F, G, A
+			chosenSamples.clear();
+			chosenSamples.add(0);
+			chosenSamples.add(2);
+			chosenSamples.add(4);
+			chosenSamples.add(5);
+			chosenSamples.add(7);
+			chosenSamples.add(9);
 			break;
 
 		case 7:
-
+			// C, D, E, F, G, A, B
+			chosenSamples.clear();
+			chosenSamples.add(0);
+			chosenSamples.add(2);
+			chosenSamples.add(4);
+			chosenSamples.add(5);
+			chosenSamples.add(7);
+			chosenSamples.add(9);
+			chosenSamples.add(11);
 			break;
 
 		case 8:
-
 			break;
 		}
 
