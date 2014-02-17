@@ -20,6 +20,7 @@ public class DrawingView extends View {
 	private int paintColor = 0xffff0000;
 	private int dotColor;
 	private float brushSize = (float) 20.0;
+	private int ringSpeed = 2;
 	// drawing and canvas paint
 	private Paint drawPaint, canvasPaint, dotPaint, animDot;
 	// drawing path
@@ -155,22 +156,23 @@ public class DrawingView extends View {
 		for (int d = 0; d < dots.length; d++) {
 			int radius = dots[d].getRadius();
 			int wave = dots[d].getRingRadius();
-			// draw the dot animation
 			/* TODO The ring stops drawing if the user lifts finger and touches the screen again,
-			 * because this calls the restartHand method wich sets all sample-triggered to false
-			 * again, so it's neccesary to add a second condition
+			 * because this calls the restartHand method which sets all sample-triggered to false
+			 * again, so it's necessary to add a second condition.
+			 * Also: create two functions to put the drawing of dots and rings in nice separated
+			 * cleaned places
 			 */
+			// draw the dot animation
 			animDot.setColor(dots[d].getColor());
 			animDot.setStyle(Paint.Style.STROKE);
 			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), wave,
 					animDot);
 			// increase ring size
-			if (dots[d].getSampleTriggered() || dots[d].getWaveOn()) {
-			dots[d].setRingRadius(wave + 1);
-			dots[d].setWaveOn(true);
+			if (dots[d].getWaveOn()) { // || dots[d].getWaveOn()) {
+			dots[d].setRingRadius(wave + ringSpeed);
 			}
 			// return ring to dot size
-			if (wave > radius * 6) {
+			if (wave > radius * 5) {
 				dots[d].setRingRadius(radius);
 				dots[d].setWaveOn(false);
 			}
@@ -254,7 +256,7 @@ public class DrawingView extends View {
 			if ((dist < Dot.radius) && (eachDot.getSampleTriggered() == false)) {
 				/*
 				 * If finger is close enough to the dot, and it's the first time
-				 * in this hand, fire it's sample
+				 * in this hand, store dot in hand and fire it's sample
 				 */
 				for (int i = 0; i < dots.length; i++) {
 					if (theHand[i] == 999) {
@@ -267,6 +269,7 @@ public class DrawingView extends View {
 
 				GameActivity.doSound(eachDot.getSample());
 				eachDot.setSampleTriggered(true);
+				eachDot.setWaveOn(true);
 			}
 		}
 	}
