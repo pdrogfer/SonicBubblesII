@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:text="Sonic Bubbles II"
+        android:text="Sonic Bubbles"
         android:textSize="40sp" />
 
     <Button
