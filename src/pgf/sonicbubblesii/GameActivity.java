@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.GetChars;
 import android.util.Log;
@@ -19,7 +20,6 @@ public class GameActivity extends Activity implements OnClickListener {
 	Button listenAgain, newGame;
 	DrawingView drawView;
 	static Theme theme;
-
 
 	// an arraylist of int to define wich samples are used in each level
 	static List<Integer> chosenSamples = new ArrayList<Integer>();
@@ -37,11 +37,10 @@ public class GameActivity extends Activity implements OnClickListener {
 
 		// Number of Dots initialized here
 		themeSetup(4, 7);
-		levelSetup(theme.getNumSamples());
-		
-		
-	}
+		// depending in the number of samples, select which ones to use
+		chooseSamples(theme.getNumSamples());
 
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -50,14 +49,12 @@ public class GameActivity extends Activity implements OnClickListener {
 		return true;
 	}
 
-
-
 	private void themeSetup(int nDots, int nSamples) {
 		// generate a theme
 		theme = new Theme(nDots, nSamples);
-		Log.i(DrawingView.SB, "New Theme created"); 
-		//theme.playTheme(1000);
-		
+		Log.i(DrawingView.SB, "New Theme created");
+		// theme.playTheme(1000);
+
 	}
 
 	@Override
@@ -77,19 +74,11 @@ public class GameActivity extends Activity implements OnClickListener {
 
 	}
 
-	public static void messages(int msg, boolean bool) {
-		if (msg == 1) {
-			String text = bool ? "You got it" : "Nope! try again?";
-			// Problems here!!!!
-			// Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
-			//return toast;
-			Log.i(DrawingView.SB, text);
-		}
-	}
-	private void levelSetup(int levels) {
+	private void chooseSamples(int levels) {
 		/*
 		 * Define the level to play in by setting the amount of sounds to use
-		 * and wich ones. Create more levels: minor, pentatonic, blues, whole-tone, etc 
+		 * and wich ones. Create more levels: minor, pentatonic, blues,
+		 * whole-tone, etc
 		 */
 		switch (levels) {
 		case 4:

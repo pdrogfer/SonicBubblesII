@@ -8,6 +8,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -29,6 +30,8 @@ public class DrawingView extends View {
 	// canvas size
 	static int width, height;
 	public float scale;
+	public boolean check;
+	private String feedback;
 
 	public static Dot[] dots;
 	public static int[] theTheme;
@@ -211,7 +214,11 @@ public class DrawingView extends View {
 		case MotionEvent.ACTION_UP:
 			// to erase the hand on finger up
 			// drawCanvas.drawPath(drawPath, drawPaint);
-			checkHand();
+			feedback = checkHand() ? "yep" : "nor";
+			Toast t = Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT);
+			t.setGravity(Gravity.CENTER, 0, 0);
+			t.show();
+			Log.i(DrawingView.SB, feedback);
 			drawPath.reset();
 			break;
 		default:
@@ -221,9 +228,9 @@ public class DrawingView extends View {
 		return true;
 	}
 
-	public void checkHand() {
+	public boolean checkHand() {
 		// Check if the theHand is equal to theTheme
-		boolean check = false;
+		check = false;
 		for (int i = 0; i < theTheme.length; i++) {
 			if (theHand[i] != theTheme[i]) {
 				check = false;
@@ -231,8 +238,7 @@ public class DrawingView extends View {
 			}
 			check = true;
 		}
-		GameActivity.messages(1, check);
-
+		return check;
 	}
 
 	private void restartHand() {
@@ -278,7 +284,7 @@ public class DrawingView extends View {
 			}
 		}
 	}
-
+	
 	public void startNew() {
 		drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
 		setupDots();
