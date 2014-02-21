@@ -6,5 +6,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="feedback">feedback</string>
+    <string name="btn_start_game">Start Game</string>
+    <string name="how_to_play">How To Play</string>
+    <string name="sonic_bubbles_logo">Sonic Bubbles logo</string>
 
 </resources>
