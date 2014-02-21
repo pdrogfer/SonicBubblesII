@@ -22,7 +22,7 @@ public class DrawingView extends View {
 	private int dotColor;
 	private float brushSize = (float) 20.0;
 	private float defaultBrushSize = (float) 20.0;
-	private int ringSpeed = 2;
+	private int ringSpeed = 3;
 	// drawing and canvas paint
 	private Paint drawPaint, canvasPaint, dotPaint, animDot;
 	// drawing path
@@ -179,7 +179,7 @@ public class DrawingView extends View {
 			animDot.setStrokeWidth(brushSize);
 			}
 			// return ring to dot size
-			if (wave > radius * 4) {
+			if (wave > radius * 5) {
 				dots[d].setRingRadius(radius);
 				dots[d].setWaveOn(false);
 				brushSize = defaultBrushSize;
