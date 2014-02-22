@@ -7,12 +7,8 @@ package pgf.sonicbubblesii;
 import java.util.Random;
 
 import android.graphics.Color;
-import android.util.Log;
 
 public class Dot {
-
-	// native variables
-	private final String SBDot = "Sonic Bubbles II-Dot";
 
 	private boolean trig, waveOn;
 	private int posX, posY, colorDot;
