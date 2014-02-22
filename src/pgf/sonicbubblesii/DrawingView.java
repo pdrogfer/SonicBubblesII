@@ -89,12 +89,12 @@ public class DrawingView extends View {
 
 		// Funny and crazy that setUpDots() must be placed here to get it
 		// working properly!!
-		setupDots();
+		setupDots(GameActivity.numDots, GameActivity.numSamples);
 
 	}
 
-	void setupDots() {
-		dots = new Dot[GameActivity.theme.getNumDots()];
+	void setupDots(int numDots, int numSamples) {
+		dots = new Dot[numDots];
 		theTheme = new int[dots.length];
 		theHand = new int[dots.length];
 		for (int n = 0; n < dots.length; n++) {
@@ -105,7 +105,7 @@ public class DrawingView extends View {
 				dot.setPosY();
 			} while (checkDotLimits(dot.getPosX(), dot.getPosY(), dot.getRadius())
 					|| checkDotCollision(n, dot.getPosX(), dot.getPosY()));
-			dot.setSample(GameActivity.theme.getNumSamples());
+			dot.setSample(numSamples);
 			dot.setSampleTriggered(false);
 			dot.setColor();
 			dots[n] = dot;
@@ -214,11 +214,9 @@ public class DrawingView extends View {
 		case MotionEvent.ACTION_UP:
 			// to erase the hand on finger up
 			// drawCanvas.drawPath(drawPath, drawPaint);
-			feedback = checkHand() ? "yep" : "nor";
-			Toast t = Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT);
-			t.setGravity(Gravity.CENTER, 0, 0);
-			t.show();
-			Log.i(DrawingView.SB, feedback);
+			boolean answer = checkHand();
+			displayToast(answer);
+			updateScore(answer);
 			drawPath.reset();
 			break;
 		default:
@@ -226,6 +224,25 @@ public class DrawingView extends View {
 		}
 		invalidate();
 		return true;
+	}
+
+	private void displayToast(boolean answer) {
+		// display a short message type: right/wrong
+		feedback = answer ? "right!" : "wrong";
+		Toast t = Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT);
+		t.setGravity(Gravity.CENTER, 0, 0);
+		t.show();
+		Log.i(DrawingView.SB, feedback);
+		
+	}
+	
+	private void updateScore(boolean answer) {
+		// update score
+		if (answer) {
+			GameActivity.getScoreTxt().setText("Score: " + (GameActivity.presentScore + 1));
+			
+		}
+		
 	}
 
 	public boolean checkHand() {
@@ -287,7 +304,7 @@ public class DrawingView extends View {
 	
 	public void startNew() {
 		drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
-		setupDots();
+		setupDots(GameActivity.numDots, GameActivity.numSamples);
 		invalidate();
 	}
 

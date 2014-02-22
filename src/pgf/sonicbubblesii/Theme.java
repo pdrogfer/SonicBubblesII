@@ -8,7 +8,6 @@ public class Theme {
 	public int nDots;
 	// the level of difficulty, as the number of possible samples. Init = 4
 	public int nSamples;
-	private static int i = 0;
 
 	// constructors
 	public Theme(int nDots, int nSamples) {

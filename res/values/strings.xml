@@ -11,6 +11,7 @@
     <string name="new_game">New Game</string>
     <string name="btn_start_game">Start Game</string>
     <string name="sonic_bubbles_logo">Sonic Bubbles logo</string>
+    <string name="score">"score: "</string>
 
 
 </resources>
