@@ -7,13 +7,14 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class IntroActivity extends Activity implements OnClickListener {
 
-	Button startGame;
+	Button startGame, howToPlay;
 
 	// for sound
 	public static SoundPool soundPool;
@@ -27,8 +28,10 @@ public class IntroActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_intro);
 
 		startGame = (Button) findViewById(R.id.btnStartGame);
+		howToPlay = (Button) findViewById(R.id.btnHowToPlay);
 		startGame.setOnClickListener(this);
-		
+		howToPlay.setOnClickListener(this);
+
 		soundSetup();
 	}
 
@@ -37,6 +40,32 @@ public class IntroActivity extends Activity implements OnClickListener {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.general_menu, menu);
 		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// handle selection on general_menu items
+		switch (item.getItemId()) {
+		case R.id.new_game:
+			// open a new game
+			Intent intent1 = new Intent(this, GameActivity.class);
+			startActivity(intent1);
+			overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+			return true;
+		case R.id.best_scores:
+			// show the best scores
+			return true;
+		case R.id.hot_to_play:
+			// show activity_how
+			Intent intent3 = new Intent(this, HowToPlay.class);
+			startActivity(intent3);
+			return true;
+		case R.id.exit:
+			// quit
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	private void soundSetup() {
@@ -64,14 +93,21 @@ public class IntroActivity extends Activity implements OnClickListener {
 		soundAS = soundPool.load(this, R.raw.a_s, 1);
 		soundB = soundPool.load(this, R.raw.b, 1);
 	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnStartGame:
 			// launch game activity
-			Intent intent = new Intent(this, GameActivity.class);
-			startActivity(intent);
+			Intent intent1 = new Intent(this, GameActivity.class);
+			startActivity(intent1);
 			overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+			break;
+		case R.id.btnHowToPlay:
+			// show instructions
+			Intent intent2 = new Intent(this, HowToPlay.class);
+			startActivity(intent2);
+			// overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 			break;
 		}
 

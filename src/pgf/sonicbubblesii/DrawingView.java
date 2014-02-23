@@ -218,6 +218,9 @@ public class DrawingView extends View {
 			displayToast(answer);
 			updateScore(answer);
 			drawPath.reset();
+			if (answer) {
+				startNew();
+			}
 			break;
 		default:
 			return false;
@@ -241,7 +244,6 @@ public class DrawingView extends View {
 		if (answer) {
 			GameActivity.presentScore += 1;
 			GameActivity.getScoreTxt().setText("Score: " + (GameActivity.presentScore));
-			
 		}
 		
 	}
