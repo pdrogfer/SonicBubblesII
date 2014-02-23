@@ -8,7 +8,7 @@
 
    <!-- buttons on the upper part of the screen -->
 
-<RelativeLayout
+<LinearLayout
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="#FFCCCCCC"
@@ -16,21 +16,22 @@
 
     <Button
         android:id="@+id/btnListenAgain"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="ListenAgain" />
+        android:text="@string/listen_again" />
 
     <TextView
         android:id="@+id/scoreView"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
+        android:layout_weight="1"
+        android:gravity="center"
         android:text="@string/score"
-        android:textSize="30sp" />
+        android:textSize="20sp" />
 
-</RelativeLayout>
+</LinearLayout>
 
     <!-- drawing area -->
 
@@ -51,6 +52,6 @@
     android:id="@+id/btnNewGame"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="NewGame" />
+    android:text="@string/new_game" />
 
 </LinearLayout>

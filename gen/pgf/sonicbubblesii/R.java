@@ -74,6 +74,7 @@ public final class R {
         public static final int exit=0x7f060006;
         public static final int feedback=0x7f060003;
         public static final int how_to_play=0x7f060005;
+        public static final int listen_again=0x7f06000b;
         public static final int new_game=0x7f060007;
         public static final int score=0x7f06000a;
         public static final int sonic_bubbles_logo=0x7f060009;

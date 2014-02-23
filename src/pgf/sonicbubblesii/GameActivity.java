@@ -52,12 +52,14 @@ public class GameActivity extends Activity implements OnClickListener {
 		gamePrefs = getSharedPreferences(GAME_PREFS, 0);
 		drawView = (DrawingView) findViewById(R.id.drawing);
 		listenAgain = (Button) findViewById(R.id.btnListenAgain);
-		setScoreTxt((TextView) findViewById(R.id.scoreView));
+		scoreTxt = (TextView) findViewById(R.id.scoreView);
 		newGame = (Button) findViewById(R.id.btnNewGame);
 		listenAgain.setOnClickListener(this);
 		newGame.setOnClickListener(this);
 
-		scoreTxt.setText(R.string.score + presentScore);
+		// display score
+		presentScore = 0;
+		scoreTxt.setText("Score: " + Integer.toString(presentScore));
 
 	}
 
@@ -142,6 +144,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		}
 
 	}
+
 	public static TextView getScoreTxt() {
 		return scoreTxt;
 	}

@@ -12,6 +12,7 @@
     <string name="btn_start_game">Start Game</string>
     <string name="sonic_bubbles_logo">Sonic Bubbles logo</string>
     <string name="score">"score: "</string>
+    <string name="listen_again">Listen Again</string>
 
 
 </resources>

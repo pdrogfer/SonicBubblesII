@@ -239,7 +239,8 @@ public class DrawingView extends View {
 	private void updateScore(boolean answer) {
 		// update score
 		if (answer) {
-			GameActivity.getScoreTxt().setText("Score: " + (GameActivity.presentScore + 1));
+			GameActivity.presentScore += 1;
+			GameActivity.getScoreTxt().setText("Score: " + (GameActivity.presentScore));
 			
 		}
 		
