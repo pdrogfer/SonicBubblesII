@@ -61,7 +61,7 @@ public class GameActivity extends Activity implements OnClickListener {
 
 		// display score
 		presentScore = 0;
-		scoreTxt.setText("Score: " + Integer.toString(presentScore));
+		scoreTxt.setText(getString(R.string.score) + Integer.toString(presentScore));
 
 	}
 
@@ -112,6 +112,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.btnNewGame:
 			// start a new game
+			// TODO set score to 0, and numDots and numSamples to default value
 			drawView.startNew();
 			break;
 		default:

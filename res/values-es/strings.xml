@@ -9,5 +9,7 @@
     <string name="listen_again">Oir de nuevo</string>
     <string name="new_game">Nueva Partida</string>
     <string name="score">"Puntuacion: "</string>
+    <string name="right">¡correcto!</string>
+    <string name="wrong">incorrecto</string>
 
 </resources>

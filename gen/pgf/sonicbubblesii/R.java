@@ -87,9 +87,11 @@ public final class R {
         public static final int instructions=0x7f07000c;
         public static final int listen_again=0x7f07000b;
         public static final int new_game=0x7f070007;
+        public static final int right=0x7f07000d;
         public static final int score=0x7f07000a;
         public static final int sonic_bubbles_logo=0x7f070009;
         public static final int title_activity_game=0x7f070002;
+        public static final int wrong=0x7f07000e;
     }
     public static final class style {
         /** 

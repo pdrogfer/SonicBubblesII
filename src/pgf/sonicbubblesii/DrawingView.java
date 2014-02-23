@@ -231,9 +231,8 @@ public class DrawingView extends View {
 
 	private void displayToast(boolean answer) {
 		// display a short message type: right/wrong
-		feedback = answer ? "right!" : "wrong";
+		feedback = answer ? getContext().getString(R.string.right) : getContext().getString(R.string.wrong);
 		Toast t = Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT);
-		t.setGravity(Gravity.CENTER, 0, 0);
 		t.show();
 		Log.i(DrawingView.SB, feedback);
 		
@@ -243,9 +242,10 @@ public class DrawingView extends View {
 		// update score
 		if (answer) {
 			GameActivity.presentScore += 1;
-			
+			// increase numDots by 1 every 4 points of score 
 			GameActivity.numDots = 4 + GameActivity.presentScore / 4;
-			GameActivity.getScoreTxt().setText("Score: " + (GameActivity.presentScore));
+			// write score on screen
+			GameActivity.getScoreTxt().setText(getContext().getString(R.string.score) + (GameActivity.presentScore));
 		}
 		
 	}
