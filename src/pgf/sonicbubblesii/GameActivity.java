@@ -8,11 +8,13 @@ import java.util.Date;
 import java.util.List;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.GetChars;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -34,12 +36,13 @@ public class GameActivity extends Activity implements OnClickListener {
 	private SharedPreferences gamePrefs;
 	public static final String GAME_PREFS = "Arithmetic_File";
 	private static TextView scoreTxt;
-	public static int presentScore; 
+	public static int presentScore;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
-		
+
 		// Number of Dots initialized here
 		numDots = 4;
 		numSamples = 7;
@@ -47,7 +50,6 @@ public class GameActivity extends Activity implements OnClickListener {
 		theme = new Theme(numDots, numSamples);
 		// depending in the number of samples, select which ones to use
 		chooseSamples(theme.getNumSamples());
-		
 
 		gamePrefs = getSharedPreferences(GAME_PREFS, 0);
 		drawView = (DrawingView) findViewById(R.id.drawing);
@@ -69,6 +71,29 @@ public class GameActivity extends Activity implements OnClickListener {
 		getMenuInflater().inflate(R.menu.general_menu, menu);
 		presentScore = 0;
 		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// handle selection on general_menu items
+		switch (item.getItemId()) {
+		case R.id.new_game:
+			// open a new game
+			return true;
+		case R.id.best_scores:
+			// show the best scores
+			return true;
+		case R.id.hot_to_play:
+			// show activity_how
+			Intent intent = new Intent(this, HowToPlay.class);
+			startActivity(intent);
+			return true;
+		case R.id.exit:
+			// quit
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	private void themeSetup(int nDots, int nSamples) {
@@ -95,6 +120,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		}
 
 	}
+
 	private int getScore() {
 		// returns the present score
 		String scoreStr = getScoreTxt().getText().toString();

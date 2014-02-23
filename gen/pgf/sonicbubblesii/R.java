@@ -29,28 +29,30 @@ public final class R {
         public static final int logo_original=0x7f020001;
     }
     public static final class id {
-        public static final int best_scores=0x7f0a000d;
-        public static final int btnHowToPlay=0x7f0a000a;
+        public static final int best_scores=0x7f0a000e;
+        public static final int btnHowToPlay=0x7f0a000b;
         public static final int btnListenAgain=0x7f0a0000;
         public static final int btnNewGame=0x7f0a0003;
-        public static final int btnStartGame=0x7f0a0009;
+        public static final int btnStartGame=0x7f0a000a;
         public static final int drawing=0x7f0a0002;
-        public static final int exit=0x7f0a000f;
+        public static final int exit=0x7f0a0010;
         public static final int high_head=0x7f0a0005;
         public static final int high_scores_list=0x7f0a0006;
-        public static final int hot_to_play=0x7f0a000e;
+        public static final int hot_to_play=0x7f0a000f;
+        public static final int how_to_play=0x7f0a0007;
         public static final int intro=0x7f0a0004;
-        public static final int intro_image=0x7f0a0008;
-        public static final int new_game=0x7f0a000c;
+        public static final int intro_image=0x7f0a0009;
+        public static final int new_game=0x7f0a000d;
         public static final int scoreView=0x7f0a0001;
-        public static final int tVwTitle=0x7f0a0007;
-        public static final int textView1=0x7f0a000b;
+        public static final int tVwTitle=0x7f0a0008;
+        public static final int textView1=0x7f0a000c;
     }
     public static final class layout {
         public static final int activity_game=0x7f030000;
         public static final int activity_high=0x7f030001;
-        public static final int activity_intro=0x7f030002;
-        public static final int feedback_view=0x7f030003;
+        public static final int activity_how=0x7f030002;
+        public static final int activity_intro=0x7f030003;
+        public static final int feedback_view=0x7f030004;
     }
     public static final class menu {
         public static final int general_menu=0x7f090000;
@@ -78,6 +80,7 @@ public final class R {
         public static final int exit=0x7f070006;
         public static final int feedback=0x7f070003;
         public static final int how_to_play=0x7f070005;
+        public static final int instructions=0x7f07000c;
         public static final int listen_again=0x7f07000b;
         public static final int new_game=0x7f070007;
         public static final int score=0x7f07000a;
