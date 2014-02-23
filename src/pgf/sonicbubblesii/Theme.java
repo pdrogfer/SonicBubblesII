@@ -35,7 +35,7 @@ public class Theme {
 	public void playTheme(int delayMillis) {
 		for (int i = 0; i < DrawingView.dots.length; i++) {
 			GameActivity.doSound(DrawingView.dots[i].getSample());
-			android.os.SystemClock.sleep(1000);
+			android.os.SystemClock.sleep(delayMillis);
 		}
 	}
 }

@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFCCCCCC"
+    android:orientation="vertical"
+    tools:context=".HighScores" >
+
+    <!-- buttons on the upper part of the screen -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:background="#FFCCCCCC"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnListenAgain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/listen_again"
+            android:textSize="35sp" />
+
+        <TextView
+            android:id="@+id/scoreView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/score"
+            android:textSize="35sp" />
+    </LinearLayout>
+
+    <!-- drawing area -->
+
+    <pgf.sonicbubblesii.DrawingView
+        android:id="@+id/drawing"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_weight="1"
+        android:background="#FFFFFFFF" />
+
+    <!-- buttons on the lower part of the screen -->
+
+    <Button
+        android:id="@+id/btnNewGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/new_game"
+        android:textSize="35sp" />
+
+</LinearLayout>

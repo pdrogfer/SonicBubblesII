@@ -108,7 +108,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.btnListenAgain:
 			// play again the sequence, at 1sec intervals
-			theme.playTheme(1000);
+			theme.playTheme(750);
 			break;
 		case R.id.btnNewGame:
 			// start a new game

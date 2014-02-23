@@ -243,6 +243,8 @@ public class DrawingView extends View {
 		// update score
 		if (answer) {
 			GameActivity.presentScore += 1;
+			
+			GameActivity.numDots = 4 + GameActivity.presentScore / 4;
 			GameActivity.getScoreTxt().setText("Score: " + (GameActivity.presentScore));
 		}
 		

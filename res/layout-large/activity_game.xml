@@ -1,17 +1,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#FFCCCCCC"
     android:orientation="vertical"
-    tools:context=".GameActivity" >
+    tools:context=".HighScores" >
+
    <!-- buttons on the upper part of the screen -->
+
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFCCCCCC"
+    android:orientation="horizontal" >
 
     <Button
         android:id="@+id/btnListenAgain"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="ListenAgain" />
+        android:text="@string/listen_again" />
+
+    <TextView
+        android:id="@+id/scoreView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/score"
+        android:textSize="20sp" />
+
+</LinearLayout>
 
     <!-- drawing area -->
 
@@ -32,6 +52,6 @@
     android:id="@+id/btnNewGame"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="NewGame" />
+    android:text="@string/new_game" />
 
 </LinearLayout>
