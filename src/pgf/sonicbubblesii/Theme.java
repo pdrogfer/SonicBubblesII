@@ -1,6 +1,5 @@
 package pgf.sonicbubblesii;
 
-
 public class Theme {
 
 	// variables
@@ -32,10 +31,19 @@ public class Theme {
 		this.nSamples = numSamples;
 	}
 
-	public void playTheme(int delayMillis) {
-		for (int i = 0; i < DrawingView.dots.length; i++) {
-			GameActivity.doSound(DrawingView.dots[i].getSample());
-			android.os.SystemClock.sleep(delayMillis);
-		}
+	public void playTheme(final int loopDelayMillis, final int initDelayMillis) {
+		// New thread to put this operation away from the main UI thread
+		// loopDelayMillis = delay between sounds
+		// initDelayMillis = initial delay before play first sound
+		Thread thread = new Thread() {
+			public void run() {
+				android.os.SystemClock.sleep(initDelayMillis);
+				for (int i = 0; i < DrawingView.dots.length; i++) {
+					GameActivity.doSound(DrawingView.dots[i].getSample());
+					android.os.SystemClock.sleep(loopDelayMillis);
+				}
+			}
+		};
+		thread.start();
 	}
 }

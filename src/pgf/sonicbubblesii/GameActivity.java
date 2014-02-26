@@ -63,6 +63,8 @@ public class GameActivity extends Activity implements OnClickListener {
 		presentScore = 0;
 		scoreTxt.setText(getString(R.string.score) + Integer.toString(presentScore));
 
+		// play first theme
+		theme.playTheme(750, 1500);
 	}
 
 	@Override
@@ -107,13 +109,18 @@ public class GameActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnListenAgain:
-			// play again the sequence, at 1sec intervals
-			theme.playTheme(750);
+			// play again the sequence, at 0.75 sec intervals
+			theme.playTheme(750, 0);
 			break;
 		case R.id.btnNewGame:
-			// start a new game
-			// TODO set score to 0, and numDots and numSamples to default value
+			// start a new game.
+			// set score to 0, and numDots and numSamples to default value
+			/*
+			 * TODO This works, but is not accurate. It starts a new HAND, not a
+			 * new GAME.
+			 */
 			drawView.startNew();
+			theme.playTheme(750, 1000);
 			break;
 		default:
 			break;
