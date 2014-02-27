@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -59,8 +60,6 @@ public class GameActivity extends Activity implements OnClickListener {
 		newGame = (Button) findViewById(R.id.btnNewGame);
 		listenAgain.setOnClickListener(this);
 		newGame.setOnClickListener(this);
-		
-		drawView.setBackgroundResource(R.drawable.fondo1);
 
 		// display score
 		presentScore = 0;

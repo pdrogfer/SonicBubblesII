@@ -65,7 +65,7 @@ public class DrawingView extends View {
 		drawPaint.setStrokeCap(Paint.Cap.ROUND);
 		drawPaint.setAlpha(alphaPath);
 		canvasPaint = new Paint(Paint.DITHER_FLAG);
-		canvasPaint.setAlpha(0);
+		canvasPaint.setAlpha(255);
 		
 
 		/*
