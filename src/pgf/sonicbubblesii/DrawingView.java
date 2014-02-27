@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
@@ -64,6 +65,8 @@ public class DrawingView extends View {
 		drawPaint.setStrokeJoin(Paint.Join.ROUND);
 		drawPaint.setStrokeCap(Paint.Cap.ROUND);
 		drawPaint.setAlpha(alphaPath);
+		// hace las lineas redondeadas
+		drawPaint.setPathEffect(new CornerPathEffect(20));
 		canvasPaint = new Paint(Paint.DITHER_FLAG);
 		canvasPaint.setAlpha(255);
 		
