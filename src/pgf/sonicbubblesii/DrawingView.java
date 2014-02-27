@@ -1,5 +1,8 @@
 package pgf.sonicbubblesii;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -28,6 +31,7 @@ public class DrawingView extends View {
 	// drawing path
 	private Path drawPath;
 	// path opacity
+	private List<Integer> alphas;
 	private int alphaPath = 255;
 	// canvas size
 	static int width, height;
@@ -61,6 +65,8 @@ public class DrawingView extends View {
 		drawPaint.setStrokeCap(Paint.Cap.ROUND);
 		drawPaint.setAlpha(alphaPath);
 		canvasPaint = new Paint(Paint.DITHER_FLAG);
+		canvasPaint.setAlpha(0);
+		
 
 		/*
 		 * configure the style for the dots with dotPaint, except color which is
@@ -164,23 +170,23 @@ public class DrawingView extends View {
 		for (int d = 0; d < dots.length; d++) {
 			int radius = dots[d].getRadius();
 			int wave = dots[d].getRingRadius();
-			/* TODO The ring stops drawing if the user lifts finger and touches the screen again,
-			 * because this calls the restartHand method which sets all sample-triggered to false
-			 * again, so it's necessary to add a second condition.
-			 * Also: create two functions to put the drawing of dots and rings in nice separated
-			 * cleaned places
+			/*
+			 * TODO The ring stops drawing if the user lifts finger and touches
+			 * the screen again, because this calls the restartHand method which
+			 * sets all sample-triggered to false again, so it's necessary to
+			 * add a second condition. Also: create two functions to put the
+			 * drawing of dots and rings in nice separated cleaned places
 			 */
 			// draw the dot animation
 			animDot.setColor(dots[d].getColor());
 			animDot.setStyle(Paint.Style.STROKE);
-			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), wave,
-					animDot);
+			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), wave, animDot);
 			// increase ring size
 			if (dots[d].getWaveOn()) { // || dots[d].getWaveOn()) {
-			dots[d].setRingRadius(wave + ringSpeed);
-			// 
-			brushSize -= 0.3;
-			animDot.setStrokeWidth(brushSize);
+				dots[d].setRingRadius(wave + ringSpeed);
+				//
+				brushSize -= 0.3;
+				animDot.setStrokeWidth(brushSize);
 			}
 			// return ring to dot size
 			if (wave > radius * 5) {
@@ -195,9 +201,8 @@ public class DrawingView extends View {
 
 		}
 		canvas.drawPath(drawPath, drawPaint);
-//		alphaPath --;
-//		drawPaint.setAlpha(alphaPath);
-		invalidate(); 
+		invalidate();
+
 	}
 
 	@Override
@@ -208,12 +213,21 @@ public class DrawingView extends View {
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
+			alphas = new ArrayList<Integer>();
 			restartHand();
+			alphas.add(255);
+			drawPaint.setAlpha(255);
+			
 			drawPath.moveTo(touchX, touchY);
 			checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_MOVE:
+			int historySize = event.getHistorySize();
 			drawPath.lineTo(touchX, touchY);
+			for (Integer i : alphas) {
+				i = i - 5;
+			}
+			alphas.add(255);
 			checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_UP:
@@ -236,23 +250,25 @@ public class DrawingView extends View {
 
 	private void displayToast(boolean answer) {
 		// display a short message type: right/wrong
-		feedback = answer ? getContext().getString(R.string.right) : getContext().getString(R.string.wrong);
+		feedback = answer ? getContext().getString(R.string.right) : getContext().getString(
+				R.string.wrong);
 		Toast t = Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT);
 		t.show();
 		Log.i(DrawingView.SB, feedback);
-		
+
 	}
-	
+
 	private void updateScore(boolean answer) {
 		// update score
 		if (answer) {
 			GameActivity.presentScore += 1;
-			// increase numDots by 1 every 4 points of score 
+			// increase numDots by 1 every 4 points of score
 			GameActivity.numDots = 4 + GameActivity.presentScore / 4;
 			// write score on screen
-			GameActivity.getScoreTxt().setText(getContext().getString(R.string.score) + (GameActivity.presentScore));
+			GameActivity.getScoreTxt().setText(
+					getContext().getString(R.string.score) + (GameActivity.presentScore));
 		}
-		
+
 	}
 
 	public boolean checkHand() {
@@ -311,7 +327,7 @@ public class DrawingView extends View {
 			}
 		}
 	}
-	
+
 	public void startNew() {
 		drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
 		setupDots(GameActivity.numDots, GameActivity.numSamples);

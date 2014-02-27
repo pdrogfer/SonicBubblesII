@@ -59,6 +59,8 @@ public class GameActivity extends Activity implements OnClickListener {
 		newGame = (Button) findViewById(R.id.btnNewGame);
 		listenAgain.setOnClickListener(this);
 		newGame.setOnClickListener(this);
+		
+		drawView.setBackgroundResource(R.drawable.fondo1);
 
 		// display score
 		presentScore = 0;
