@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.GetChars;
 import android.util.Log;
@@ -45,7 +46,7 @@ public class GameActivity extends Activity implements OnClickListener {
 
 		// Number of Dots initialized here
 		numDots = 4;
-		numSamples = 7;
+		numSamples = 4;
 		themeSetup(numDots, numSamples);
 		theme = new Theme(numDots, numSamples);
 		// depending in the number of samples, select which ones to use
@@ -80,6 +81,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		switch (item.getItemId()) {
 		case R.id.new_game:
 			// open a new game
+			newGame();
 			return true;
 		case R.id.best_scores:
 			// show the best scores
@@ -113,19 +115,23 @@ public class GameActivity extends Activity implements OnClickListener {
 			theme.playTheme(750, 0);
 			break;
 		case R.id.btnNewGame:
-			// start a new game.
-			// set score to 0, and numDots and numSamples to default value
-			/*
-			 * TODO This works, but is not accurate. It starts a new HAND, not a
-			 * new GAME.
-			 */
-			drawView.startNew();
-			theme.playTheme(750, 1000);
+			newGame();
 			break;
 		default:
 			break;
 		}
 
+	}
+
+	private void newGame() {
+		// start a new game.
+		// set score to 0, and numDots and numSamples to default value
+		/*
+		 * TODO This works, but is not accurate. It starts a new HAND, not a
+		 * new GAME.
+		 */
+		drawView.startNew();
+		theme.playTheme(750, 1000);
 	}
 
 	private int getScore() {

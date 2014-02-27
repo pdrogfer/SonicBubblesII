@@ -57,6 +57,7 @@ public class DrawingView extends View {
 		drawPaint.setStyle(Paint.Style.STROKE);
 		drawPaint.setStrokeJoin(Paint.Join.ROUND);
 		drawPaint.setStrokeCap(Paint.Cap.ROUND);
+		drawPaint.setAlpha(100);
 		canvasPaint = new Paint(Paint.DITHER_FLAG);
 
 		/*
