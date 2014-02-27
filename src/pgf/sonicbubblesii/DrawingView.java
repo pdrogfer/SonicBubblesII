@@ -27,6 +27,8 @@ public class DrawingView extends View {
 	private Paint drawPaint, canvasPaint, dotPaint, animDot;
 	// drawing path
 	private Path drawPath;
+	// path opacity
+	private int alphaPath = 255;
 	// canvas size
 	static int width, height;
 	public float scale;
@@ -57,7 +59,7 @@ public class DrawingView extends View {
 		drawPaint.setStyle(Paint.Style.STROKE);
 		drawPaint.setStrokeJoin(Paint.Join.ROUND);
 		drawPaint.setStrokeCap(Paint.Cap.ROUND);
-		drawPaint.setAlpha(100);
+		drawPaint.setAlpha(alphaPath);
 		canvasPaint = new Paint(Paint.DITHER_FLAG);
 
 		/*
@@ -156,6 +158,7 @@ public class DrawingView extends View {
 	protected void onDraw(Canvas canvas) {
 		// draw DrawingView
 		canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
+		// TODO set the background
 
 		// draw the dot objects
 		for (int d = 0; d < dots.length; d++) {
@@ -192,6 +195,8 @@ public class DrawingView extends View {
 
 		}
 		canvas.drawPath(drawPath, drawPaint);
+//		alphaPath --;
+//		drawPaint.setAlpha(alphaPath);
 		invalidate(); 
 	}
 
@@ -209,7 +214,6 @@ public class DrawingView extends View {
 			break;
 		case MotionEvent.ACTION_MOVE:
 			drawPath.lineTo(touchX, touchY);
-			Log.i(SB, "");
 			checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_UP:
