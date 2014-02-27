@@ -26,7 +26,7 @@ import android.widget.Toast;
 public class GameActivity extends Activity implements OnClickListener {
 
 	// GUI
-	Button listenAgain, newGame;
+	Button listenAgain;
 	DrawingView drawView;
 	static Theme theme;
 	public static int numDots, numSamples;
@@ -57,9 +57,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		drawView = (DrawingView) findViewById(R.id.drawing);
 		listenAgain = (Button) findViewById(R.id.btnListenAgain);
 		scoreTxt = (TextView) findViewById(R.id.scoreView);
-		newGame = (Button) findViewById(R.id.btnNewGame);
 		listenAgain.setOnClickListener(this);
-		newGame.setOnClickListener(this);
 
 		// display score
 		presentScore = 0;
@@ -86,11 +84,13 @@ public class GameActivity extends Activity implements OnClickListener {
 			return true;
 		case R.id.best_scores:
 			// show the best scores
+			Intent intentBest = new Intent(this, HighScores.class);
+			startActivity(intentBest);
 			return true;
 		case R.id.hot_to_play:
 			// show activity_how
-			Intent intent = new Intent(this, HowToPlay.class);
-			startActivity(intent);
+			Intent intentHow = new Intent(this, HowToPlay.class);
+			startActivity(intentHow);
 			return true;
 		case R.id.exit:
 			// quit

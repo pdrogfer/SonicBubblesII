@@ -164,14 +164,12 @@ public class DrawingView extends View {
 	protected void onDraw(Canvas canvas) {
 		// draw DrawingView
 		canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
-		// TODO set the background
-
 		// draw the dot objects
 		for (int d = 0; d < dots.length; d++) {
 			int radius = dots[d].getRadius();
 			int wave = dots[d].getRingRadius();
 			/*
-			 * TODO The ring stops drawing if the user lifts finger and touches
+			 * The ring stops drawing if the user lifts finger and touches
 			 * the screen again, because this calls the restartHand method which
 			 * sets all sample-triggered to false again, so it's necessary to
 			 * add a second condition. Also: create two functions to put the
@@ -182,7 +180,7 @@ public class DrawingView extends View {
 			animDot.setStyle(Paint.Style.STROKE);
 			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), wave, animDot);
 			// increase ring size
-			if (dots[d].getWaveOn()) { // || dots[d].getWaveOn()) {
+			if (dots[d].getWaveOn()) { 
 				dots[d].setRingRadius(wave + ringSpeed);
 				//
 				brushSize -= 0.3;
@@ -207,7 +205,7 @@ public class DrawingView extends View {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		// handle user touch, and proximity to Dots for sound triggering
+		// handle finger proximity to Dots for sound triggering
 		float touchX = event.getX();
 		float touchY = event.getY();
 
@@ -231,8 +229,6 @@ public class DrawingView extends View {
 			checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_UP:
-			// to erase the hand on finger up
-			// drawCanvas.drawPath(drawPath, drawPaint);
 			boolean answer = checkHand();
 			displayToast(answer);
 			updateScore(answer);
@@ -260,6 +256,7 @@ public class DrawingView extends View {
 
 	private void updateScore(boolean answer) {
 		// update score
+		// TODO Update Level and Round on screen (variables are not created yet)
 		if (answer) {
 			GameActivity.presentScore += 1;
 			// increase numDots by 1 every 4 points of score
@@ -268,7 +265,6 @@ public class DrawingView extends View {
 			GameActivity.getScoreTxt().setText(
 					getContext().getString(R.string.score) + (GameActivity.presentScore));
 		}
-
 	}
 
 	public boolean checkHand() {

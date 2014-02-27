@@ -11,5 +11,7 @@
     <string name="score">"Puntuacion: "</string>
     <string name="right">¡correcto!</string>
     <string name="wrong">incorrecto</string>
+    <string name="tv_level">"Nivel: "</string>
+    <string name="tv_round">"Ronda: "</string>
 
 </resources>

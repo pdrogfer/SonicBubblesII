@@ -48,17 +48,19 @@ public class IntroActivity extends Activity implements OnClickListener {
 		switch (item.getItemId()) {
 		case R.id.new_game:
 			// open a new game
-			Intent intent1 = new Intent(this, GameActivity.class);
-			startActivity(intent1);
+			Intent intentNew = new Intent(this, GameActivity.class);
+			startActivity(intentNew);
 			overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 			return true;
 		case R.id.best_scores:
 			// show the best scores
+			Intent intentBest = new Intent(this, HighScores.class);
+			startActivity(intentBest);
 			return true;
 		case R.id.hot_to_play:
 			// show activity_how
-			Intent intent3 = new Intent(this, HowToPlay.class);
-			startActivity(intent3);
+			Intent intentHow = new Intent(this, HowToPlay.class);
+			startActivity(intentHow);
 			return true;
 		case R.id.exit:
 			// quit
