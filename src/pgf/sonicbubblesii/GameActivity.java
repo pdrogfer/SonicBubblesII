@@ -24,6 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class GameActivity extends Activity implements OnClickListener {
+	
+	// Log tags
+	public final static String SB = "Sonic Bubbles II";
+	public final static String SB_LifeCycle = "SB II LifeCycle";
+
 
 	// GUI
 	Button listenAgain;
@@ -65,6 +70,9 @@ public class GameActivity extends Activity implements OnClickListener {
 
 		// play first theme
 		theme.playTheme(750, 1500);
+		
+		Log.i(SB_LifeCycle, "Game Activity On Create");
+
 	}
 
 	@Override
@@ -103,7 +111,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	private void themeSetup(int nDots, int nSamples) {
 		// generate a theme
 		// theme = new Theme(nDots, nSamples);
-		Log.i(DrawingView.SB, "New Theme created");
+		Log.i(SB, "New Theme created");
 		// theme.playTheme(1000);
 
 	}
@@ -252,14 +260,68 @@ public class GameActivity extends Activity implements OnClickListener {
 		float volume = 1;
 		if (IntroActivity.loaded) {
 			IntroActivity.soundPool.play(chosenSamples.get(sndId) + 1, volume, volume, 1, 0, 1f);
-			Log.i(DrawingView.SB, "sampleTriggered");
+			Log.i(SB, "sampleTriggered");
 		}
+	}
+
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		Log.i(SB_LifeCycle, "Game Activity On Start");
+		if (!IntroActivity.loaded) {
+			
+		}
+		super.onStart();
+	}
+	
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		Log.i(SB_LifeCycle, "Game Activity On Restart");
+		super.onRestart();
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		Log.i(SB_LifeCycle, "Game Activity On Resume");
+		super.onResume();
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		Log.i(SB_LifeCycle, "Game Activity On Pause");
+		super.onPause();
+	}
+
+
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		Log.i(SB_LifeCycle, "Game Activity On Stop");
+		super.onStop();
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		IntroActivity.soundPool.release();
+		// IntroActivity.soundPool.release();
+		Log.i(SB_LifeCycle, "Game Activity On Destroy");
+	}
+	
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		// TODO Implement this when support for landscape orientation
+		super.onRestoreInstanceState(savedInstanceState);
+	}
+	
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// TODO Implement this when support for landscape orientation
+		super.onSaveInstanceState(outState);
 	}
 
 }

@@ -18,6 +18,9 @@ import android.widget.Toast;
 
 public class DrawingView extends View {
 
+	// Log tags
+	public final static String SB = "Sonic Bubbles II";
+
 	// native variables:
 	private Canvas drawCanvas;
 	private Bitmap canvasBitmap;
@@ -43,8 +46,6 @@ public class DrawingView extends View {
 	public static int[] theTheme;
 	public static int[] theHand;
 
-	// Log tags
-	public final static String SB = "Sonic Bubbles II";
 
 	// constructors
 	public DrawingView(Context context, AttributeSet attrs) {
