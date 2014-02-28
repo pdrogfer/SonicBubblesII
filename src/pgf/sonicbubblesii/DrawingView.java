@@ -259,10 +259,16 @@ public class DrawingView extends View {
 		// update score
 		// TODO Update Level and Round on screen (variables are not created yet)
 		if (answer) {
-			GameActivity.presentScore += 1;
+			// update score, Level and Round
+			GameActivity.presentScore += 10;
+			GameActivity.Hand ++;
+			GameActivity.Level = GameActivity.Hand % 4;
+			GameActivity.Round = GameActivity.Hand / 4;
 			// increase numDots by 1 every 4 points of score
 			GameActivity.numDots = 4 + GameActivity.presentScore / 4;
 			// write score on screen
+			GameActivity.getScoreTxt().setText(
+					getContext().getString(R.string.score) + (GameActivity.presentScore));
 			GameActivity.getScoreTxt().setText(
 					getContext().getString(R.string.score) + (GameActivity.presentScore));
 		}

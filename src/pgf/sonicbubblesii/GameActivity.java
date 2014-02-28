@@ -42,8 +42,11 @@ public class GameActivity extends Activity implements OnClickListener {
 	// scores
 	private SharedPreferences gamePrefs;
 	public static final String GAME_PREFS = "Arithmetic_File";
-	private static TextView scoreTxt;
+	private static TextView scoreTxt, levelTxt, roundTxt;
 	public static int presentScore;
+	public static int Hand = 1;
+	public static int Level = 1;
+	public static int Round = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +65,12 @@ public class GameActivity extends Activity implements OnClickListener {
 		drawView = (DrawingView) findViewById(R.id.drawing);
 		listenAgain = (Button) findViewById(R.id.btnListenAgain);
 		scoreTxt = (TextView) findViewById(R.id.scoreView);
+		levelTxt = (TextView) findViewById(R.id.tvLevel);
+		roundTxt = (TextView) findViewById(R.id.tvRound);
 		listenAgain.setOnClickListener(this);
 
 		// display score
-		presentScore = 0;
+		presentScore = 10;
 		scoreTxt.setText(getString(R.string.score) + Integer.toString(presentScore));
 
 		// play first theme
@@ -144,9 +149,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	}
 
 	private int getScore() {
-		// returns the present score
-		String scoreStr = getScoreTxt().getText().toString();
-		return Integer.parseInt(scoreStr.substring(scoreStr.lastIndexOf(" ") + 1));
+		return presentScore;
 	}
 
 	private void setHighScore() {
@@ -208,7 +211,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		 * whole-tone, etc
 		 */
 		switch (levels) {
-		case 4:
+		case 1:
 			// C, D, E, G
 			chosenSamples.clear();
 			chosenSamples.add(0);
@@ -217,7 +220,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			chosenSamples.add(7);
 			break;
 
-		case 5:
+		case 2:
 			// C, D, E, G, A
 			chosenSamples.clear();
 			chosenSamples.add(0);
@@ -227,7 +230,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			chosenSamples.add(9);
 			break;
 
-		case 6:
+		case 3:
 			// C, D, E, F, G, A
 			chosenSamples.clear();
 			chosenSamples.add(0);
@@ -238,7 +241,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			chosenSamples.add(9);
 			break;
 
-		case 7:
+		case 4:
 			// C, D, E, F, G, A, B
 			chosenSamples.clear();
 			chosenSamples.add(0);
@@ -250,7 +253,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			chosenSamples.add(11);
 			break;
 
-		case 8:
+		case 5:
 			break;
 		}
 
