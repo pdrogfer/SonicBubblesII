@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="action_settings">Configuration</string>
+    <string name="best_scores">Tes mieux ponctuations</string>
+    <string name="btn_start_game">Nouvelle Partie</string>
+    <string name="exit">Sortir</string>
+    <string name="how_to_play">Comment jouer</string>
+    <string name="instructions">Sonic Bubbles est un jeu très simple. Écoute la séquence des sons et pousse ton doigt sur les bulles pour les joindre dans le même ordre que le sujet.</string>
+    <string name="listen_again">Écouter encore</string>
+    <string name="new_game">Nouvelle Partie</string>
+    <string name="right">¡correct!</string>
+    <string name="score">"Ponctuation: "</string>
+    <string name="tv_level">"Niveau: "</string>
+    <string name="tv_round">Ronde:</string>
+    <string name="wrong">incorrect</string>
+
+</resources>

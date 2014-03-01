@@ -43,7 +43,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="3dp"
         android:layout_weight="1"
-        android:background="@drawable/fondo1" />
+        android:background="@drawable/htc254" />
 
     <!-- Level and Round info on the lower part of the screen -->
 

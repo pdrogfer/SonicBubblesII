@@ -31,8 +31,9 @@ public final class R {
     public static final class drawable {
         public static final int fondo1=0x7f020000;
         public static final int fondo2=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int logo_original=0x7f020003;
+        public static final int htc254=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int logo_original=0x7f020004;
     }
     public static final class id {
         public static final int best_scores=0x7f0a0010;
