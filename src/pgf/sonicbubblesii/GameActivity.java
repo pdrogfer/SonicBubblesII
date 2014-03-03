@@ -54,6 +54,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_game);
 
 		// Number of Dots initialized here
+		// TODO There is something wrong with which samples are chosen
 		numDots = 4;
 		numSamples = 4;
 		themeSetup(numDots, numSamples);
@@ -226,7 +227,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		 * whole-tone, etc
 		 */
 		switch (levels) {
-		case 1:
+		case 4:
 			// C, D, E, G
 			chosenSamples.clear();
 			chosenSamples.add(0);
@@ -235,7 +236,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			chosenSamples.add(7);
 			break;
 
-		case 2:
+		case 5:
 			// C, D, E, G, A
 			chosenSamples.clear();
 			chosenSamples.add(0);
@@ -245,7 +246,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			chosenSamples.add(9);
 			break;
 
-		case 3:
+		case 6:
 			// C, D, E, F, G, A
 			chosenSamples.clear();
 			chosenSamples.add(0);
@@ -256,7 +257,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			chosenSamples.add(9);
 			break;
 
-		case 4:
+		case 7:
 			// C, D, E, F, G, A, B
 			chosenSamples.clear();
 			chosenSamples.add(0);
@@ -268,7 +269,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			chosenSamples.add(11);
 			break;
 
-		case 5:
+		case 8:
 			break;
 		}
 
@@ -284,31 +285,24 @@ public class GameActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
 		Log.i(SB_LifeCycle, "Game Activity On Start");
-		if (!IntroActivity.loaded) {
-		//
-		}
 		super.onStart();
 	}
 	
 	@Override
 	protected void onRestart() {
-		// TODO Auto-generated method stub
 		Log.i(SB_LifeCycle, "Game Activity On Restart");
 		super.onRestart();
 	}
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		Log.i(SB_LifeCycle, "Game Activity On Resume");
 		super.onResume();
 	}
 	
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		Log.i(SB_LifeCycle, "Game Activity On Pause");
 		super.onPause();
 	}

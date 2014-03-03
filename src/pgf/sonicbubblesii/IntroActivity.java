@@ -124,7 +124,6 @@ public class IntroActivity extends Activity implements OnClickListener {
 	
 	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
 		Log.i(SB_LifeCycle, "Intro Activity On Start");
 		if (!IntroActivity.loaded) {
 			
@@ -134,21 +133,18 @@ public class IntroActivity extends Activity implements OnClickListener {
 	
 	@Override
 	protected void onRestart() {
-		// TODO Auto-generated method stub
 		Log.i(SB_LifeCycle, "Intro Activity On Restart");
 		super.onRestart();
 	}
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		Log.i(SB_LifeCycle, "Intro Activity On Resume");
 		super.onResume();
 	}
 	
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		Log.i(SB_LifeCycle, "Intro Activity On Pause");
 		super.onPause();
 	}
@@ -157,7 +153,6 @@ public class IntroActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onStop() {
-		// TODO Auto-generated method stub
 		Log.i(SB_LifeCycle, "Intro Activity On Stop");
 		super.onStop();
 	}
