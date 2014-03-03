@@ -8,7 +8,7 @@
     <string name="instructions">  Sonic Bubbles es un juego muy sencillo. Escucha la secuencia de sonidos y arrastra tu dedo sobre las burbujas para unirlas en el mismo orden que el tema.\n  A medida que avanzas en el juego se vuelve mas complicado: las secuencias se alargan y la cantidad de sonidos usados aumenta también.\n  Diviértete!</string>
     <string name="listen_again">Oir de nuevo</string>
     <string name="new_game">Nueva Partida</string>
-    <string name="score">"Puntuacion: "</string>
+    <string name="tv_score">"Puntuacion: "</string>
     <string name="right">¡correcto!</string>
     <string name="wrong">incorrecto</string>
     <string name="tv_level">"Nivel: "</string>

@@ -43,7 +43,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	private SharedPreferences gamePrefs;
 	public static final String GAME_PREFS = "Arithmetic_File";
 	private static TextView scoreTxt, levelTxt, roundTxt;
-	public static int presentScore;
+	public static int presentScore = 10;
 	public static int Hand = 1;
 	public static int Level = 1;
 	public static int Round = 1;
@@ -70,8 +70,9 @@ public class GameActivity extends Activity implements OnClickListener {
 		listenAgain.setOnClickListener(this);
 
 		// display score
-		presentScore = 10;
-		scoreTxt.setText(getString(R.string.score) + Integer.toString(presentScore));
+		scoreTxt.setText(getString(R.string.tv_score) + Integer.toString(presentScore));
+		levelTxt.setText(getString(R.string.tv_level) + Integer.toString(Level));
+		roundTxt.setText(getString(R.string.tv_round) + Integer.toString(Round));
 
 		// play first theme
 		theme.playTheme(750, 1500);
@@ -203,6 +204,20 @@ public class GameActivity extends Activity implements OnClickListener {
 	public void setScoreTxt(TextView scoreTxt) {
 		this.scoreTxt = scoreTxt;
 	}
+	public static TextView getLevelTxt() {
+		return levelTxt;
+	}
+	
+	public void setLevelTxt(TextView levelTxt) {
+		this.levelTxt = levelTxt;
+	}
+	public static TextView getRoundTxt() {
+		return roundTxt;
+	}
+	
+	public void setRoundTxt(TextView roundTxt) {
+		this.roundTxt = roundTxt;
+	}
 
 	private void chooseSamples(int levels) {
 		/*
@@ -272,7 +287,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		Log.i(SB_LifeCycle, "Game Activity On Start");
 		if (!IntroActivity.loaded) {
-			
+		//
 		}
 		super.onStart();
 	}
@@ -298,13 +313,16 @@ public class GameActivity extends Activity implements OnClickListener {
 		super.onPause();
 	}
 
-
-
 	@Override
 	protected void onStop() {
-		// TODO Auto-generated method stub
-		Log.i(SB_LifeCycle, "Game Activity On Stop");
 		super.onStop();
+		// Destroy the running game: set scores to default start
+		presentScore = 10;
+		Hand = 1;
+		Level = 1;
+		Round = 1;
+		
+		Log.i(SB_LifeCycle, "Game Activity On Stop");
 	}
 
 	@Override

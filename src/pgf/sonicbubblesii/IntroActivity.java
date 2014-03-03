@@ -165,7 +165,6 @@ public class IntroActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		// IntroActivity.soundPool.release();
 		Log.i(SB_LifeCycle, "Intro Activity On Destroy");
 	}
 
