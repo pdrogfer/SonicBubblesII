@@ -19,6 +19,9 @@ import android.widget.Toast;
 
 public class DrawingView extends View {
 
+	// Log tags
+	public final static String SB = "Sonic Bubbles II";
+
 	// native variables:
 	private Canvas drawCanvas;
 	private Bitmap canvasBitmap;
@@ -44,8 +47,6 @@ public class DrawingView extends View {
 	public static int[] theTheme;
 	public static int[] theHand;
 
-	// Log tags
-	public final static String SB = "Sonic Bubbles II";
 
 	// constructors
 	public DrawingView(Context context, AttributeSet attrs) {
@@ -261,12 +262,20 @@ public class DrawingView extends View {
 		// update score
 		// TODO Update Level and Round on screen (variables are not created yet)
 		if (answer) {
-			GameActivity.presentScore += 1;
+			// update score, Level and Round
+			GameActivity.presentScore += 10;
+			GameActivity.Hand ++;
+			GameActivity.Level = GameActivity.Hand % 4;
+			GameActivity.Round = 1 + GameActivity.Hand / 4;
 			// increase numDots by 1 every 4 points of score
-			GameActivity.numDots = 4 + GameActivity.presentScore / 4;
-			// write score on screen
+			GameActivity.numDots = 4 + GameActivity.Hand / 4;
+			// write score, level and round on screen
 			GameActivity.getScoreTxt().setText(
-					getContext().getString(R.string.score) + (GameActivity.presentScore));
+					getContext().getString(R.string.tv_score) + (GameActivity.presentScore));
+			GameActivity.getLevelTxt().setText(
+					getContext().getString(R.string.tv_level) + (GameActivity.Level));
+			GameActivity.getRoundTxt().setText(
+					getContext().getString(R.string.tv_round) + (GameActivity.Round));
 		}
 	}
 

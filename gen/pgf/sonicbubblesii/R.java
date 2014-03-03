@@ -31,9 +31,11 @@ public final class R {
     public static final class drawable {
         public static final int fondo1=0x7f020000;
         public static final int fondo2=0x7f020001;
-        public static final int htc254=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int logo_original=0x7f020004;
+        public static final int htc156=0x7f020002;
+        public static final int htc254=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int logo_original=0x7f020005;
+        public static final int our_planet2=0x7f020006;
     }
     public static final class id {
         public static final int best_scores=0x7f0a0010;
@@ -93,11 +95,11 @@ public final class R {
         public static final int listen_again=0x7f07000b;
         public static final int new_game=0x7f070007;
         public static final int right=0x7f07000d;
-        public static final int score=0x7f07000a;
         public static final int sonic_bubbles_logo=0x7f070009;
         public static final int title_activity_game=0x7f070002;
         public static final int tv_level=0x7f07000f;
         public static final int tv_round=0x7f070010;
+        public static final int tv_score=0x7f07000a;
         public static final int wrong=0x7f07000e;
     }
     public static final class style {

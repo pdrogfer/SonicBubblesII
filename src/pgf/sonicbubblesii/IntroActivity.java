@@ -6,11 +6,13 @@ import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class IntroActivity extends Activity implements OnClickListener {
 
@@ -22,6 +24,10 @@ public class IntroActivity extends Activity implements OnClickListener {
 			soundAS, soundB;
 	public static boolean loaded = false;
 
+	// Log tags
+	public final static String SB = "Sonic Bubbles II";
+	public final static String SB_LifeCycle = "SB II LifeCycle";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,6 +45,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.general_menu, menu);
+		Log.i(SB_LifeCycle, "Intro Activity On Create");
 		return true;
 	}
 
@@ -113,6 +120,52 @@ public class IntroActivity extends Activity implements OnClickListener {
 			break;
 		}
 
+	}
+	
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		Log.i(SB_LifeCycle, "Intro Activity On Start");
+		if (!IntroActivity.loaded) {
+			
+		}
+		super.onStart();
+	}
+	
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		Log.i(SB_LifeCycle, "Intro Activity On Restart");
+		super.onRestart();
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		Log.i(SB_LifeCycle, "Intro Activity On Resume");
+		super.onResume();
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		Log.i(SB_LifeCycle, "Intro Activity On Pause");
+		super.onPause();
+	}
+
+
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		Log.i(SB_LifeCycle, "Intro Activity On Stop");
+		super.onStop();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		Log.i(SB_LifeCycle, "Intro Activity On Destroy");
 	}
 
 }

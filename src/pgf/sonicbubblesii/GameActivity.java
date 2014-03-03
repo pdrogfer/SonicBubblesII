@@ -24,6 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class GameActivity extends Activity implements OnClickListener {
+	
+	// Log tags
+	public final static String SB = "Sonic Bubbles II";
+	public final static String SB_LifeCycle = "SB II LifeCycle";
+
 
 	// GUI
 	Button listenAgain;
@@ -37,8 +42,11 @@ public class GameActivity extends Activity implements OnClickListener {
 	// scores
 	private SharedPreferences gamePrefs;
 	public static final String GAME_PREFS = "Arithmetic_File";
-	private static TextView scoreTxt;
-	public static int presentScore;
+	private static TextView scoreTxt, levelTxt, roundTxt;
+	public static int presentScore = 10;
+	public static int Hand = 1;
+	public static int Level = 1;
+	public static int Round = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +65,20 @@ public class GameActivity extends Activity implements OnClickListener {
 		drawView = (DrawingView) findViewById(R.id.drawing);
 		listenAgain = (Button) findViewById(R.id.btnListenAgain);
 		scoreTxt = (TextView) findViewById(R.id.scoreView);
+		levelTxt = (TextView) findViewById(R.id.tvLevel);
+		roundTxt = (TextView) findViewById(R.id.tvRound);
 		listenAgain.setOnClickListener(this);
 
 		// display score
-		presentScore = 0;
-		scoreTxt.setText(getString(R.string.score) + Integer.toString(presentScore));
+		scoreTxt.setText(getString(R.string.tv_score) + Integer.toString(presentScore));
+		levelTxt.setText(getString(R.string.tv_level) + Integer.toString(Level));
+		roundTxt.setText(getString(R.string.tv_round) + Integer.toString(Round));
 
 		// play first theme
 		theme.playTheme(750, 1500);
+		
+		Log.i(SB_LifeCycle, "Game Activity On Create");
+
 	}
 
 	@Override
@@ -103,7 +117,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	private void themeSetup(int nDots, int nSamples) {
 		// generate a theme
 		// theme = new Theme(nDots, nSamples);
-		Log.i(DrawingView.SB, "New Theme created");
+		Log.i(SB, "New Theme created");
 		// theme.playTheme(1000);
 
 	}
@@ -136,9 +150,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	}
 
 	private int getScore() {
-		// returns the present score
-		String scoreStr = getScoreTxt().getText().toString();
-		return Integer.parseInt(scoreStr.substring(scoreStr.lastIndexOf(" ") + 1));
+		return presentScore;
 	}
 
 	private void setHighScore() {
@@ -192,6 +204,20 @@ public class GameActivity extends Activity implements OnClickListener {
 	public void setScoreTxt(TextView scoreTxt) {
 		this.scoreTxt = scoreTxt;
 	}
+	public static TextView getLevelTxt() {
+		return levelTxt;
+	}
+	
+	public void setLevelTxt(TextView levelTxt) {
+		this.levelTxt = levelTxt;
+	}
+	public static TextView getRoundTxt() {
+		return roundTxt;
+	}
+	
+	public void setRoundTxt(TextView roundTxt) {
+		this.roundTxt = roundTxt;
+	}
 
 	private void chooseSamples(int levels) {
 		/*
@@ -200,7 +226,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		 * whole-tone, etc
 		 */
 		switch (levels) {
-		case 4:
+		case 1:
 			// C, D, E, G
 			chosenSamples.clear();
 			chosenSamples.add(0);
@@ -209,7 +235,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			chosenSamples.add(7);
 			break;
 
-		case 5:
+		case 2:
 			// C, D, E, G, A
 			chosenSamples.clear();
 			chosenSamples.add(0);
@@ -219,7 +245,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			chosenSamples.add(9);
 			break;
 
-		case 6:
+		case 3:
 			// C, D, E, F, G, A
 			chosenSamples.clear();
 			chosenSamples.add(0);
@@ -230,7 +256,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			chosenSamples.add(9);
 			break;
 
-		case 7:
+		case 4:
 			// C, D, E, F, G, A, B
 			chosenSamples.clear();
 			chosenSamples.add(0);
@@ -242,7 +268,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			chosenSamples.add(11);
 			break;
 
-		case 8:
+		case 5:
 			break;
 		}
 
@@ -252,14 +278,71 @@ public class GameActivity extends Activity implements OnClickListener {
 		float volume = 1;
 		if (IntroActivity.loaded) {
 			IntroActivity.soundPool.play(chosenSamples.get(sndId) + 1, volume, volume, 1, 0, 1f);
-			Log.i(DrawingView.SB, "sampleTriggered");
+			Log.i(SB, "sampleTriggered");
 		}
+	}
+
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		Log.i(SB_LifeCycle, "Game Activity On Start");
+		if (!IntroActivity.loaded) {
+		//
+		}
+		super.onStart();
+	}
+	
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		Log.i(SB_LifeCycle, "Game Activity On Restart");
+		super.onRestart();
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		Log.i(SB_LifeCycle, "Game Activity On Resume");
+		super.onResume();
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		Log.i(SB_LifeCycle, "Game Activity On Pause");
+		super.onPause();
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		// Destroy the running game: set scores to default start
+		presentScore = 10;
+		Hand = 1;
+		Level = 1;
+		Round = 1;
+		
+		Log.i(SB_LifeCycle, "Game Activity On Stop");
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		IntroActivity.soundPool.release();
+		// IntroActivity.soundPool.release();
+		Log.i(SB_LifeCycle, "Game Activity On Destroy");
+	}
+	
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		// TODO Implement this when support for landscape orientation
+		super.onRestoreInstanceState(savedInstanceState);
+	}
+	
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// TODO Implement this when support for landscape orientation
+		super.onSaveInstanceState(outState);
 	}
 
 }
