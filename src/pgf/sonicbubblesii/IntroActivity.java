@@ -5,6 +5,9 @@ import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -32,6 +35,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_intro);
+		Log.i(SB_LifeCycle, "Intro Activity On Create");
 
 		startGame = (Button) findViewById(R.id.btnStartGame);
 		howToPlay = (Button) findViewById(R.id.btnHowToPlay);
@@ -45,7 +49,6 @@ public class IntroActivity extends Activity implements OnClickListener {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.general_menu, menu);
-		Log.i(SB_LifeCycle, "Intro Activity On Create");
 		return true;
 	}
 
@@ -110,11 +113,42 @@ public class IntroActivity extends Activity implements OnClickListener {
 	}
 
 	public void newGame() {
-		// open a new game
+		// choose level and open a new game
+	
+		AlertDialog.Builder levelDialog = new AlertDialog.Builder(this);
+		levelDialog.setTitle(R.string.dialog_level_title);
+		levelDialog.setItems(R.array.string_array_levels, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO manage level choice
+				switch (which) {
+				case 0:
+					Toast choice0 = Toast.makeText(getApplicationContext(), "choice Relax", Toast.LENGTH_SHORT);
+					choice0.show();
+					break;
+				case 1:
+					Toast choice1 = Toast.makeText(getApplicationContext(), "choice Standard", Toast.LENGTH_SHORT);
+					choice1.show();
+					break;
+				case 2:
+					Toast choice2 = Toast.makeText(getApplicationContext(), "choice Expert", Toast.LENGTH_SHORT);
+					choice2.show();
+					break;
+
+				default:
+					break;
+				}
+			}
+		});
+		levelDialog.show();
+		
 		Intent intentNew = new Intent(this, GameActivity.class);
 		startActivity(intentNew);
 		overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 	}
+	
+	
 
 	public void bestScores() {
 		// show the best scores
@@ -174,4 +208,5 @@ public class IntroActivity extends Activity implements OnClickListener {
 		Log.i(SB_LifeCycle, "Intro Activity On Destroy");
 	}
 
+	
 }
