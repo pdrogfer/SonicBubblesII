@@ -26,6 +26,9 @@ public class IntroActivity extends Activity implements OnClickListener {
 	private int soundC, soundCS, soundD, soundDS, soundE, soundF, soundFS, soundG, soundGS, soundA,
 			soundAS, soundB;
 	public static boolean loaded = false;
+	
+	// options in creating a new game
+	int numBubbles, numSounds; 
 
 	// Log tags
 	public final static String SB = "Sonic Bubbles II";
@@ -57,7 +60,8 @@ public class IntroActivity extends Activity implements OnClickListener {
 		// handle selection on general_menu items
 		switch (item.getItemId()) {
 		case R.id.new_game:
-			newGame();
+			// chooseLevel calls newGame
+			chooseLevel();
 			return true;
 		case R.id.best_scores:
 			bestScores();
@@ -103,7 +107,8 @@ public class IntroActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnStartGame:
-			newGame();
+			// chooseLevel calls newGame
+			chooseLevel();
 			break;
 		case R.id.btnHowToPlay:
 			instructions();
@@ -111,44 +116,57 @@ public class IntroActivity extends Activity implements OnClickListener {
 		}
 
 	}
-
-	public void newGame() {
-		// choose level and open a new game
-	
+	public void chooseLevel() {
+		// choose level and set variables for the new game
 		AlertDialog.Builder levelDialog = new AlertDialog.Builder(this);
 		levelDialog.setTitle(R.string.dialog_level_title);
 		levelDialog.setItems(R.array.string_array_levels, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// TODO manage level choice
+				// manage level choice
 				switch (which) {
 				case 0:
-					Toast choice0 = Toast.makeText(getApplicationContext(), "choice Relax", Toast.LENGTH_SHORT);
+					numBubbles = 4;
+					numSounds = 4;
+					newGame();
+					// TODO remove this  3 toasts once working nice
+					Toast choice0 = Toast.makeText(getApplicationContext(), "choice Relax",
+							Toast.LENGTH_SHORT);
 					choice0.show();
 					break;
 				case 1:
-					Toast choice1 = Toast.makeText(getApplicationContext(), "choice Standard", Toast.LENGTH_SHORT);
+					numBubbles = 4;
+					numSounds = 7;
+					newGame();
+					Toast choice1 = Toast.makeText(getApplicationContext(), "choice Standard",
+							Toast.LENGTH_SHORT);
 					choice1.show();
 					break;
 				case 2:
-					Toast choice2 = Toast.makeText(getApplicationContext(), "choice Expert", Toast.LENGTH_SHORT);
+					numBubbles = 4;
+					numSounds = 12;
+					newGame();
+					Toast choice2 = Toast.makeText(getApplicationContext(), "choice Expert",
+							Toast.LENGTH_SHORT);
 					choice2.show();
 					break;
-
 				default:
 					break;
 				}
 			}
 		});
 		levelDialog.show();
-		
+	}
+
+	public void newGame() {
+		// open a new game
 		Intent intentNew = new Intent(this, GameActivity.class);
+		intentNew.putExtra("nBubbles", numBubbles);
+		intentNew.putExtra("nSounds", numSounds);
 		startActivity(intentNew);
 		overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 	}
-	
-	
 
 	public void bestScores() {
 		// show the best scores
@@ -169,6 +187,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 		intentExit.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intentExit);
 	}
+
 	@Override
 	protected void onStart() {
 		Log.i(SB_LifeCycle, "Intro Activity On Start");
@@ -208,5 +227,4 @@ public class IntroActivity extends Activity implements OnClickListener {
 		Log.i(SB_LifeCycle, "Intro Activity On Destroy");
 	}
 
-	
 }
