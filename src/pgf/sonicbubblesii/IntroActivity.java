@@ -27,7 +27,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 	// Log tags
 	public final static String SB = "Sonic Bubbles II";
 	public final static String SB_LifeCycle = "SB II LifeCycle";
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,23 +54,16 @@ public class IntroActivity extends Activity implements OnClickListener {
 		// handle selection on general_menu items
 		switch (item.getItemId()) {
 		case R.id.new_game:
-			// open a new game
-			Intent intentNew = new Intent(this, GameActivity.class);
-			startActivity(intentNew);
-			overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+			newGame();
 			return true;
 		case R.id.best_scores:
-			// show the best scores
-			Intent intentBest = new Intent(this, HighScores.class);
-			startActivity(intentBest);
+			bestScores();
 			return true;
 		case R.id.hot_to_play:
-			// show activity_how
-			Intent intentHow = new Intent(this, HowToPlay.class);
-			startActivity(intentHow);
+			instructions();
 			return true;
 		case R.id.exit:
-			// quit
+			exitAll();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -107,49 +100,67 @@ public class IntroActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnStartGame:
-			// launch game activity
-			Intent intent1 = new Intent(this, GameActivity.class);
-			startActivity(intent1);
-			overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+			newGame();
 			break;
 		case R.id.btnHowToPlay:
-			// show instructions
-			Intent intent2 = new Intent(this, HowToPlay.class);
-			startActivity(intent2);
-			// overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+			instructions();
 			break;
 		}
 
 	}
-	
+
+	public void newGame() {
+		// open a new game
+		Intent intentNew = new Intent(this, GameActivity.class);
+		startActivity(intentNew);
+		overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+	}
+
+	public void bestScores() {
+		// show the best scores
+		Intent intentBest = new Intent(this, HighScores.class);
+		startActivity(intentBest);
+	}
+
+	public void instructions() {
+		// show activity_how
+		Intent intentHow = new Intent(this, HowToPlay.class);
+		startActivity(intentHow);
+	}
+
+	public void exitAll() {
+		// exit the app
+		Intent intentExit = new Intent(Intent.ACTION_MAIN);
+		intentExit.addCategory(Intent.CATEGORY_HOME);
+		intentExit.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intentExit);
+	}
 	@Override
 	protected void onStart() {
 		Log.i(SB_LifeCycle, "Intro Activity On Start");
 		if (!IntroActivity.loaded) {
-			
+
 		}
 		super.onStart();
 	}
-	
+
 	@Override
 	protected void onRestart() {
 		Log.i(SB_LifeCycle, "Intro Activity On Restart");
 		super.onRestart();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		Log.i(SB_LifeCycle, "Intro Activity On Resume");
 		super.onResume();
 	}
-	
+
 	@Override
 	protected void onPause() {
 		Log.i(SB_LifeCycle, "Intro Activity On Pause");
 		super.onPause();
 	}
-
-
 
 	@Override
 	protected void onStop() {
