@@ -24,11 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class GameActivity extends Activity implements OnClickListener {
-	
+
 	// Log tags
 	public final static String SB = "Sonic Bubbles II";
 	public final static String SB_LifeCycle = "SB II LifeCycle";
-
 
 	// GUI
 	Button listenAgain;
@@ -57,10 +56,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		// TODO There is something wrong with which samples are chosen
 		numDots = 4;
 		numSamples = 4;
-		themeSetup(numDots, numSamples);
-		theme = new Theme(numDots, numSamples);
-		// depending in the number of samples, select which ones to use
-		chooseSamples(theme.getNumSamples());
+		themeSetup();
 
 		gamePrefs = getSharedPreferences(GAME_PREFS, 0);
 		drawView = (DrawingView) findViewById(R.id.drawing);
@@ -77,7 +73,7 @@ public class GameActivity extends Activity implements OnClickListener {
 
 		// play first theme
 		theme.playTheme(750, 1500);
-		
+
 		Log.i(SB_LifeCycle, "Game Activity On Create");
 
 	}
@@ -115,12 +111,20 @@ public class GameActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	private void themeSetup(int nDots, int nSamples) {
-		// generate a theme
-		// theme = new Theme(nDots, nSamples);
-		Log.i(SB, "New Theme created");
-		// theme.playTheme(1000);
+	private void themeSetup() {
+		// retrieve data from IntroActivity's level selector and generate a
+		// theme
 
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			numDots = extras.getInt("nBubbles");
+			numSamples = extras.getInt("nSounds");
+		}
+		
+		theme = new Theme(numDots, numSamples);
+		// depending in the number of samples, select which ones to use
+		chooseSamples(theme.getNumSamples());
+		Log.i(SB, "New Theme created");
 	}
 
 	@Override
@@ -143,8 +147,8 @@ public class GameActivity extends Activity implements OnClickListener {
 		// start a new game.
 		// set score to 0, and numDots and numSamples to default value
 		/*
-		 * TODO This works, but is not accurate. It starts a new HAND, not a
-		 * new GAME.
+		 * TODO This works, but is not accurate. It starts a new HAND, not a new
+		 * GAME.
 		 */
 		drawView.startNew();
 		theme.playTheme(750, 1000);
@@ -205,17 +209,19 @@ public class GameActivity extends Activity implements OnClickListener {
 	public void setScoreTxt(TextView scoreTxt) {
 		this.scoreTxt = scoreTxt;
 	}
+
 	public static TextView getLevelTxt() {
 		return levelTxt;
 	}
-	
+
 	public void setLevelTxt(TextView levelTxt) {
 		this.levelTxt = levelTxt;
 	}
+
 	public static TextView getRoundTxt() {
 		return roundTxt;
 	}
-	
+
 	public void setRoundTxt(TextView roundTxt) {
 		this.roundTxt = roundTxt;
 	}
@@ -270,6 +276,38 @@ public class GameActivity extends Activity implements OnClickListener {
 			break;
 
 		case 8:
+			// C, D, E, F, G, A, B and C octave up
+			chosenSamples.clear();
+			chosenSamples.add(0);
+			chosenSamples.add(2);
+			chosenSamples.add(4);
+			chosenSamples.add(5);
+			chosenSamples.add(7);
+			chosenSamples.add(9);
+			chosenSamples.add(11);
+			chosenSamples.add(12);
+			break;
+		case 9:
+			break;
+		case 10:
+			break;
+		case 11:
+			break;
+		case 12:
+			// Full chromatic scale (no C up)
+			chosenSamples.clear();
+			chosenSamples.add(0);
+			chosenSamples.add(1);
+			chosenSamples.add(2);
+			chosenSamples.add(3);
+			chosenSamples.add(4);
+			chosenSamples.add(5);
+			chosenSamples.add(6);
+			chosenSamples.add(7);
+			chosenSamples.add(8);
+			chosenSamples.add(9);
+			chosenSamples.add(10);
+			chosenSamples.add(11);
 			break;
 		}
 
@@ -288,19 +326,19 @@ public class GameActivity extends Activity implements OnClickListener {
 		Log.i(SB_LifeCycle, "Game Activity On Start");
 		super.onStart();
 	}
-	
+
 	@Override
 	protected void onRestart() {
 		Log.i(SB_LifeCycle, "Game Activity On Restart");
 		super.onRestart();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		Log.i(SB_LifeCycle, "Game Activity On Resume");
 		super.onResume();
 	}
-	
+
 	@Override
 	protected void onPause() {
 		Log.i(SB_LifeCycle, "Game Activity On Pause");
@@ -315,7 +353,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		Hand = 1;
 		Level = 1;
 		Round = 1;
-		
+
 		Log.i(SB_LifeCycle, "Game Activity On Stop");
 	}
 
@@ -325,14 +363,13 @@ public class GameActivity extends Activity implements OnClickListener {
 		// IntroActivity.soundPool.release();
 		Log.i(SB_LifeCycle, "Game Activity On Destroy");
 	}
-	
+
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		// TODO Implement this when support for landscape orientation
 		super.onRestoreInstanceState(savedInstanceState);
 	}
-	
-	
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		// TODO Implement this when support for landscape orientation

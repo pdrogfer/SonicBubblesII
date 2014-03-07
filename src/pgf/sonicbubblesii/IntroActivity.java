@@ -24,7 +24,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 	// for sound
 	public static SoundPool soundPool;
 	private int soundC, soundCS, soundD, soundDS, soundE, soundF, soundFS, soundG, soundGS, soundA,
-			soundAS, soundB;
+			soundAS, soundB, soundCC; // last one is C octave up
 	public static boolean loaded = false;
 	
 	// options in creating a new game
@@ -101,6 +101,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 		soundA = soundPool.load(this, R.raw.a, 1);
 		soundAS = soundPool.load(this, R.raw.a_s, 1);
 		soundB = soundPool.load(this, R.raw.b, 1);
+		soundCC = soundPool.load(this, R.raw.cc, 1);
 	}
 
 	@Override
