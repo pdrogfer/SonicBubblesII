@@ -265,10 +265,13 @@ public class DrawingView extends View {
 			// update score, Level and Round
 			GameActivity.presentScore += 10;
 			GameActivity.Hand ++;
-			GameActivity.Level = GameActivity.Hand % 4;
-			GameActivity.Round = 1 + GameActivity.Hand / 4;
-			// increase numDots by 1 every 4 points of score
-			GameActivity.numDots = 4 + GameActivity.Hand / 4;
+			GameActivity.Level ++;
+			if (GameActivity.Level > 4) {
+				GameActivity.Level = 1;
+				GameActivity.Round ++;
+				// increase numDots by 1 every 4 points of score
+				GameActivity.numDots = 4 + GameActivity.Hand / 4;
+			}
 			// write score, level and round on screen
 			GameActivity.getScoreTxt().setText(
 					getContext().getString(R.string.tv_score) + (GameActivity.presentScore));

@@ -131,26 +131,16 @@ public class IntroActivity extends Activity implements OnClickListener {
 					numBubbles = 4;
 					numSounds = 4;
 					newGame();
-					// TODO remove this  3 toasts once working nice
-					Toast choice0 = Toast.makeText(getApplicationContext(), "choice Relax",
-							Toast.LENGTH_SHORT);
-					choice0.show();
 					break;
 				case 1:
 					numBubbles = 4;
 					numSounds = 7;
 					newGame();
-					Toast choice1 = Toast.makeText(getApplicationContext(), "choice Standard",
-							Toast.LENGTH_SHORT);
-					choice1.show();
 					break;
 				case 2:
 					numBubbles = 4;
 					numSounds = 12;
 					newGame();
-					Toast choice2 = Toast.makeText(getApplicationContext(), "choice Expert",
-							Toast.LENGTH_SHORT);
-					choice2.show();
 					break;
 				default:
 					break;
@@ -161,7 +151,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 	}
 
 	public void newGame() {
-		// open a new game
+		// open a new game and pass num of bubbles and sounds as params
 		Intent intentNew = new Intent(this, GameActivity.class);
 		intentNew.putExtra("nBubbles", numBubbles);
 		intentNew.putExtra("nSounds", numSounds);
