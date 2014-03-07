@@ -79,14 +79,10 @@ public class DrawingView extends View {
 		dotPaint = new Paint();
 		dotPaint.setStrokeWidth(brushSize * 2);
 		dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-		// drawPaint.setStrokeJoin(Paint.Join.ROUND);
-		// drawPaint.setStrokeCap(Paint.Cap.ROUND);
 
 		animDot = new Paint();
-		animDot.setStrokeWidth(brushSize);
 		animDot.setStyle(Paint.Style.STROKE);
-		// animDot.setStrokeJoin(Paint.Join.ROUND);
-		// animDot.setStrokeCap(Paint.Cap.ROUND);
+		// animDot.setStrokeWidth(brushSize);
 
 	}
 
@@ -121,6 +117,7 @@ public class DrawingView extends View {
 			dot.setSample(numSamples);
 			dot.setSampleTriggered(false);
 			dot.setColor();
+			// dot.setRingStrokeWidth(20);
 			dots[n] = dot;
 			// populate both the Theme and the hand(this, with default 999)
 			theTheme[n] = dot.getSample();
@@ -186,15 +183,15 @@ public class DrawingView extends View {
 			// increase ring size
 			if (dots[d].getWaveOn()) { 
 				dots[d].setRingRadius(wave + ringSpeed);
-				//
-				brushSize -= 0.3;
-				animDot.setStrokeWidth(brushSize);
+				// decrease ring stroke width
+				dots[d].setRingStrokeWidth(dots[d].getRingStrokeWidth() - 0.3);// brushSize -= 0.3;
+				animDot.setStrokeWidth((float) dots[d].getRingStrokeWidth());
 			}
 			// return ring to dot size
 			if (wave > radius * 5) {
 				dots[d].setRingRadius(radius);
 				dots[d].setWaveOn(false);
-				brushSize = defaultBrushSize;
+				dots[d].resetRingStrokeWidth();
 			}
 			// draw the dot
 			dotPaint.setColor(dots[d].getColor());

@@ -14,7 +14,9 @@ public class Dot {
 	private int posX, posY, colorDot;
 	private int sampleInd; // index of the sample corresponding to the dot
 	static int radius = DrawingView.width / 25; // TO make it relative to canvas
-	private int	ringRadius = radius;										// width
+	private int	ringRadius = radius;
+	private double defaultRingStrokeWidth = 20;
+	private double	ringStrokeWidth = defaultRingStrokeWidth;
 	Random random = new Random();
 
 	// constructors
@@ -61,6 +63,18 @@ public class Dot {
 	
 	public void setRingRadius(int ringRadius) {
 		this.ringRadius = ringRadius;
+	}
+	
+	public void setRingStrokeWidth(double d) {
+		this.ringStrokeWidth = d;
+	}
+	
+	public double getRingStrokeWidth(){
+		return ringStrokeWidth;
+	}
+	
+	public void resetRingStrokeWidth() {
+		ringStrokeWidth = defaultRingStrokeWidth;
 	}
 	
 	public boolean getWaveOn() {
