@@ -348,7 +348,8 @@ public class GameActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onStop() {
 		super.onStop();
-		// Destroy the running game: set scores to default start
+		// Destroy the running game: save score and set scores to default start
+		setHighScore();
 		presentScore = 10;
 		Hand = 1;
 		Level = 1;

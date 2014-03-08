@@ -256,8 +256,6 @@ public class DrawingView extends View {
 	}
 
 	private void updateScore(boolean answer) {
-		// update score
-		// TODO Update Level and Round on screen (variables are not created yet)
 		if (answer) {
 			// update score, Level and Round
 			GameActivity.presentScore += 10;
