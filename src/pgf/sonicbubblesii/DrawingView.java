@@ -12,7 +12,6 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -26,9 +25,7 @@ public class DrawingView extends View {
 	private Canvas drawCanvas;
 	private Bitmap canvasBitmap;
 	private int paintColor = 0xffff0000;
-	private int dotColor;
 	private float brushSize = (float) 20.0;
-	private float defaultBrushSize = (float) 20.0;
 	private int ringSpeed = 3;
 	// drawing and canvas paint
 	private Paint drawPaint, canvasPaint, dotPaint, animDot;
