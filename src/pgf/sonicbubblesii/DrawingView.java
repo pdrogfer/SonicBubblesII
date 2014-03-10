@@ -313,7 +313,7 @@ public class DrawingView extends View {
 			x = touchX - eachDot.getPosX();
 			y = touchY - eachDot.getPosY();
 			double dist = Math.hypot(x, y);
-			if ((dist < Dot.radius) && (eachDot.getSampleTriggered() == false)) {
+			if ((dist < eachDot.getRadius() + eachDot.getRingStrokeWidth()) && (eachDot.getSampleTriggered() == false)) {
 				/*
 				 * If finger is close enough to the dot, and it's the first time
 				 * in this hand, store dot in hand and fire it's sample
