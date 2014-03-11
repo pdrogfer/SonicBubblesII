@@ -75,7 +75,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			// there is saved instance state data
 			Level = savedInstanceState.getInt("level");
 			Round = savedInstanceState.getInt("round");
-			Mode = savedInstanceState.getString("mode");
+			// Mode = savedInstanceState.getString("mode");
 		}
 
 		// display score
@@ -128,7 +128,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		if (extras != null) {
 			numDots = extras.getInt("nBubbles");
 			numSamples = extras.getInt("nSounds");
-			Mode = Modes[extras.getInt("mode")];
+			Mode = extras.getString("mode");
 		}
 		
 		theme = new Theme(numDots, numSamples);
@@ -143,9 +143,6 @@ public class GameActivity extends Activity implements OnClickListener {
 		case R.id.btnListenAgain:
 			// play again the sequence, at 0.75 sec intervals
 			theme.playTheme(750, 0);
-			break;
-		case R.id.btnNewGame:
-			selectLevel();
 			break;
 		default:
 			break;
@@ -230,7 +227,7 @@ public class GameActivity extends Activity implements OnClickListener {
 				Collections.sort(scoreStrings);
 				StringBuilder scoreBuild = new StringBuilder("");
 				for (int s = 0; s < scoreStrings.size(); s++) {
-					if (s > 10) {
+					if (s >= 10) {
 						break; // we only want 10
 					}
 					if (s > 0) {

@@ -28,7 +28,9 @@ public class IntroActivity extends Activity implements OnClickListener {
 	public static boolean loaded = false;
 	
 	// options in creating a new game
-	int numBubbles, numSounds, mode; 
+	int numBubbles, numSounds; 
+	private String[] Modes;
+	private String Mode;
 
 	// Log tags
 	public final static String SB = "Sonic Bubbles II";
@@ -44,6 +46,8 @@ public class IntroActivity extends Activity implements OnClickListener {
 		howToPlay = (Button) findViewById(R.id.btnHowToPlay);
 		startGame.setOnClickListener(this);
 		howToPlay.setOnClickListener(this);
+		
+		Modes = getResources().getStringArray(R.array.string_array_levels);
 
 		soundSetup();
 	}
@@ -118,6 +122,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 
 	}
 	public void chooseLevel() {
+		// TODO this is written twice, here and in GameActivity. Maybe it can be encapsulated somewhere else?
 		// choose level and set variables for the new game
 		AlertDialog.Builder levelDialog = new AlertDialog.Builder(this);
 		levelDialog.setTitle(R.string.dialog_level_title);
@@ -130,20 +135,20 @@ public class IntroActivity extends Activity implements OnClickListener {
 				case 0:
 					numBubbles = 4;
 					numSounds = 4;
+					Mode = Modes[0];
 					newGame();
-					mode = 0;
 					break;
 				case 1:
 					numBubbles = 4;
 					numSounds = 7;
+					Mode = Modes[1];
 					newGame();
-					mode = 1;
 					break;
 				case 2:
 					numBubbles = 4;
 					numSounds = 12;
+					Mode = Modes[2];
 					newGame();
-					mode = 2;
 					break;
 				default:
 					break;
@@ -158,7 +163,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 		Intent intentNew = new Intent(this, GameActivity.class);
 		intentNew.putExtra("nBubbles", numBubbles);
 		intentNew.putExtra("nSounds", numSounds);
-		intentNew.putExtra("mode", mode);
+		intentNew.putExtra("mode", Mode);
 		startActivity(intentNew);
 		overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 	}
