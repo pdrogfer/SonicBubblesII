@@ -218,12 +218,7 @@ public class DrawingView extends View {
 			checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_MOVE:
-			int historySize = event.getHistorySize();
 			drawPath.lineTo(touchX, touchY);
-			for (Integer i : alphas) {
-				i = i - 5;
-			}
-			alphas.add(255);
 			checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_UP:
@@ -264,16 +259,28 @@ public class DrawingView extends View {
 				// increase numDots by 1 every 4 points of score
 				GameActivity.numDots = 4 + GameActivity.Hand / 4;
 			}
-			// write score, level and round on screen
-			GameActivity.getScoreTxt().setText(
-					getContext().getString(R.string.tv_score) + (GameActivity.presentScore));
-			GameActivity.getLevelTxt().setText(
-					getContext().getString(R.string.tv_level) + (GameActivity.Level));
-			GameActivity.getRoundTxt().setText(
-					getContext().getString(R.string.tv_round) + (GameActivity.Round));
+			writeScores();
 		}
 	}
 
+	public void resetScores() {
+		// reset score to default values
+		GameActivity.presentScore = 10;
+		GameActivity.Level = 1;
+		GameActivity.Round = 1;
+		GameActivity.Hand = 1;
+		writeScores();
+	}
+	
+	private void writeScores(){
+		// write score, level and round on screen
+		GameActivity.getScoreTxt().setText(
+				getContext().getString(R.string.tv_score) + (GameActivity.presentScore));
+		GameActivity.getLevelTxt().setText(
+				getContext().getString(R.string.tv_level) + (GameActivity.Level));
+		GameActivity.getRoundTxt().setText(
+				getContext().getString(R.string.tv_round) + (GameActivity.Round));
+	}
 	public boolean checkHand() {
 		// Check if the theHand is equal to theTheme
 		check = false;

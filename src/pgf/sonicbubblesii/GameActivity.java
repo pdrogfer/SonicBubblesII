@@ -8,7 +8,9 @@ import java.util.Date;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
@@ -65,6 +67,12 @@ public class GameActivity extends Activity implements OnClickListener {
 		levelTxt = (TextView) findViewById(R.id.tvLevel);
 		roundTxt = (TextView) findViewById(R.id.tvRound);
 		listenAgain.setOnClickListener(this);
+		
+		if(savedInstanceState != null) {
+			// there is saved instance state data
+			Level = savedInstanceState.getInt("level");
+			Round = savedInstanceState.getInt("round");
+		}
 
 		// display score
 		scoreTxt.setText(getString(R.string.tv_score) + Integer.toString(presentScore));
@@ -90,16 +98,13 @@ public class GameActivity extends Activity implements OnClickListener {
 		// handle selection on general_menu items
 		switch (item.getItemId()) {
 		case R.id.new_game:
-			// open a new game
-			newGame();
+			selectLevel();
 			return true;
 		case R.id.best_scores:
-			// show the best scores
 			Intent intentBest = new Intent(this, HighScores.class);
 			startActivity(intentBest);
 			return true;
 		case R.id.hot_to_play:
-			// show activity_how
 			Intent intentHow = new Intent(this, HowToPlay.class);
 			startActivity(intentHow);
 			return true;
@@ -135,7 +140,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			theme.playTheme(750, 0);
 			break;
 		case R.id.btnNewGame:
-			newGame();
+			selectLevel();
 			break;
 		default:
 			break;
@@ -150,8 +155,43 @@ public class GameActivity extends Activity implements OnClickListener {
 		 * TODO This works, but is not accurate. It starts a new HAND, not a new
 		 * GAME.
 		 */
+
 		drawView.startNew();
+		drawView.resetScores();
 		theme.playTheme(750, 1000);
+	}
+	
+	private void selectLevel() {
+		// choose level and set variables for the new game
+		AlertDialog.Builder levelDialog = new AlertDialog.Builder(this);
+		levelDialog.setTitle(R.string.dialog_level_title);
+		levelDialog.setItems(R.array.string_array_levels, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// manage level choice
+				switch (which) {
+				case 0:
+					numDots = 4;
+					numSamples = 4;
+					newGame();
+					break;
+				case 1:
+					numDots = 4;
+					numSamples = 7;
+					newGame();
+					break;
+				case 2:
+					numDots = 4;
+					numSamples = 12;
+					newGame();
+					break;
+				default:
+					break;
+				}
+			}
+		});
+		levelDialog.show();	
 	}
 
 	private int getScore() {
@@ -165,6 +205,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			// check valid value for exScore
 			SharedPreferences.Editor scoreEdit = gamePrefs.edit();
 			// create an editor object to write the scores
+			// TODO Locale this format for english, french, etc
 			DateFormat dateForm = new SimpleDateFormat("dd MMMM yyyy");
 			String dateOutput = dateForm.format(new Date());
 			String scores = gamePrefs.getString("highScores", "");
@@ -179,19 +220,19 @@ public class GameActivity extends Activity implements OnClickListener {
 				Score newScore = new Score(dateOutput, exScore);
 				scoreStrings.add(newScore);
 				Collections.sort(scoreStrings);
-
 				StringBuilder scoreBuild = new StringBuilder("");
 				for (int s = 0; s < scoreStrings.size(); s++) {
-					if (s > 10)
+					if (s > 10) {
 						break; // we only want 10
+					}
 					if (s > 0) {
 						scoreBuild.append("|"); // pipe separate the score
 												// strings
-						scoreBuild.append(scoreStrings.get(s).getScoreText());
 					}
+					scoreBuild.append(scoreStrings.get(s).getScoreText());
 				}
 				// write to prefs
-				scoreEdit.putString("HighScores", scoreBuild.toString());
+				scoreEdit.putString("highScores", scoreBuild.toString());
 				scoreEdit.commit();
 			} else {
 				// no existing scores
@@ -341,15 +382,17 @@ public class GameActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onPause() {
-		Log.i(SB_LifeCycle, "Game Activity On Pause");
+		// set the present score
+		setHighScore();
 		super.onPause();
+		Log.i(SB_LifeCycle, "Game Activity On Pause");
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
 		// Destroy the running game: save score and set scores to default start
-		setHighScore();
+		// TODO onStop is also called when HighScores activity is opened, not good
 		presentScore = 10;
 		Hand = 1;
 		Level = 1;
@@ -361,7 +404,6 @@ public class GameActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		// IntroActivity.soundPool.release();
 		Log.i(SB_LifeCycle, "Game Activity On Destroy");
 	}
 
@@ -372,9 +414,14 @@ public class GameActivity extends Activity implements OnClickListener {
 	}
 
 	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		// TODO Implement this when support for landscape orientation
-		super.onSaveInstanceState(outState);
+	protected void onSaveInstanceState(Bundle savedInstanceState) {
+		// save score
+		int exScore = getScore();
+		savedInstanceState.putInt("score", exScore);
+		savedInstanceState.putInt("level", Level);
+		savedInstanceState.putInt("round", Round);
+		// superclass method
+		super.onSaveInstanceState(savedInstanceState);
 	}
 
 }

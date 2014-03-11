@@ -40,7 +40,6 @@
             android:gravity="center"
             android:padding="10dp"
             android:textSize="22sp"
-            android:textStyle="bold" >
-        </TextView>
+            android:textStyle="bold" />
     </RelativeLayout>
 </ScrollView>
