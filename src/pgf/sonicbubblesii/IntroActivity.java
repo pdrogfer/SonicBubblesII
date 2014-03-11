@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 public class IntroActivity extends Activity implements OnClickListener {
 
-	Button startGame, howToPlay;
+	Button startGame, howToPlay, bestScores;
 
 	// for sound
 	public static SoundPool soundPool;
@@ -44,9 +44,10 @@ public class IntroActivity extends Activity implements OnClickListener {
 
 		startGame = (Button) findViewById(R.id.btnStartGame);
 		howToPlay = (Button) findViewById(R.id.btnHowToPlay);
+		bestScores= (Button) findViewById(R.id.btnHighScores);
 		startGame.setOnClickListener(this);
 		howToPlay.setOnClickListener(this);
-		
+		bestScores.setOnClickListener(this);
 		Modes = getResources().getStringArray(R.array.string_array_levels);
 
 		soundSetup();
@@ -118,9 +119,12 @@ public class IntroActivity extends Activity implements OnClickListener {
 		case R.id.btnHowToPlay:
 			instructions();
 			break;
+		case R.id.btnHighScores:
+			bestScores();
 		}
 
 	}
+
 	public void chooseLevel() {
 		// TODO this is written twice, here and in GameActivity. Maybe it can be encapsulated somewhere else?
 		// choose level and set variables for the new game
@@ -179,7 +183,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 		Intent intentHow = new Intent(this, HowToPlay.class);
 		startActivity(intentHow);
 	}
-
+	
 	public void exitAll() {
 		// exit the app
 		Intent intentExit = new Intent(Intent.ACTION_MAIN);

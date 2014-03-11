@@ -14,4 +14,6 @@
     <string name="tv_round">Ronde:</string>
     <string name="wrong">incorrect</string>
    <string name="dialog_level_title">Sélectionnez Mode: </string>
+       <string name="btn_high_scores">Ponctuations</string>
+   
 </resources>

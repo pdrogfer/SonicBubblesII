@@ -20,6 +20,7 @@
     <string name="tv_round">Round: </string>
     <string name="dialog_level_title">Select Mode: </string>
     <string name="version_number">v1.6</string>
+    <string name="btn_high_scores">High Scores</string>
 
 
 </resources>
