@@ -31,9 +31,6 @@ public class DrawingView extends View {
 	private Paint drawPaint, canvasPaint, dotPaint, animDot;
 	// drawing path
 	private Path drawPath;
-	// path opacity
-	private List<Integer> alphas;
-	private int alphaPath = 255;
 	// canvas size
 	static int width, height;
 	public float scale;
@@ -43,7 +40,6 @@ public class DrawingView extends View {
 	public static Dot[] dots;
 	public static int[] theTheme;
 	public static int[] theHand;
-
 
 	// constructors
 	public DrawingView(Context context, AttributeSet attrs) {
@@ -62,12 +58,10 @@ public class DrawingView extends View {
 		drawPaint.setStyle(Paint.Style.STROKE);
 		drawPaint.setStrokeJoin(Paint.Join.ROUND);
 		drawPaint.setStrokeCap(Paint.Cap.ROUND);
-		drawPaint.setAlpha(alphaPath);
 		// hace las lineas redondeadas
 		drawPaint.setPathEffect(new CornerPathEffect(20));
 		canvasPaint = new Paint(Paint.DITHER_FLAG);
 		canvasPaint.setAlpha(255);
-		
 
 		/*
 		 * configure the style for the dots with dotPaint, except color which is
@@ -167,8 +161,8 @@ public class DrawingView extends View {
 			int radius = dots[d].getRadius();
 			int wave = dots[d].getRingRadius();
 			/*
-			 * The ring stops drawing if the user lifts finger and touches
-			 * the screen again, because this calls the restartHand method which
+			 * The ring stops drawing if the user lifts finger and touches the
+			 * screen again, because this calls the restartHand method which
 			 * sets all sample-triggered to false again, so it's necessary to
 			 * add a second condition. Also: create two functions to put the
 			 * drawing of dots and rings in nice separated cleaned places
@@ -178,10 +172,12 @@ public class DrawingView extends View {
 			animDot.setStyle(Paint.Style.STROKE);
 			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), wave, animDot);
 			// increase ring size
-			if (dots[d].getWaveOn()) { 
+			if (dots[d].getWaveOn()) {
 				dots[d].setRingRadius(wave + ringSpeed);
 				// decrease ring stroke width
-				dots[d].setRingStrokeWidth(dots[d].getRingStrokeWidth() - 0.3);// brushSize -= 0.3;
+				dots[d].setRingStrokeWidth(dots[d].getRingStrokeWidth() - 0.3);// brushSize
+																				// -=
+																				// 0.3;
 				animDot.setStrokeWidth((float) dots[d].getRingStrokeWidth());
 			}
 			// return ring to dot size
@@ -209,11 +205,7 @@ public class DrawingView extends View {
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			alphas = new ArrayList<Integer>();
 			restartHand();
-			alphas.add(255);
-			drawPaint.setAlpha(255);
-			
 			drawPath.moveTo(touchX, touchY);
 			checkBubble(touchX, touchY);
 			break;
@@ -238,24 +230,36 @@ public class DrawingView extends View {
 	}
 
 	private void displayToast(boolean answer) {
-		// display a short message type: right/wrong
-		feedback = answer ? getContext().getString(R.string.right) : getContext().getString(
-				R.string.wrong);
+		// display a short message type: right/wrong on completed hands
+		// first check that theHand is complete
+		boolean display = false;
+		for (int i = 0; i < theHand.length; i++) {
+			if (theHand[i] == 999) {
+				display = false;
+				break;
+			} else {
+				display = true;
+			}
+		}
+		if (display) {
+		// complete Hand, so display the Toast
+		feedback = answer ? getContext().getString(R.string.right) : getContext()
+				.getString(R.string.wrong);
 		Toast t = Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT);
 		t.show();
 		Log.i(DrawingView.SB, feedback);
-
+		}
 	}
 
 	private void updateScore(boolean answer) {
 		if (answer) {
 			// update score, Level and Round
 			GameActivity.presentScore += 10;
-			GameActivity.Hand ++;
-			GameActivity.Level ++;
+			GameActivity.Hand++;
+			GameActivity.Level++;
 			if (GameActivity.Level > 4) {
 				GameActivity.Level = 1;
-				GameActivity.Round ++;
+				GameActivity.Round++;
 				// increase numDots by 1 every 4 points of score
 				GameActivity.numDots = 4 + GameActivity.Hand / 4;
 			}
@@ -271,8 +275,8 @@ public class DrawingView extends View {
 		GameActivity.Hand = 1;
 		writeScores();
 	}
-	
-	private void writeScores(){
+
+	private void writeScores() {
 		// write score, level and round on screen
 		GameActivity.getScoreTxt().setText(
 				getContext().getString(R.string.tv_score) + (GameActivity.presentScore));
@@ -281,6 +285,7 @@ public class DrawingView extends View {
 		GameActivity.getRoundTxt().setText(
 				getContext().getString(R.string.tv_round) + (GameActivity.Round));
 	}
+
 	public boolean checkHand() {
 		// Check if the theHand is equal to theTheme
 		check = false;
@@ -317,7 +322,8 @@ public class DrawingView extends View {
 			x = touchX - eachDot.getPosX();
 			y = touchY - eachDot.getPosY();
 			double dist = Math.hypot(x, y);
-			if ((dist < eachDot.getRadius() + eachDot.getRingStrokeWidth()) && (eachDot.getSampleTriggered() == false)) {
+			if ((dist < eachDot.getRadius() + eachDot.getRingStrokeWidth())
+					&& (eachDot.getSampleTriggered() == false)) {
 				/*
 				 * If finger is close enough to the dot, and it's the first time
 				 * in this hand, store dot in hand and fire it's sample

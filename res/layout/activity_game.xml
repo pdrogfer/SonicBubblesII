@@ -44,7 +44,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="3dp"
         android:layout_weight="1"
-        android:background="@android:color/white" />
+        android:background="@drawable/fondo1" />
 
     <!-- Level and Round info on the lower part of the screen -->
 
