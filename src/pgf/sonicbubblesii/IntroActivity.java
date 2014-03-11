@@ -28,7 +28,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 	public static boolean loaded = false;
 	
 	// options in creating a new game
-	int numBubbles, numSounds; 
+	int numBubbles, numSounds, mode; 
 
 	// Log tags
 	public final static String SB = "Sonic Bubbles II";
@@ -131,16 +131,19 @@ public class IntroActivity extends Activity implements OnClickListener {
 					numBubbles = 4;
 					numSounds = 4;
 					newGame();
+					mode = 0;
 					break;
 				case 1:
 					numBubbles = 4;
 					numSounds = 7;
 					newGame();
+					mode = 1;
 					break;
 				case 2:
 					numBubbles = 4;
 					numSounds = 12;
 					newGame();
+					mode = 2;
 					break;
 				default:
 					break;
@@ -155,6 +158,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 		Intent intentNew = new Intent(this, GameActivity.class);
 		intentNew.putExtra("nBubbles", numBubbles);
 		intentNew.putExtra("nSounds", numSounds);
+		intentNew.putExtra("mode", mode);
 		startActivity(intentNew);
 		overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 	}

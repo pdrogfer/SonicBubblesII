@@ -48,6 +48,8 @@ public class GameActivity extends Activity implements OnClickListener {
 	public static int Hand = 1;
 	public static int Level = 1;
 	public static int Round = 1;
+	private static String[] Modes;
+	private static String Mode;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		// TODO There is something wrong with which samples are chosen
 		numDots = 4;
 		numSamples = 4;
+		Modes = getResources().getStringArray(R.array.string_array_levels);
 		themeSetup();
 
 		gamePrefs = getSharedPreferences(GAME_PREFS, 0);
@@ -72,6 +75,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			// there is saved instance state data
 			Level = savedInstanceState.getInt("level");
 			Round = savedInstanceState.getInt("round");
+			Mode = savedInstanceState.getString("mode");
 		}
 
 		// display score
@@ -124,6 +128,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		if (extras != null) {
 			numDots = extras.getInt("nBubbles");
 			numSamples = extras.getInt("nSounds");
+			Mode = Modes[extras.getInt("mode")];
 		}
 		
 		theme = new Theme(numDots, numSamples);
@@ -166,7 +171,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		AlertDialog.Builder levelDialog = new AlertDialog.Builder(this);
 		levelDialog.setTitle(R.string.dialog_level_title);
 		levelDialog.setItems(R.array.string_array_levels, new DialogInterface.OnClickListener() {
-			
+		
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// manage level choice
@@ -175,16 +180,19 @@ public class GameActivity extends Activity implements OnClickListener {
 					numDots = 4;
 					numSamples = 4;
 					newGame();
+					Mode = Modes[0];
 					break;
 				case 1:
 					numDots = 4;
 					numSamples = 7;
 					newGame();
+					Mode = Modes[1];
 					break;
 				case 2:
 					numDots = 4;
 					numSamples = 12;
 					newGame();
+					Mode = Modes[2];
 					break;
 				default:
 					break;
@@ -215,9 +223,9 @@ public class GameActivity extends Activity implements OnClickListener {
 				String[] exScores = scores.split("\\|");
 				for (String eSc : exScores) {
 					String[] parts = eSc.split(" - ");
-					scoreStrings.add(new Score(parts[0], Integer.parseInt(parts[1])));
+					scoreStrings.add(new Score(parts[0], parts[1], Integer.parseInt(parts[2])));
 				}
-				Score newScore = new Score(dateOutput, exScore);
+				Score newScore = new Score(dateOutput, Mode, exScore);
 				scoreStrings.add(newScore);
 				Collections.sort(scoreStrings);
 				StringBuilder scoreBuild = new StringBuilder("");
@@ -236,7 +244,7 @@ public class GameActivity extends Activity implements OnClickListener {
 				scoreEdit.commit();
 			} else {
 				// no existing scores
-				scoreEdit.putString("highScores", "" + dateOutput + " - " + exScore);
+				scoreEdit.putString("highScores", "" + dateOutput + " - " + Mode + " - " + exScore);
 				scoreEdit.commit();
 			}
 		}
@@ -420,6 +428,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		savedInstanceState.putInt("score", exScore);
 		savedInstanceState.putInt("level", Level);
 		savedInstanceState.putInt("round", Round);
+		savedInstanceState.putString("mode", Mode);
 		// superclass method
 		super.onSaveInstanceState(savedInstanceState);
 	}

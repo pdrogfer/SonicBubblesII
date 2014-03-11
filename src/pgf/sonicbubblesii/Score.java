@@ -6,11 +6,13 @@ public class Score implements Comparable<Score> {
 
 	// variables
 	private String scoreDate;
+	private String gameMode;
 	public int scoreNum;
 
 	// constructors
-	public Score(String date, int num) {
+	public Score(String date, String mode, int num) {
 		scoreDate = date;
+		gameMode = mode;
 		scoreNum = num;
 	}
 
@@ -24,7 +26,7 @@ public class Score implements Comparable<Score> {
 	}
 	
 	public String getScoreText() {
-		return scoreDate + " - " + scoreNum;
+		return scoreDate + " - " + gameMode + " - " + scoreNum;
 	}
 
 }
