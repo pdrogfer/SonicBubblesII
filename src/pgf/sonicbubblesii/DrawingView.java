@@ -70,7 +70,6 @@ public class DrawingView extends View {
 		dotPaint = new Paint();
 		dotPaint.setStrokeWidth(brushSize * 2);
 		dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-
 		animDot = new Paint();
 		animDot.setStyle(Paint.Style.STROKE);
 		// animDot.setStrokeWidth(brushSize);
