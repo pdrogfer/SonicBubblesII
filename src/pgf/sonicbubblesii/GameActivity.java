@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.GetChars;
 import android.util.Log;
@@ -51,6 +53,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	private static String[] Modes;
 	private static String Mode;
 
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,6 +68,7 @@ public class GameActivity extends Activity implements OnClickListener {
 
 		gamePrefs = getSharedPreferences(GAME_PREFS, 0);
 		drawView = (DrawingView) findViewById(R.id.drawing);
+		// drawView.setLayerType(drawView.LAYER_TYPE_SOFTWARE, null);
 		listenAgain = (Button) findViewById(R.id.btnListenAgain);
 		scoreTxt = (TextView) findViewById(R.id.scoreView);
 		levelTxt = (TextView) findViewById(R.id.tvLevel);

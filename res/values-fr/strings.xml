@@ -11,9 +11,9 @@
     <string name="right">¡correct!</string>
     <string name="tv_score">"Ponctuation: "</string>
     <string name="tv_level">"Niveau: "</string>
-    <string name="tv_round">Ronde:</string>
+    <string name="tv_round">"Ronde: "</string>
     <string name="wrong">incorrect</string>
-   <string name="dialog_level_title">Sélectionnez Mode: </string>
+   <string name="dialog_level_title">Sélectionnez Mode:</string>
        <string name="btn_high_scores">Ponctuations</string>
    
 </resources>

@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -21,6 +22,7 @@ public class DrawingView extends View {
 	// Log tags
 	public final static String SB = "Sonic Bubbles II";
 
+
 	// native variables:
 	private Canvas drawCanvas;
 	private Bitmap canvasBitmap;
@@ -28,9 +30,11 @@ public class DrawingView extends View {
 	private float brushSize = (float) 20.0;
 	private int ringSpeed = 3;
 	// drawing and canvas paint
-	private Paint drawPaint, canvasPaint, dotPaint, animDot;
+	private Paint fingerPaint, canvasPaint, dotPaint, animPaint, dotShadowPaint, animShadowPaint;
 	// drawing path
-	private Path drawPath;
+	private Path fingerPath;
+	// shadow offset
+	private static int shadowOff = 10;
 	// canvas size
 	static int width, height;
 	public float scale;
@@ -50,16 +54,16 @@ public class DrawingView extends View {
 	// methods
 	private void setupDrawing() {
 		// get drawing area setup for interaction:
-		drawPath = new Path();
-		drawPaint = new Paint();
-		drawPaint.setColor(paintColor);
-		drawPaint.setAntiAlias(true);
-		drawPaint.setStrokeWidth(brushSize);
-		drawPaint.setStyle(Paint.Style.STROKE);
-		drawPaint.setStrokeJoin(Paint.Join.ROUND);
-		drawPaint.setStrokeCap(Paint.Cap.ROUND);
+		fingerPath = new Path();
+		fingerPaint = new Paint();
+		fingerPaint.setColor(paintColor);
+		fingerPaint.setAntiAlias(true);
+		fingerPaint.setStrokeWidth(brushSize);
+		fingerPaint.setStyle(Paint.Style.STROKE);
+		fingerPaint.setStrokeJoin(Paint.Join.ROUND);
+		fingerPaint.setStrokeCap(Paint.Cap.ROUND);
 		// hace las lineas redondeadas
-		drawPaint.setPathEffect(new CornerPathEffect(20));
+		fingerPaint.setPathEffect(new CornerPathEffect(20));
 		canvasPaint = new Paint(Paint.DITHER_FLAG);
 		canvasPaint.setAlpha(255);
 
@@ -70,10 +74,20 @@ public class DrawingView extends View {
 		dotPaint = new Paint();
 		dotPaint.setStrokeWidth(brushSize * 2);
 		dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-		animDot = new Paint();
-		animDot.setStyle(Paint.Style.STROKE);
-		// animDot.setStrokeWidth(brushSize);
+		animPaint = new Paint();
+		animPaint.setStyle(Paint.Style.STROKE);
+		// animPaint.setStrokeWidth(brushSize);
+		animShadowPaint = new Paint();
+		animShadowPaint.setStyle(Paint.Style.STROKE);
+		animShadowPaint.setColor(Color.GRAY);
+		animShadowPaint.setAlpha(150);
 
+		dotShadowPaint = new Paint();
+		dotShadowPaint.setStrokeWidth(brushSize * 2);
+		dotShadowPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+		dotShadowPaint.setColor(Color.GRAY);
+		dotShadowPaint.setAlpha(100);
+		
 	}
 
 	@Override
@@ -166,10 +180,11 @@ public class DrawingView extends View {
 			 * add a second condition. Also: create two functions to put the
 			 * drawing of dots and rings in nice separated cleaned places
 			 */
-			// draw the dot animation
-			animDot.setColor(dots[d].getColor());
-			animDot.setStyle(Paint.Style.STROKE);
-			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), wave, animDot);
+			// draw the dot animation and it's shade
+			animPaint.setColor(dots[d].getColor());
+			animPaint.setStyle(Paint.Style.STROKE);
+			canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff, wave, animShadowPaint);
+			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), wave, animPaint);
 			// increase ring size
 			if (dots[d].getWaveOn()) {
 				dots[d].setRingRadius(wave + ringSpeed);
@@ -177,7 +192,8 @@ public class DrawingView extends View {
 				dots[d].setRingStrokeWidth(dots[d].getRingStrokeWidth() - 0.3);// brushSize
 																				// -=
 																				// 0.3;
-				animDot.setStrokeWidth((float) dots[d].getRingStrokeWidth());
+				animPaint.setStrokeWidth((float) dots[d].getRingStrokeWidth());
+				animShadowPaint.setStrokeWidth((float) dots[d].getRingStrokeWidth());
 			}
 			// return ring to dot size
 			if (wave > radius * 5) {
@@ -188,10 +204,12 @@ public class DrawingView extends View {
 			// draw the dot
 			dotPaint.setColor(dots[d].getColor());
 			dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+			// draw dot shade first
+			canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff, radius, dotShadowPaint);
 			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), radius, dotPaint);
 
 		}
-		canvas.drawPath(drawPath, drawPaint);
+		canvas.drawPath(fingerPath, fingerPaint);
 		invalidate();
 
 	}
@@ -205,18 +223,18 @@ public class DrawingView extends View {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			restartHand();
-			drawPath.moveTo(touchX, touchY);
+			fingerPath.moveTo(touchX, touchY);
 			checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_MOVE:
-			drawPath.lineTo(touchX, touchY);
+			fingerPath.lineTo(touchX, touchY);
 			checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_UP:
 			boolean answer = checkHand();
 			displayToast(answer);
 			updateScore(answer);
-			drawPath.reset();
+			fingerPath.reset();
 			if (answer) {
 				startNew();
 			}

@@ -16,9 +16,9 @@
     <string name="instructions">  Sonic Bubbles is a very simple game. Just listen to the sequence and drag your finger over the bubbles to join them in the same order as the theme. \n  As you progress through the game, it will become more complex: the sequence will be longer and the amount of sounds used will be increased too. \n  Have fun! </string>
     <string name="right">right!</string>
     <string name="wrong">wrong</string>
-    <string name="tv_level">Level: </string>
-    <string name="tv_round">Round: </string>
-    <string name="dialog_level_title">Select Mode: </string>
+    <string name="tv_level">"Level: "</string>
+    <string name="tv_round">"Round: "</string>
+    <string name="dialog_level_title">"Select Mode: "</string>
     <string name="version_number">v1.7</string>
     <string name="btn_high_scores">High Scores</string>
 
