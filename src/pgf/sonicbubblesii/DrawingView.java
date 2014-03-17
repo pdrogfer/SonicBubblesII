@@ -34,7 +34,8 @@ public class DrawingView extends View {
 	// drawing path
 	private Path fingerPath;
 	// shadow offset
-	private static int shadowOff = 10;
+	private static int shadowOff = 10; // TODO Make it relative to canvas width
+	private static int shadowAlpha = 100;
 	// canvas size
 	static int width, height;
 	public float scale;
@@ -54,40 +55,31 @@ public class DrawingView extends View {
 	// methods
 	private void setupDrawing() {
 		// get drawing area setup for interaction:
+		canvasPaint = new Paint(Paint.DITHER_FLAG);
+		canvasPaint.setAlpha(255);
 		fingerPath = new Path();
 		fingerPaint = new Paint();
+		dotPaint = new Paint();
+		dotShadowPaint = new Paint();
+		animPaint = new Paint();
+		animShadowPaint = new Paint();
+		// finger drawing style
 		fingerPaint.setColor(paintColor);
 		fingerPaint.setAntiAlias(true);
 		fingerPaint.setStrokeWidth(brushSize);
 		fingerPaint.setStyle(Paint.Style.STROKE);
 		fingerPaint.setStrokeJoin(Paint.Join.ROUND);
 		fingerPaint.setStrokeCap(Paint.Cap.ROUND);
-		// hace las lineas redondeadas
 		fingerPaint.setPathEffect(new CornerPathEffect(20));
-		canvasPaint = new Paint(Paint.DITHER_FLAG);
-		canvasPaint.setAlpha(255);
-
-		/*
-		 * configure the style for the dots with dotPaint, except color which is
-		 * individual and configured below
-		 */
-		dotPaint = new Paint();
-		dotPaint.setStrokeWidth(brushSize * 2);
-		dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-		animPaint = new Paint();
+		// dot, ring animation and it's shadows's styles
+		dotPaint.setStyle(Paint.Style.FILL);
+		dotShadowPaint.setStyle(Paint.Style.FILL);
+		dotShadowPaint.setColor(Color.GRAY);
+		dotShadowPaint.setAlpha(shadowAlpha);
 		animPaint.setStyle(Paint.Style.STROKE);
-		// animPaint.setStrokeWidth(brushSize);
-		animShadowPaint = new Paint();
 		animShadowPaint.setStyle(Paint.Style.STROKE);
 		animShadowPaint.setColor(Color.GRAY);
-		animShadowPaint.setAlpha(150);
-
-		dotShadowPaint = new Paint();
-		dotShadowPaint.setStrokeWidth(brushSize * 2);
-		dotShadowPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-		dotShadowPaint.setColor(Color.GRAY);
-		dotShadowPaint.setAlpha(100);
-		
+		animShadowPaint.setAlpha(shadowAlpha);	
 	}
 
 	@Override
@@ -180,30 +172,26 @@ public class DrawingView extends View {
 			 * add a second condition. Also: create two functions to put the
 			 * drawing of dots and rings in nice separated cleaned places
 			 */
-			// draw the dot animation and it's shade
-			animPaint.setColor(dots[d].getColor());
-			animPaint.setStyle(Paint.Style.STROKE);
-			canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff, wave, animShadowPaint);
-			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), wave, animPaint);
-			// increase ring size
 			if (dots[d].getWaveOn()) {
-				dots[d].setRingRadius(wave + ringSpeed);
-				// decrease ring stroke width
-				dots[d].setRingStrokeWidth(dots[d].getRingStrokeWidth() - 0.3);// brushSize
-																				// -=
-																				// 0.3;
+				// draw the dot animation and it's shade
+				animPaint.setColor(dots[d].getColor());
 				animPaint.setStrokeWidth((float) dots[d].getRingStrokeWidth());
 				animShadowPaint.setStrokeWidth((float) dots[d].getRingStrokeWidth());
+				canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff, wave, animShadowPaint);
+				canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), wave, animPaint);
+				// increase ring size by 1 step (ringSpeed)
+				dots[d].setRingRadius(wave + ringSpeed);
+				// decrease ring stroke width
+				dots[d].setRingStrokeWidth(dots[d].getRingStrokeWidth() - 0.3);
 			}
 			// return ring to dot size
-			if (wave > radius * 5) {
+			if (dots[d].getRingStrokeWidth() <= 0) {
 				dots[d].setRingRadius(radius);
 				dots[d].setWaveOn(false);
 				dots[d].resetRingStrokeWidth();
 			}
 			// draw the dot
 			dotPaint.setColor(dots[d].getColor());
-			dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 			// draw dot shade first
 			canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff, radius, dotShadowPaint);
 			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), radius, dotPaint);

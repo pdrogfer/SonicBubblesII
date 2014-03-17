@@ -13,9 +13,9 @@ public class Dot {
 	private boolean trig, waveOn;
 	private int posX, posY, colorDot;
 	private int sampleInd; // index of the sample corresponding to the dot
-	private int radius = DrawingView.width / 25; // TO make it relative to canvas
+	private int radius = DrawingView.width / 15; // TO make it relative to canvas width
 	private int	ringRadius = radius / 2;
-	private double defaultRingStrokeWidth = 20;
+	private double defaultRingStrokeWidth = DrawingView.width / 45;  // TO make it relative to canvas width
 	private double	ringStrokeWidth = defaultRingStrokeWidth;
 	Random random = new Random();
 
