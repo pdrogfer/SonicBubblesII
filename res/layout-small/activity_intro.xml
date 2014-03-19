@@ -17,7 +17,7 @@
         android:gravity="center_horizontal"
         android:layout_weight="1"
         android:text="@string/app_name"
-        android:textSize="60sp" />
+        android:textSize="36sp" />
     
     <TextView
         android:id="@+id/tVwVersion"
@@ -28,15 +28,15 @@
         android:layout_weight="0.7"
         android:text="@string/version_number"
         android:textStyle="italic"
-        android:textSize="40sp" />
+        android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/intro_image"
-        android:layout_width="240dp"
+        android:layout_width="180dp"
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:layout_weight="5"
+        android:layout_weight="3"
         android:contentDescription="@string/sonic_bubbles_logo"
         android:src="@drawable/intro_logo" />
 
@@ -46,7 +46,6 @@
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:textSize="30sp"
         android:layout_weight="1"
         android:background="@android:drawable/btn_default"
         android:text="@string/btn_start_game" />
@@ -56,21 +55,18 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:layout_weight="1"
-        android:textSize="30sp"
         android:background="@android:drawable/btn_default"
         android:text="@string/how_to_play" />
-
     <Button
         android:id="@+id/btnHighScores"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:layout_weight="1"
         android:background="@android:drawable/btn_default"
-        android:text="@string/btn_high_scores"
-        android:textSize="30sp" />
+        android:text="@string/btn_high_scores" />
 
 </LinearLayout>
