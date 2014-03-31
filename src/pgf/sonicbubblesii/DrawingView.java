@@ -248,12 +248,12 @@ public class DrawingView extends View {
 				display = true;
 			}
 		}
-		if (display && lifeCount > 0) {
+		if (display && lifeCount > 1) {
 		// complete Hand, so display the Toast
 		feedback = answer ? getContext().getString(R.string.right) : getContext()
 				.getString(R.string.wrong);
 		}
-		if (display && lifeCount == 0) {
+		if (display && lifeCount == 1) {
 			feedback = getContext().getString(R.string.end_game);
 		}
 		Toast t = Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT);
