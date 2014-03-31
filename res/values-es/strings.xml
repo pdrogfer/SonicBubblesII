@@ -16,8 +16,7 @@
     <string name="tv_round">"Ronda: "</string>
     <string name="dialog_level_title">Modo de Juego:</string>
     <string name="btn_high_scores">Puntuaciones</string>
-    <string name="end_game">Has Perdido!!</string>
-    <string name="one_more">Has Perdido! Otra Partida?</string>
+    <string name="one_more">Partida Acabada! Jugar Otra?</string>
     <string name="yes">Si, por favor</string>
     <string name="no">No, gracias</string>
 

@@ -93,15 +93,14 @@ public final class R {
         public static final int btn_high_scores=0x7f080014;
         public static final int btn_start_game=0x7f080008;
         public static final int dialog_level_title=0x7f080012;
-        public static final int end_game=0x7f080015;
         public static final int exit=0x7f080006;
         public static final int feedback=0x7f080003;
         public static final int how_to_play=0x7f080005;
         public static final int instructions=0x7f08000c;
         public static final int listen_again=0x7f08000b;
         public static final int new_game=0x7f080007;
-        public static final int no=0x7f080018;
-        public static final int one_more=0x7f080016;
+        public static final int no=0x7f080017;
+        public static final int one_more=0x7f080015;
         public static final int right=0x7f08000d;
         public static final int sonic_bubbles_logo=0x7f080009;
         public static final int title_activity_game=0x7f080002;
@@ -111,7 +110,7 @@ public final class R {
         public static final int tv_score=0x7f08000a;
         public static final int version_number=0x7f080013;
         public static final int wrong=0x7f08000e;
-        public static final int yes=0x7f080017;
+        public static final int yes=0x7f080016;
     }
     public static final class style {
         /** 

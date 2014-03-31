@@ -22,8 +22,7 @@
     <string name="dialog_level_title">"Select Mode: "</string>
     <string name="version_number">v1.8</string>
     <string name="btn_high_scores">High Scores</string>
-    <string name="end_game">You Lost!!</string>
-    <string name="one_more">You Lost! Play Again?</string>
+    <string name="one_more">Game Over! Play Again?</string>
     <string name="yes">Yes, please</string>
     <string name="no">No, thanks</string>
 

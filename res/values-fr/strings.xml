@@ -16,8 +16,7 @@
     <string name="wrong">incorrect</string>
     <string name="dialog_level_title">Sélectionnez Mode:</string>
     <string name="btn_high_scores">Ponctuations</string>
-    <string name="end_game">Tu as Perdu!!</string>
-    <string name="one_more">Tu as Perdu! Jouer Encore?</string>
+    <string name="one_more">Partie Finie! Jouer Encore?</string>
     <string name="yes">Yes, please</string>
     <string name="no">No, thanks</string>
 

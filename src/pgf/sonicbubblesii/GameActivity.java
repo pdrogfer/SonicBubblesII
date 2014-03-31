@@ -54,7 +54,6 @@ public class GameActivity extends Activity implements OnClickListener {
 	private static String[] Modes;
 	private static String Mode;
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -151,6 +150,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		case R.id.btnListenAgain:
 			// play again the sequence, at 0.75 sec intervals
 			theme.playTheme(750, 0);
+			if (presentScore > 0) presentScore --;
 			break;
 		default:
 			break;

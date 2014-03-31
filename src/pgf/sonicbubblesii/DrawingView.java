@@ -302,12 +302,13 @@ public class DrawingView extends View {
 		} else {
 			AlertDialog.Builder oneMore = new AlertDialog.Builder(getContext());
 			oneMore.setTitle(R.string.one_more);
+			oneMore.setMessage(getContext().getString(R.string.tv_score) + (GameActivity.presentScore));
 			oneMore.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO call dialog level selector for a new game
-					startNew();
+					
 				}
 			});
 			oneMore.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
