@@ -43,6 +43,11 @@ public class DrawingView extends View {
 	private String feedback;
 
 	public static Dot[] dots;
+	// temp variables used in checkBubble, checkDotCollision, setUpDots, onTouchEvent, declared here to avoid garbage
+	private double x, y;
+	double distX, distY;
+	
+	float touchX, touchY;
 	public static int[] theTheme;
 	public static int[] theHand;
 
@@ -103,8 +108,8 @@ public class DrawingView extends View {
 		theTheme = new int[dots.length];
 		theHand = new int[dots.length];
 		for (int n = 0; n < dots.length; n++) {
-			Dot dot = new Dot();
 			// place the dot correctly in the canvas
+			Dot dot = new Dot();
 			do {
 				dot.setPosX();
 				dot.setPosY();
@@ -145,7 +150,6 @@ public class DrawingView extends View {
 			return false;
 		} else {
 			for (int i = 0; i < n; i++) {
-				double distX, distY;
 				distX = tempPosX - dots[i].getPosX();
 				distY = tempPosY - dots[i].getPosY();
 				double distXY = Math.hypot(distX, distY);
@@ -163,8 +167,6 @@ public class DrawingView extends View {
 		canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
 		// draw the dot objects
 		for (int d = 0; d < dots.length; d++) {
-			int radius = dots[d].getRadius();
-			int wave = dots[d].getRingRadius();
 			/*
 			 * The ring stops drawing if the user lifts finger and touches the
 			 * screen again, because this calls the restartHand method which
@@ -177,24 +179,24 @@ public class DrawingView extends View {
 				animPaint.setColor(dots[d].getColor());
 				animPaint.setStrokeWidth((float) dots[d].getRingStrokeWidth());
 				animShadowPaint.setStrokeWidth((float) dots[d].getRingStrokeWidth());
-				canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff, wave, animShadowPaint);
-				canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), wave, animPaint);
+				canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff, dots[d].getRingRadius(), animShadowPaint);
+				canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRingRadius(), animPaint);
 				// increase ring size by 1 step (ringSpeed)
-				dots[d].setRingRadius(wave + ringSpeed);
+				dots[d].setRingRadius(dots[d].getRingRadius() + ringSpeed);
 				// decrease ring stroke width
 				dots[d].setRingStrokeWidth(dots[d].getRingStrokeWidth() - 0.3);
 			}
 			// return ring to dot size
 			if (dots[d].getRingStrokeWidth() <= 0) {
-				dots[d].setRingRadius(radius);
+				dots[d].setRingRadius(dots[d].getRadius());
 				dots[d].setWaveOn(false);
 				dots[d].resetRingStrokeWidth();
 			}
 			// draw the dot
 			dotPaint.setColor(dots[d].getColor());
 			// draw dot shade first
-			canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff, radius, dotShadowPaint);
-			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), radius, dotPaint);
+			canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff, dots[d].getRadius(), dotShadowPaint);
+			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRadius(), dotPaint);
 
 		}
 		canvas.drawPath(fingerPath, fingerPaint);
@@ -205,8 +207,8 @@ public class DrawingView extends View {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// handle finger proximity to Dots for sound triggering
-		float touchX = event.getX();
-		float touchY = event.getY();
+		touchX = event.getX();
+		touchY = event.getY();
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
@@ -323,7 +325,6 @@ public class DrawingView extends View {
 		 */
 		for (Dot eachDot : dots) {
 			// To avoid duplicated sound triggerings
-			double x, y;
 			x = touchX - eachDot.getPosX();
 			y = touchY - eachDot.getPosY();
 			double dist = Math.hypot(x, y);
