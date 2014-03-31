@@ -3,7 +3,9 @@ package pgf.sonicbubblesii;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -258,6 +260,28 @@ public class DrawingView extends View {
 		}
 		Toast t = Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT);
 		t.show();
+		if (feedback == getContext().getString(R.string.end_game)) {
+			AlertDialog.Builder oneMore = new AlertDialog.Builder(getContext());
+			oneMore.setTitle(R.string.one_more);
+			oneMore.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO call a new game
+					
+				}
+			});
+			oneMore.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO return to Intro Activity
+					
+				}
+			});
+			AlertDialog dialog = oneMore.create();
+			dialog.show();
+		}
 		Log.i(DrawingView.SB, feedback);
 	}
 
