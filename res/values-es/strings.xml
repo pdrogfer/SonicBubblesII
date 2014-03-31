@@ -9,11 +9,13 @@
     <string name="listen_again">Oir de nuevo</string>
     <string name="new_game">Nueva Partida</string>
     <string name="tv_score">"Puntuación: "</string>
+    <string name="tv_life">"Vida: "</string>
     <string name="right">¡correcto!</string>
     <string name="wrong">incorrecto</string>
     <string name="tv_level">"Nivel: "</string>
     <string name="tv_round">"Ronda: "</string>
     <string name="dialog_level_title">Modo de Juego:</string>
     <string name="btn_high_scores">Puntuaciones</string>
+    <string name="end_game">Has Perdido!!</string>
 
 </resources>

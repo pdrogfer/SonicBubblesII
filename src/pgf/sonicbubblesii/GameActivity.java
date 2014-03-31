@@ -45,8 +45,9 @@ public class GameActivity extends Activity implements OnClickListener {
 	// scores
 	private SharedPreferences gamePrefs;
 	public static final String GAME_PREFS = "Arithmetic_File";
-	private static TextView scoreTxt, levelTxt, roundTxt;
+	private static TextView scoreTxt, lifeTxt, levelTxt, roundTxt;
 	public static int presentScore = 10;
+	public static int Life = 5;
 	public static int Hand = 1;
 	public static int Level = 1;
 	public static int Round = 1;
@@ -71,6 +72,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		// drawView.setLayerType(drawView.LAYER_TYPE_SOFTWARE, null);
 		listenAgain = (Button) findViewById(R.id.btnListenAgain);
 		scoreTxt = (TextView) findViewById(R.id.scoreView);
+		lifeTxt = (TextView) findViewById(R.id.lifeView);
 		levelTxt = (TextView) findViewById(R.id.tvLevel);
 		roundTxt = (TextView) findViewById(R.id.tvRound);
 		listenAgain.setOnClickListener(this);
@@ -79,11 +81,13 @@ public class GameActivity extends Activity implements OnClickListener {
 			// there is saved instance state data
 			Level = savedInstanceState.getInt("level");
 			Round = savedInstanceState.getInt("round");
+			Life = savedInstanceState.getInt("life");
 			// Mode = savedInstanceState.getString("mode");
 		}
 
 		// display score
 		scoreTxt.setText(getString(R.string.tv_score) + Integer.toString(presentScore));
+		lifeTxt.setText(getString(R.string.tv_life) + Integer.toString(Life));
 		levelTxt.setText(getString(R.string.tv_level) + Integer.toString(Level));
 		roundTxt.setText(getString(R.string.tv_round) + Integer.toString(Round));
 
@@ -259,6 +263,14 @@ public class GameActivity extends Activity implements OnClickListener {
 	public void setScoreTxt(TextView scoreTxt) {
 		this.scoreTxt = scoreTxt;
 	}
+	
+	public static TextView getLifeTxt() {
+		return lifeTxt;
+	}
+	
+	public void setLifeTxt(TextView lifeTxt) {
+		this.lifeTxt = lifeTxt;
+	}
 
 	public static TextView getLevelTxt() {
 		return levelTxt;
@@ -403,6 +415,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		// Destroy the running game: save score and set scores to default start
 		// TODO onStop is also called when HighScores activity is opened, not good
 		presentScore = 10;
+		Life = 5;
 		Hand = 1;
 		Level = 1;
 		Round = 1;
@@ -427,6 +440,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		// save score
 		int exScore = getScore();
 		savedInstanceState.putInt("score", exScore);
+		savedInstanceState.putInt("life", Life);
 		savedInstanceState.putInt("level", Level);
 		savedInstanceState.putInt("round", Round);
 		savedInstanceState.putString("mode", Mode);

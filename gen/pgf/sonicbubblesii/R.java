@@ -39,26 +39,27 @@ public final class R {
         public static final int logo_original=0x7f020003;
     }
     public static final class id {
-        public static final int best_scores=0x7f0b0011;
-        public static final int btnHighScores=0x7f0b000e;
-        public static final int btnHowToPlay=0x7f0b000d;
+        public static final int best_scores=0x7f0b0012;
+        public static final int btnHighScores=0x7f0b000f;
+        public static final int btnHowToPlay=0x7f0b000e;
         public static final int btnListenAgain=0x7f0b0000;
-        public static final int btnStartGame=0x7f0b000c;
-        public static final int drawing=0x7f0b0002;
-        public static final int exit=0x7f0b0013;
-        public static final int high_head=0x7f0b0006;
-        public static final int high_scores_list=0x7f0b0007;
-        public static final int hot_to_play=0x7f0b0012;
-        public static final int how_to_play=0x7f0b0008;
-        public static final int intro=0x7f0b0005;
-        public static final int intro_image=0x7f0b000b;
-        public static final int new_game=0x7f0b0010;
+        public static final int btnStartGame=0x7f0b000d;
+        public static final int drawing=0x7f0b0003;
+        public static final int exit=0x7f0b0014;
+        public static final int high_head=0x7f0b0007;
+        public static final int high_scores_list=0x7f0b0008;
+        public static final int hot_to_play=0x7f0b0013;
+        public static final int how_to_play=0x7f0b0009;
+        public static final int intro=0x7f0b0006;
+        public static final int intro_image=0x7f0b000c;
+        public static final int lifeView=0x7f0b0002;
+        public static final int new_game=0x7f0b0011;
         public static final int scoreView=0x7f0b0001;
-        public static final int tVwTitle=0x7f0b0009;
-        public static final int tVwVersion=0x7f0b000a;
-        public static final int textView1=0x7f0b000f;
-        public static final int tvLevel=0x7f0b0003;
-        public static final int tvRound=0x7f0b0004;
+        public static final int tVwTitle=0x7f0b000a;
+        public static final int tVwVersion=0x7f0b000b;
+        public static final int textView1=0x7f0b0010;
+        public static final int tvLevel=0x7f0b0004;
+        public static final int tvRound=0x7f0b0005;
     }
     public static final class layout {
         public static final int activity_game=0x7f030000;
@@ -89,9 +90,10 @@ public final class R {
         public static final int action_settings=0x7f080001;
         public static final int app_name=0x7f080000;
         public static final int best_scores=0x7f080004;
-        public static final int btn_high_scores=0x7f080013;
+        public static final int btn_high_scores=0x7f080014;
         public static final int btn_start_game=0x7f080008;
-        public static final int dialog_level_title=0x7f080011;
+        public static final int dialog_level_title=0x7f080012;
+        public static final int end_game=0x7f080015;
         public static final int exit=0x7f080006;
         public static final int feedback=0x7f080003;
         public static final int how_to_play=0x7f080005;
@@ -102,9 +104,10 @@ public final class R {
         public static final int sonic_bubbles_logo=0x7f080009;
         public static final int title_activity_game=0x7f080002;
         public static final int tv_level=0x7f08000f;
+        public static final int tv_life=0x7f080011;
         public static final int tv_round=0x7f080010;
         public static final int tv_score=0x7f08000a;
-        public static final int version_number=0x7f080012;
+        public static final int version_number=0x7f080013;
         public static final int wrong=0x7f08000e;
     }
     public static final class style {

@@ -29,10 +29,19 @@
             android:id="@+id/scoreView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/tv_score"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/lifeView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tv_life"
             android:textSize="24sp" />
     </LinearLayout>
 

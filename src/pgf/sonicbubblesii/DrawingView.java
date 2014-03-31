@@ -222,7 +222,7 @@ public class DrawingView extends View {
 			break;
 		case MotionEvent.ACTION_UP:
 			boolean answer = checkHand();
-			displayToast(answer);
+			displayToast(answer, GameActivity.Life);
 			updateScore(answer);
 			fingerPath.reset();
 			if (answer) {
@@ -236,7 +236,7 @@ public class DrawingView extends View {
 		return true;
 	}
 
-	private void displayToast(boolean answer) {
+	private void displayToast(boolean answer, int lifeCount) {
 		// display a short message type: right/wrong on completed hands
 		// first check that theHand is complete
 		boolean display = false;
@@ -248,14 +248,17 @@ public class DrawingView extends View {
 				display = true;
 			}
 		}
-		if (display) {
+		if (display && lifeCount > 0) {
 		// complete Hand, so display the Toast
 		feedback = answer ? getContext().getString(R.string.right) : getContext()
 				.getString(R.string.wrong);
+		}
+		if (display && lifeCount == 0) {
+			feedback = getContext().getString(R.string.end_game);
+		}
 		Toast t = Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT);
 		t.show();
 		Log.i(DrawingView.SB, feedback);
-		}
 	}
 
 	private void updateScore(boolean answer) {
@@ -272,11 +275,17 @@ public class DrawingView extends View {
 			}
 			writeScores();
 		}
+		else {
+			GameActivity.Life --;
+			writeScores();
+		}
+		
 	}
 
 	public void resetScores() {
 		// reset score to default values
 		GameActivity.presentScore = 10;
+		GameActivity.Life = 5;
 		GameActivity.Level = 1;
 		GameActivity.Round = 1;
 		GameActivity.Hand = 1;
@@ -287,6 +296,8 @@ public class DrawingView extends View {
 		// write score, level and round on screen
 		GameActivity.getScoreTxt().setText(
 				getContext().getString(R.string.tv_score) + (GameActivity.presentScore));
+		GameActivity.getLifeTxt().setText(
+				getContext().getString(R.string.tv_life) + (GameActivity.Life));
 		GameActivity.getLevelTxt().setText(
 				getContext().getString(R.string.tv_level) + (GameActivity.Level));
 		GameActivity.getRoundTxt().setText(
@@ -299,6 +310,9 @@ public class DrawingView extends View {
 		for (int i = 0; i < theTheme.length; i++) {
 			if (theHand[i] != theTheme[i]) {
 				check = false;
+				// loose points for error
+				GameActivity.presentScore -= i + 1;
+				if (GameActivity.presentScore <= 0) GameActivity.presentScore = 0;
 				break;
 			}
 			check = true;
