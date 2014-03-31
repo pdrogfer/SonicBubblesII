@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -267,8 +268,8 @@ public class DrawingView extends View {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO call a new game
-					
+					// TODO call dialog level selector for a new game
+					startNew();
 				}
 			});
 			oneMore.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -282,13 +283,12 @@ public class DrawingView extends View {
 			AlertDialog dialog = oneMore.create();
 			dialog.show();
 		}
-		Log.i(DrawingView.SB, feedback);
 	}
 
 	private void updateScore(boolean answer) {
 		if (answer) {
 			// update score, Level and Round
-			GameActivity.presentScore += 10;
+			GameActivity.presentScore += dots.length;
 			GameActivity.Hand++;
 			GameActivity.Level++;
 			if (GameActivity.Level > 4) {
@@ -334,9 +334,6 @@ public class DrawingView extends View {
 		for (int i = 0; i < theTheme.length; i++) {
 			if (theHand[i] != theTheme[i]) {
 				check = false;
-				// loose points for error
-				GameActivity.presentScore -= i + 1;
-				if (GameActivity.presentScore <= 0) GameActivity.presentScore = 0;
 				break;
 			}
 			check = true;

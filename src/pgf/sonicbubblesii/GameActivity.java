@@ -165,7 +165,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		 * TODO This works, but is not accurate. It starts a new HAND, not a new
 		 * GAME.
 		 */
-
+		
 		drawView.startNew();
 		drawView.resetScores();
 		theme.playTheme(750, 1000);
