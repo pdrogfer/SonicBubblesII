@@ -25,7 +25,6 @@ public class DrawingView extends View {
 	// Log tags
 	public final static String SB = "Sonic Bubbles II";
 
-
 	// native variables:
 	private Canvas drawCanvas;
 	private Bitmap canvasBitmap;
@@ -46,11 +45,15 @@ public class DrawingView extends View {
 	private String feedback;
 
 	public static Dot[] dots;
-	// temp variables used in checkBubble, checkDotCollision, setUpDots, onTouchEvent, declared here to avoid garbage
+	/*
+	 * temp variables used in checkBubble, checkDotCollision, setUpDots,
+	 * onTouchEvent, checkHand, declared here to avoid garbage
+	 */
 	private double x, y;
 	double distX, distY;
-	
 	float touchX, touchY;
+	boolean equalLength, rightAnswer;
+
 	public static int[] theTheme;
 	public static int[] theHand;
 
@@ -87,7 +90,7 @@ public class DrawingView extends View {
 		animPaint.setStyle(Paint.Style.STROKE);
 		animShadowPaint.setStyle(Paint.Style.STROKE);
 		animShadowPaint.setColor(Color.GRAY);
-		animShadowPaint.setAlpha(shadowAlpha);	
+		animShadowPaint.setAlpha(shadowAlpha);
 	}
 
 	@Override
@@ -182,8 +185,10 @@ public class DrawingView extends View {
 				animPaint.setColor(dots[d].getColor());
 				animPaint.setStrokeWidth((float) dots[d].getRingStrokeWidth());
 				animShadowPaint.setStrokeWidth((float) dots[d].getRingStrokeWidth());
-				canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff, dots[d].getRingRadius(), animShadowPaint);
-				canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRingRadius(), animPaint);
+				canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff,
+						dots[d].getRingRadius(), animShadowPaint);
+				canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRingRadius(),
+						animPaint);
 				// increase ring size by 1 step (ringSpeed)
 				dots[d].setRingRadius(dots[d].getRingRadius() + ringSpeed);
 				// decrease ring stroke width
@@ -198,7 +203,8 @@ public class DrawingView extends View {
 			// draw the dot
 			dotPaint.setColor(dots[d].getColor());
 			// draw dot shade first
-			canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff, dots[d].getRadius(), dotShadowPaint);
+			canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff,
+					dots[d].getRadius(), dotShadowPaint);
 			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRadius(), dotPaint);
 
 		}
@@ -224,13 +230,8 @@ public class DrawingView extends View {
 			checkBubble(touchX, touchY);
 			break;
 		case MotionEvent.ACTION_UP:
-			boolean answer = checkHand();
-			displayToast(answer, GameActivity.Life);
-			updateScore(answer);
+			checkHand();
 			fingerPath.reset();
-			if (answer) {
-				startNew();
-			}
 			break;
 		default:
 			return false;
@@ -239,54 +240,40 @@ public class DrawingView extends View {
 		return true;
 	}
 
-	private void displayToast(boolean answer, int lifeCount) {
-		// display a short message type: right/wrong on completed hands
-		// first check that theHand is complete
-		boolean display = false;
+	public void checkHand() {
+		// First, check if LENGHT of theHand is equal to LENGTH of theTheme
+		equalLength = false;
 		for (int i = 0; i < theHand.length; i++) {
 			if (theHand[i] == 999) {
-				display = false;
+				equalLength = false;
 				break;
 			} else {
-				display = true;
+				equalLength = true;
 			}
+		} // on equal length, check if theHand is the rigth answer
+		rightAnswer = false;
+		for (int j = 0; j < theTheme.length; j++) {
+			if (theHand[j] != theTheme[j]) {
+				rightAnswer = false;
+				break;
+			}
+			rightAnswer = true;
 		}
-		if (display && lifeCount > 1) {
-		// complete Hand, so display the Toast
-		feedback = answer ? getContext().getString(R.string.right) : getContext()
-				.getString(R.string.wrong);
-		}
-		if (display && lifeCount == 1) {
-			feedback = getContext().getString(R.string.end_game);
-		}
-		Toast t = Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT);
-		t.show();
-		if (feedback == getContext().getString(R.string.end_game)) {
-			AlertDialog.Builder oneMore = new AlertDialog.Builder(getContext());
-			oneMore.setTitle(R.string.one_more);
-			oneMore.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO call dialog level selector for a new game
-					startNew();
-				}
-			});
-			oneMore.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO return to Intro Activity
-					
-				}
-			});
-			AlertDialog dialog = oneMore.create();
-			dialog.show();
+		updateScore(equalLength, rightAnswer);
+		if (equalLength && rightAnswer) {
+			startNew();
 		}
 	}
 
-	private void updateScore(boolean answer) {
-		if (answer) {
+	private void updateScore(boolean equalLength, boolean answer) {
+		if (equalLength == false && answer == false) {
+			// do nothing
+		}
+		else if (equalLength == true && answer == false) {
+			GameActivity.Life--;
+			// show wrong message
+			displayToast(false, GameActivity.Life);
+		} else if (equalLength == true && answer == true) {
 			// update score, Level and Round
 			GameActivity.presentScore += dots.length;
 			GameActivity.Hand++;
@@ -294,21 +281,51 @@ public class DrawingView extends View {
 			if (GameActivity.Level > 4) {
 				GameActivity.Level = 1;
 				GameActivity.Round++;
+				// Give an extra life every Round;
+				GameActivity.Life++;
 				// increase numDots by 1 every 4 points of score
 				GameActivity.numDots = 4 + GameActivity.Hand / 4;
 			}
-			writeScores();
+			displayToast(true, GameActivity.Life);
 		}
-		else {
-			GameActivity.Life --;
-			writeScores();
+		// Show right message and write new scores on screen
+		writeScores();
+	}
+
+	private void displayToast(boolean answer, int lifeCount) {
+		// display a short message type: right/wrong
+		if (lifeCount > 0) {
+			feedback = answer ? getContext().getString(R.string.right) : getContext().getString(
+					R.string.wrong);
+			Toast t = Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT);
+			t.show();
+		} else {
+			AlertDialog.Builder oneMore = new AlertDialog.Builder(getContext());
+			oneMore.setTitle(R.string.one_more);
+			oneMore.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO call dialog level selector for a new game
+					startNew();
+				}
+			});
+			oneMore.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO return to Intro Activity
+
+				}
+			});
+			AlertDialog dialog = oneMore.create();
+			dialog.show();
 		}
-		
 	}
 
 	public void resetScores() {
 		// reset score to default values
-		GameActivity.presentScore = 10;
+		GameActivity.presentScore = 0;
 		GameActivity.Life = 5;
 		GameActivity.Level = 1;
 		GameActivity.Round = 1;
@@ -326,19 +343,6 @@ public class DrawingView extends View {
 				getContext().getString(R.string.tv_level) + (GameActivity.Level));
 		GameActivity.getRoundTxt().setText(
 				getContext().getString(R.string.tv_round) + (GameActivity.Round));
-	}
-
-	public boolean checkHand() {
-		// Check if the theHand is equal to theTheme
-		check = false;
-		for (int i = 0; i < theTheme.length; i++) {
-			if (theHand[i] != theTheme[i]) {
-				check = false;
-				break;
-			}
-			check = true;
-		}
-		return check;
 	}
 
 	private void restartHand() {

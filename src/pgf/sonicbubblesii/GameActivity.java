@@ -46,7 +46,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	private SharedPreferences gamePrefs;
 	public static final String GAME_PREFS = "Arithmetic_File";
 	private static TextView scoreTxt, lifeTxt, levelTxt, roundTxt;
-	public static int presentScore = 10;
+	public static int presentScore = 0;
 	public static int Life = 5;
 	public static int Hand = 1;
 	public static int Level = 1;
@@ -414,7 +414,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		super.onStop();
 		// Destroy the running game: save score and set scores to default start
 		// TODO onStop is also called when HighScores activity is opened, not good
-		presentScore = 10;
+		presentScore = 0;
 		Life = 5;
 		Hand = 1;
 		Level = 1;
