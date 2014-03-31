@@ -351,7 +351,7 @@ public class DrawingView extends View {
 	}
 
 	public void startNew() {
-		drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
+		// drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
 		setupDots(GameActivity.numDots, GameActivity.numSamples);
 		invalidate();
 		GameActivity.theme.playTheme(750, 1000);
