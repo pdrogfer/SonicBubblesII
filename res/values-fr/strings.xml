@@ -8,9 +8,9 @@
     <string name="instructions">Sonic Bubbles est un jeu très simple. Écoute la séquence des sons et pousse ton doigt sur les bulles pour les joindre dans le même ordre que le sujet.</string>
     <string name="listen_again">Écouter encore</string>
     <string name="new_game">Nouvelle Partie</string>
-    <string name="tv_life">"Vie: "</string>
+    <string name="tv_life">"Vies: "</string>
     <string name="right">¡correct!</string>
-    <string name="tv_score">"Ponctuation: "</string>
+    <string name="tv_score">"Points: "</string>
     <string name="tv_level">"Niveau: "</string>
     <string name="tv_round">"Ronde: "</string>
     <string name="wrong">incorrect</string>

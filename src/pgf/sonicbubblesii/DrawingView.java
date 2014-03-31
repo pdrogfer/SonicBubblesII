@@ -16,6 +16,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.ActionMode.Callback;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -308,7 +309,6 @@ public class DrawingView extends View {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO call dialog level selector for a new game
-					
 				}
 			});
 			oneMore.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -334,7 +334,7 @@ public class DrawingView extends View {
 		writeScores();
 	}
 
-	private void writeScores() {
+	public void writeScores() {
 		// write score, level and round on screen
 		GameActivity.getScoreTxt().setText(
 				getContext().getString(R.string.tv_score) + (GameActivity.presentScore));

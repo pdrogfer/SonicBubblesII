@@ -44,12 +44,11 @@
         android:id="@+id/btnStartGame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:textSize="30sp"
         android:layout_weight="1"
         android:background="@android:drawable/btn_default"
-        android:text="@string/btn_start_game" />
+        android:text="@string/btn_start_game"
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/btnHowToPlay"

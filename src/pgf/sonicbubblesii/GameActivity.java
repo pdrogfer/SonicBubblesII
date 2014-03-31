@@ -151,6 +151,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			// play again the sequence, at 0.75 sec intervals
 			theme.playTheme(750, 0);
 			if (presentScore > 0) presentScore --;
+			drawView.writeScores();
 			break;
 		default:
 			break;
