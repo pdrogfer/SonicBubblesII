@@ -360,12 +360,14 @@ public class DrawingView extends View {
 					break;
 				}
 				GameActivity.setMode(GameActivity.getModes()[which]);
-				GameActivity.chooseSamples(nSamples);
-				setupDots(nDots, nSamples);
+				GameActivity.numDots = nDots;
+				GameActivity.numSamples = nSamples;
+				GameActivity.chooseSamples(GameActivity.numSamples);
+				setupDots(GameActivity.numDots, GameActivity.numSamples);
 				resetScores();
 				invalidate();
-				GameActivity.theme.setNumDots(nDots);
-				GameActivity.theme.setNumSamples(nSamples);
+				GameActivity.theme.setNumDots(GameActivity.numDots);
+				GameActivity.theme.setNumSamples(GameActivity.numSamples);
 				GameActivity.theme.playTheme(750, 1000);
 			}
 		});
@@ -440,8 +442,9 @@ public class DrawingView extends View {
 
 	public void startNew() {
 		// drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
-		GameActivity.theme.setNumSamples(nSamples);
-		setupDots(nDots, nSamples);
+
+		GameActivity.theme.setNumSamples(GameActivity.numSamples);
+		setupDots(GameActivity.numDots, GameActivity.numSamples);
 		invalidate();
 		GameActivity.theme.playTheme(750, 1000);
 
