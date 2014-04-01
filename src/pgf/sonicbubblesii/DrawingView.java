@@ -3,6 +3,7 @@ package pgf.sonicbubblesii;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -269,7 +270,7 @@ public class DrawingView extends View {
 
 	private void updateScore(boolean equalLength, boolean answer) {
 		if (equalLength == false && answer == false) {
-			// do nothing
+			// incomplete Hand, do nothing
 		}
 		else if (equalLength == true && answer == false) {
 			GameActivity.Life--;
@@ -307,7 +308,7 @@ public class DrawingView extends View {
 	}
 
 	private void newGameDialog() {
-		// TODO Auto-generated method stub
+		// Write score on HighScores View and offer a new game
 		AlertDialog.Builder oneMore = new AlertDialog.Builder(getContext());
 		oneMore.setTitle(R.string.one_more);
 		oneMore.setMessage(getContext().getString(R.string.tv_score) + (GameActivity.presentScore));
@@ -315,7 +316,7 @@ public class DrawingView extends View {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// TODO call dialog level selector for a new game
+				// call dialog level selector for a new game
 				oneMoreGame();
 			}
 
@@ -324,14 +325,19 @@ public class DrawingView extends View {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// TODO return to Intro Activity
-
+				// return to Intro Activity
+				returnToIntro();
 			}
 		});
 		AlertDialog dialog = oneMore.create();
 		dialog.show();
 	}
-	
+
+	protected void returnToIntro() {
+		Intent intent = new Intent(getContext(), IntroActivity.class);
+		((Activity)getContext()).startActivity(intent);
+	}
+
 	private void oneMoreGame() {
 		// TODO Auto-generated method stub
 		// choose level and set variables for the new game

@@ -121,6 +121,8 @@ public class GameActivity extends Activity implements OnClickListener {
 			return true;
 		case R.id.exit:
 			// quit
+			Intent intentIntro = new Intent(this, IntroActivity.class);
+			startActivity(intentIntro);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -212,7 +214,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		return presentScore;
 	}
 
-	private void setHighScore() {
+	public void setHighScore() {
 		// set high score
 		int exScore = getScore();
 		if (exScore > 0) {
@@ -410,7 +412,6 @@ public class GameActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onPause() {
 		// set the present score
-		setHighScore();
 		super.onPause();
 		Log.i(SB_LifeCycle, "Game Activity On Pause");
 	}
