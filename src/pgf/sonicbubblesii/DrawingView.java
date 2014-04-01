@@ -64,6 +64,7 @@ public class DrawingView extends View {
 	public DrawingView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setupDrawing();
+		
 	}
 
 	// methods
@@ -309,6 +310,7 @@ public class DrawingView extends View {
 
 	private void newGameDialog() {
 		// Write score on HighScores View and offer a new game
+		GameActivity.setHighScore();
 		AlertDialog.Builder oneMore = new AlertDialog.Builder(getContext());
 		oneMore.setTitle(R.string.one_more);
 		oneMore.setMessage(getContext().getString(R.string.tv_score) + (GameActivity.presentScore));
@@ -339,7 +341,6 @@ public class DrawingView extends View {
 	}
 
 	private void oneMoreGame() {
-		// TODO Auto-generated method stub
 		// choose level and set variables for the new game
 		AlertDialog.Builder levelDialog = new AlertDialog.Builder(getContext());
 		levelDialog.setTitle(R.string.dialog_level_title);

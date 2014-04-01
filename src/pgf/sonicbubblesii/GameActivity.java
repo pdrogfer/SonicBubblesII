@@ -43,7 +43,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	static List<Integer> chosenSamples = new ArrayList<Integer>();
 
 	// scores
-	private SharedPreferences gamePrefs;
+	private static SharedPreferences gamePrefs;
 	public static final String GAME_PREFS = "Arithmetic_File";
 	private static TextView scoreTxt, lifeTxt, levelTxt, roundTxt;
 	public static int presentScore = 0;
@@ -210,11 +210,11 @@ public class GameActivity extends Activity implements OnClickListener {
 		levelDialog.show();	
 	}
 
-	private int getScore() {
+	private static int getScore() {
 		return presentScore;
 	}
 
-	public void setHighScore() {
+	public static void setHighScore() {
 		// set high score
 		int exScore = getScore();
 		if (exScore > 0) {
