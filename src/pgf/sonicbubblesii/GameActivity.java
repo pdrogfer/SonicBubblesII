@@ -386,11 +386,6 @@ public class GameActivity extends Activity implements OnClickListener {
 		}
 	}
 	
-	public static void oneMoreGame() {
-		// TODO 
-
-	}
-
 	@Override
 	protected void onStart() {
 		Log.i(SB_LifeCycle, "Game Activity On Start");
@@ -419,14 +414,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onStop() {
 		super.onStop();
-		// Destroy the running game: save score and set scores to default start
-		// TODO onStop is also called when HighScores activity is opened, not good
-		presentScore = 0;
-		Life = 5;
-		Hand = 1;
-		Level = 1;
-		Round = 1;
-
+		// do nothing, because it's called even at opening HighScores
 		Log.i(SB_LifeCycle, "Game Activity On Stop");
 	}
 
