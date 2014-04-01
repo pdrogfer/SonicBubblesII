@@ -26,16 +26,16 @@ public class IntroActivity extends Activity implements OnClickListener {
 	private int soundC, soundCS, soundD, soundDS, soundE, soundF, soundFS, soundG, soundGS, soundA,
 			soundAS, soundB, soundCC; // last one is C octave up
 	public static boolean loaded = false;
-	
+
 	// options in creating a new game
-	int numBubbles, numSounds; 
+	int numBubbles, numSounds;
 	private String[] Modes;
 	private String Mode;
 
 	// Log tags
 	public final static String SB = "Sonic Bubbles II";
 	public final static String SB_LifeCycle = "SB II LifeCycle";
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,13 +44,16 @@ public class IntroActivity extends Activity implements OnClickListener {
 
 		startGame = (Button) findViewById(R.id.btnStartGame);
 		howToPlay = (Button) findViewById(R.id.btnHowToPlay);
-		bestScores= (Button) findViewById(R.id.btnHighScores);
+		bestScores = (Button) findViewById(R.id.btnHighScores);
 		startGame.setOnClickListener(this);
 		howToPlay.setOnClickListener(this);
 		bestScores.setOnClickListener(this);
 		Modes = getResources().getStringArray(R.array.string_array_levels);
 
-		soundSetup();
+		if (soundPool == null) {
+			//to prevent loading unneccesary loads when returning from finished game
+			soundSetup();
+		}
 	}
 
 	@Override
@@ -126,12 +129,13 @@ public class IntroActivity extends Activity implements OnClickListener {
 	}
 
 	public void chooseLevel() {
-		// TODO this is written twice, here and in GameActivity. Maybe it can be encapsulated somewhere else?
+		// TODO this is written twice, here and in GameActivity. Maybe it can be
+		// encapsulated somewhere else?
 		// choose level and set variables for the new game
 		AlertDialog.Builder levelDialog = new AlertDialog.Builder(this);
 		levelDialog.setTitle(R.string.dialog_level_title);
 		levelDialog.setItems(R.array.string_array_levels, new DialogInterface.OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// manage level choice
@@ -183,7 +187,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 		Intent intentHow = new Intent(this, HowToPlay.class);
 		startActivity(intentHow);
 	}
-	
+
 	public void exitAll() {
 		// exit the app
 		Intent intentExit = new Intent(Intent.ACTION_MAIN);

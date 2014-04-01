@@ -43,17 +43,17 @@ public class GameActivity extends Activity implements OnClickListener {
 	static List<Integer> chosenSamples = new ArrayList<Integer>();
 
 	// scores
-	private SharedPreferences gamePrefs;
+	private static SharedPreferences gamePrefs;
 	public static final String GAME_PREFS = "Arithmetic_File";
-	private static TextView scoreTxt, levelTxt, roundTxt;
-	public static int presentScore = 10;
+	private static TextView scoreTxt, lifeTxt, levelTxt, roundTxt;
+	public static int presentScore = 0;
+	public static int Life = 5;
 	public static int Hand = 1;
 	public static int Level = 1;
 	public static int Round = 1;
 	private static String[] Modes;
 	private static String Mode;
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,7 +63,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		// TODO There is something wrong with which samples are chosen
 		numDots = 4;
 		numSamples = 4;
-		Modes = getResources().getStringArray(R.array.string_array_levels);
+		setModes(getResources().getStringArray(R.array.string_array_levels));
 		themeSetup();
 
 		gamePrefs = getSharedPreferences(GAME_PREFS, 0);
@@ -71,6 +71,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		// drawView.setLayerType(drawView.LAYER_TYPE_SOFTWARE, null);
 		listenAgain = (Button) findViewById(R.id.btnListenAgain);
 		scoreTxt = (TextView) findViewById(R.id.scoreView);
+		lifeTxt = (TextView) findViewById(R.id.lifeView);
 		levelTxt = (TextView) findViewById(R.id.tvLevel);
 		roundTxt = (TextView) findViewById(R.id.tvRound);
 		listenAgain.setOnClickListener(this);
@@ -79,11 +80,13 @@ public class GameActivity extends Activity implements OnClickListener {
 			// there is saved instance state data
 			Level = savedInstanceState.getInt("level");
 			Round = savedInstanceState.getInt("round");
+			Life = savedInstanceState.getInt("life");
 			// Mode = savedInstanceState.getString("mode");
 		}
 
 		// display score
 		scoreTxt.setText(getString(R.string.tv_score) + Integer.toString(presentScore));
+		lifeTxt.setText(getString(R.string.tv_life) + Integer.toString(Life));
 		levelTxt.setText(getString(R.string.tv_level) + Integer.toString(Level));
 		roundTxt.setText(getString(R.string.tv_round) + Integer.toString(Round));
 
@@ -118,6 +121,8 @@ public class GameActivity extends Activity implements OnClickListener {
 			return true;
 		case R.id.exit:
 			// quit
+			Intent intentIntro = new Intent(this, IntroActivity.class);
+			startActivity(intentIntro);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -132,7 +137,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		if (extras != null) {
 			numDots = extras.getInt("nBubbles");
 			numSamples = extras.getInt("nSounds");
-			Mode = extras.getString("mode");
+			setMode(extras.getString("mode"));
 		}
 		
 		theme = new Theme(numDots, numSamples);
@@ -147,6 +152,8 @@ public class GameActivity extends Activity implements OnClickListener {
 		case R.id.btnListenAgain:
 			// play again the sequence, at 0.75 sec intervals
 			theme.playTheme(750, 0);
+			if (presentScore > 0) presentScore --;
+			drawView.writeScores();
 			break;
 		default:
 			break;
@@ -161,7 +168,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		 * TODO This works, but is not accurate. It starts a new HAND, not a new
 		 * GAME.
 		 */
-
+		
 		drawView.startNew();
 		drawView.resetScores();
 		theme.playTheme(750, 1000);
@@ -180,34 +187,31 @@ public class GameActivity extends Activity implements OnClickListener {
 				case 0:
 					numDots = 4;
 					numSamples = 4;
-					newGame();
-					Mode = Modes[0];
 					break;
 				case 1:
 					numDots = 4;
 					numSamples = 7;
-					newGame();
-					Mode = Modes[1];
 					break;
 				case 2:
 					numDots = 4;
 					numSamples = 12;
-					newGame();
-					Mode = Modes[2];
 					break;
 				default:
 					break;
 				}
+				setMode(getModes()[which]);
+				chooseSamples(numSamples);
+				newGame();
 			}
 		});
 		levelDialog.show();	
 	}
 
-	private int getScore() {
+	private static int getScore() {
 		return presentScore;
 	}
 
-	private void setHighScore() {
+	public static void setHighScore() {
 		// set high score
 		int exScore = getScore();
 		if (exScore > 0) {
@@ -226,7 +230,7 @@ public class GameActivity extends Activity implements OnClickListener {
 					String[] parts = eSc.split(" - ");
 					scoreStrings.add(new Score(parts[0], parts[1], Integer.parseInt(parts[2])));
 				}
-				Score newScore = new Score(dateOutput, Mode, exScore);
+				Score newScore = new Score(dateOutput, getMode(), exScore);
 				scoreStrings.add(newScore);
 				Collections.sort(scoreStrings);
 				StringBuilder scoreBuild = new StringBuilder("");
@@ -245,7 +249,7 @@ public class GameActivity extends Activity implements OnClickListener {
 				scoreEdit.commit();
 			} else {
 				// no existing scores
-				scoreEdit.putString("highScores", "" + dateOutput + " - " + Mode + " - " + exScore);
+				scoreEdit.putString("highScores", "" + dateOutput + " - " + getMode() + " - " + exScore);
 				scoreEdit.commit();
 			}
 		}
@@ -258,6 +262,14 @@ public class GameActivity extends Activity implements OnClickListener {
 
 	public void setScoreTxt(TextView scoreTxt) {
 		this.scoreTxt = scoreTxt;
+	}
+	
+	public static TextView getLifeTxt() {
+		return lifeTxt;
+	}
+	
+	public void setLifeTxt(TextView lifeTxt) {
+		this.lifeTxt = lifeTxt;
 	}
 
 	public static TextView getLevelTxt() {
@@ -276,7 +288,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		this.roundTxt = roundTxt;
 	}
 
-	private void chooseSamples(int levels) {
+	public static void chooseSamples(int levels) {
 		/*
 		 * Define the level to play in by setting the amount of sounds to use
 		 * and wich ones. Create more levels: minor, pentatonic, blues,
@@ -370,7 +382,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			Log.i(SB, "sampleTriggered");
 		}
 	}
-
+	
 	@Override
 	protected void onStart() {
 		Log.i(SB_LifeCycle, "Game Activity On Start");
@@ -392,7 +404,6 @@ public class GameActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onPause() {
 		// set the present score
-		setHighScore();
 		super.onPause();
 		Log.i(SB_LifeCycle, "Game Activity On Pause");
 	}
@@ -400,13 +411,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onStop() {
 		super.onStop();
-		// Destroy the running game: save score and set scores to default start
-		// TODO onStop is also called when HighScores activity is opened, not good
-		presentScore = 10;
-		Hand = 1;
-		Level = 1;
-		Round = 1;
-
+		// do nothing, because it's called even at opening HighScores
 		Log.i(SB_LifeCycle, "Game Activity On Stop");
 	}
 
@@ -427,11 +432,29 @@ public class GameActivity extends Activity implements OnClickListener {
 		// save score
 		int exScore = getScore();
 		savedInstanceState.putInt("score", exScore);
+		savedInstanceState.putInt("life", Life);
 		savedInstanceState.putInt("level", Level);
 		savedInstanceState.putInt("round", Round);
-		savedInstanceState.putString("mode", Mode);
+		savedInstanceState.putString("mode", getMode());
 		// superclass method
 		super.onSaveInstanceState(savedInstanceState);
 	}
+
+	public static String getMode() {
+		return Mode;
+	}
+
+	public static void setMode(String mode) {
+		Mode = mode;
+	}
+
+	public static String[] getModes() {
+		return Modes;
+	}
+
+	public static void setModes(String[] modes) {
+		Modes = modes;
+	}
+
 
 }

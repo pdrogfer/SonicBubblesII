@@ -18,7 +18,7 @@
             android:id="@+id/btnListenAgain"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:background="@android:drawable/btn_default"
             android:text="@string/listen_again" />
 
@@ -26,10 +26,18 @@
             android:id="@+id/scoreView"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/tv_score"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/lifeView"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tv_life"
             android:textSize="20sp" />
     </LinearLayout>
 
