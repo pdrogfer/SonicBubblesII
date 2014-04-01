@@ -338,6 +338,7 @@ public class DrawingView extends View {
 	protected void returnToIntro() {
 		Intent intent = new Intent(getContext(), IntroActivity.class);
 		((Activity)getContext()).startActivity(intent);
+		resetScores();
 	}
 
 	private void oneMoreGame() {
