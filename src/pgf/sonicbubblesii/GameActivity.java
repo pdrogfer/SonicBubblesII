@@ -137,6 +137,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		if (extras != null) {
 			numDots = extras.getInt("nBubbles");
 			numSamples = extras.getInt("nSounds");
+			Life = extras.getInt("nLive");
 			setMode(extras.getString("mode"));
 		}
 		
@@ -187,14 +188,17 @@ public class GameActivity extends Activity implements OnClickListener {
 				case 0:
 					numDots = 4;
 					numSamples = 4;
+					Life = 5;
 					break;
 				case 1:
 					numDots = 4;
 					numSamples = 7;
+					Life = 5;
 					break;
 				case 2:
 					numDots = 4;
 					numSamples = 12;
+					Life = 5;
 					break;
 				default:
 					break;
