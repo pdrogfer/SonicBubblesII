@@ -35,7 +35,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 	// Log tags
 	public final static String SB = "Sonic Bubbles II";
 	public final static String SB_LifeCycle = "SB II LifeCycle";
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

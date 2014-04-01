@@ -48,12 +48,13 @@ public class DrawingView extends View {
 	public static Dot[] dots;
 	/*
 	 * temp variables used in checkBubble, checkDotCollision, setUpDots,
-	 * onTouchEvent, checkHand, declared here to avoid garbage
+	 * onTouchEvent, checkHand, oneMoreGame, declared here to avoid garbage
 	 */
 	private double x, y;
 	double distX, distY;
 	float touchX, touchY;
 	boolean equalLength, rightAnswer;
+	int nDots, nSamples;
 
 	public static int[] theTheme;
 	public static int[] theHand;
@@ -301,27 +302,74 @@ public class DrawingView extends View {
 			Toast t = Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT);
 			t.show();
 		} else {
-			AlertDialog.Builder oneMore = new AlertDialog.Builder(getContext());
-			oneMore.setTitle(R.string.one_more);
-			oneMore.setMessage(getContext().getString(R.string.tv_score) + (GameActivity.presentScore));
-			oneMore.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO call dialog level selector for a new game
-				}
-			});
-			oneMore.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO return to Intro Activity
-
-				}
-			});
-			AlertDialog dialog = oneMore.create();
-			dialog.show();
+			newGameDialog();
 		}
+	}
+
+	private void newGameDialog() {
+		// TODO Auto-generated method stub
+		AlertDialog.Builder oneMore = new AlertDialog.Builder(getContext());
+		oneMore.setTitle(R.string.one_more);
+		oneMore.setMessage(getContext().getString(R.string.tv_score) + (GameActivity.presentScore));
+		oneMore.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO call dialog level selector for a new game
+				oneMoreGame();
+			}
+
+		});
+		oneMore.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO return to Intro Activity
+
+			}
+		});
+		AlertDialog dialog = oneMore.create();
+		dialog.show();
+	}
+	
+	private void oneMoreGame() {
+		// TODO Auto-generated method stub
+		// choose level and set variables for the new game
+		AlertDialog.Builder levelDialog = new AlertDialog.Builder(getContext());
+		levelDialog.setTitle(R.string.dialog_level_title);
+		levelDialog.setItems(R.array.string_array_levels, new DialogInterface.OnClickListener() {
+		
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// manage level choice
+				
+				switch (which) {
+				case 0:
+					nDots = 4;
+					nSamples = 4;
+					break;
+				case 1:
+					nDots = 4;
+					nSamples = 7;
+					break;
+				case 2:
+					nDots = 4;
+					nSamples = 12;
+					break;
+				default:
+					break;
+				}
+				GameActivity.setMode(GameActivity.getModes()[which]);
+				GameActivity.chooseSamples(nSamples);
+				setupDots(nDots, nSamples);
+				resetScores();
+				invalidate();
+				GameActivity.theme.setNumDots(nDots);
+				GameActivity.theme.setNumSamples(nSamples);
+				GameActivity.theme.playTheme(750, 1000);
+			}
+		});
+		levelDialog.show();	
 	}
 
 	public void resetScores() {
@@ -392,7 +440,8 @@ public class DrawingView extends View {
 
 	public void startNew() {
 		// drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
-		setupDots(GameActivity.numDots, GameActivity.numSamples);
+		GameActivity.theme.setNumSamples(nSamples);
+		setupDots(nDots, nSamples);
 		invalidate();
 		GameActivity.theme.playTheme(750, 1000);
 

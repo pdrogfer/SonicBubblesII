@@ -63,7 +63,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		// TODO There is something wrong with which samples are chosen
 		numDots = 4;
 		numSamples = 4;
-		Modes = getResources().getStringArray(R.array.string_array_levels);
+		setModes(getResources().getStringArray(R.array.string_array_levels));
 		themeSetup();
 
 		gamePrefs = getSharedPreferences(GAME_PREFS, 0);
@@ -135,7 +135,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		if (extras != null) {
 			numDots = extras.getInt("nBubbles");
 			numSamples = extras.getInt("nSounds");
-			Mode = extras.getString("mode");
+			setMode(extras.getString("mode"));
 		}
 		
 		theme = new Theme(numDots, numSamples);
@@ -186,19 +186,19 @@ public class GameActivity extends Activity implements OnClickListener {
 					numDots = 4;
 					numSamples = 4;
 					newGame();
-					Mode = Modes[0];
+					setMode(getModes()[0]);
 					break;
 				case 1:
 					numDots = 4;
 					numSamples = 7;
 					newGame();
-					Mode = Modes[1];
+					setMode(getModes()[1]);
 					break;
 				case 2:
 					numDots = 4;
 					numSamples = 12;
 					newGame();
-					Mode = Modes[2];
+					setMode(getModes()[2]);
 					break;
 				default:
 					break;
@@ -231,7 +231,7 @@ public class GameActivity extends Activity implements OnClickListener {
 					String[] parts = eSc.split(" - ");
 					scoreStrings.add(new Score(parts[0], parts[1], Integer.parseInt(parts[2])));
 				}
-				Score newScore = new Score(dateOutput, Mode, exScore);
+				Score newScore = new Score(dateOutput, getMode(), exScore);
 				scoreStrings.add(newScore);
 				Collections.sort(scoreStrings);
 				StringBuilder scoreBuild = new StringBuilder("");
@@ -250,7 +250,7 @@ public class GameActivity extends Activity implements OnClickListener {
 				scoreEdit.commit();
 			} else {
 				// no existing scores
-				scoreEdit.putString("highScores", "" + dateOutput + " - " + Mode + " - " + exScore);
+				scoreEdit.putString("highScores", "" + dateOutput + " - " + getMode() + " - " + exScore);
 				scoreEdit.commit();
 			}
 		}
@@ -289,7 +289,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		this.roundTxt = roundTxt;
 	}
 
-	private void chooseSamples(int levels) {
+	public static void chooseSamples(int levels) {
 		/*
 		 * Define the level to play in by setting the amount of sounds to use
 		 * and wich ones. Create more levels: minor, pentatonic, blues,
@@ -383,6 +383,11 @@ public class GameActivity extends Activity implements OnClickListener {
 			Log.i(SB, "sampleTriggered");
 		}
 	}
+	
+	public static void oneMoreGame() {
+		// TODO 
+
+	}
 
 	@Override
 	protected void onStart() {
@@ -444,9 +449,26 @@ public class GameActivity extends Activity implements OnClickListener {
 		savedInstanceState.putInt("life", Life);
 		savedInstanceState.putInt("level", Level);
 		savedInstanceState.putInt("round", Round);
-		savedInstanceState.putString("mode", Mode);
+		savedInstanceState.putString("mode", getMode());
 		// superclass method
 		super.onSaveInstanceState(savedInstanceState);
 	}
+
+	public static String getMode() {
+		return Mode;
+	}
+
+	public static void setMode(String mode) {
+		Mode = mode;
+	}
+
+	public static String[] getModes() {
+		return Modes;
+	}
+
+	public static void setModes(String[] modes) {
+		Modes = modes;
+	}
+
 
 }
