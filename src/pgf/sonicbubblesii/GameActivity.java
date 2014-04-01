@@ -187,24 +187,21 @@ public class GameActivity extends Activity implements OnClickListener {
 				case 0:
 					numDots = 4;
 					numSamples = 4;
-					newGame();
-					setMode(getModes()[0]);
 					break;
 				case 1:
 					numDots = 4;
 					numSamples = 7;
-					newGame();
-					setMode(getModes()[1]);
 					break;
 				case 2:
 					numDots = 4;
 					numSamples = 12;
-					newGame();
-					setMode(getModes()[2]);
 					break;
 				default:
 					break;
 				}
+				setMode(getModes()[which]);
+				chooseSamples(numSamples);
+				newGame();
 			}
 		});
 		levelDialog.show();	
