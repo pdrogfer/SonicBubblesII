@@ -28,7 +28,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 	public static boolean loaded = false;
 
 	// options in creating a new game
-	int numBubbles, numSounds, numLive;
+	int numBubbles, numSounds, score, numLive, level, round, hand;
 	private String[] Modes;
 	private String Mode;
 
@@ -143,21 +143,23 @@ public class IntroActivity extends Activity implements OnClickListener {
 				case 0:
 					numBubbles = 4;
 					numSounds = 4;
-					numLive = 5;
 					break;
 				case 1:
 					numBubbles = 4;
 					numSounds = 7;
-					numLive = 5;
 					break;
 				case 2:
 					numBubbles = 4;
 					numSounds = 12;
-					numLive = 5;
 					break;
 				default:
 					break;
 				}
+				score = 0;
+				numLive = 5;
+				level = 1;
+				round = 1;
+				hand = 1;
 				Mode = Modes[which];
 				newGame();
 			}
@@ -166,11 +168,15 @@ public class IntroActivity extends Activity implements OnClickListener {
 	}
 
 	public void newGame() {
-		// open a new game and pass num of bubbles and sounds as params
+		// open a new game and pass default params
 		Intent intentNew = new Intent(this, GameActivity.class);
 		intentNew.putExtra("nBubbles", numBubbles);
 		intentNew.putExtra("nSounds", numSounds);
+		intentNew.putExtra("score", score);
 		intentNew.putExtra("nLive", numLive);
+		intentNew.putExtra("level", level);
+		intentNew.putExtra("round", round);
+		intentNew.putExtra("hand", hand);
 		intentNew.putExtra("mode", Mode);
 		startActivity(intentNew);
 		overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

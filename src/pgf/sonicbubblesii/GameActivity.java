@@ -137,7 +137,11 @@ public class GameActivity extends Activity implements OnClickListener {
 		if (extras != null) {
 			numDots = extras.getInt("nBubbles");
 			numSamples = extras.getInt("nSounds");
+			presentScore = extras.getInt("score");
 			Life = extras.getInt("nLive");
+			Level = extras.getInt("level");
+			Round = extras.getInt("round");
+			Hand = extras.getInt("hand");
 			setMode(extras.getString("mode"));
 		}
 		
