@@ -1,8 +1,5 @@
 package pgf.sonicbubblesii;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -14,10 +11,8 @@ import android.graphics.Color;
 import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.ActionMode.Callback;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -27,8 +22,6 @@ public class DrawingView extends View {
 	// Log tags
 	public final static String SB = "Sonic Bubbles II";
 
-	// native variables:
-	private Canvas drawCanvas;
 	private Bitmap canvasBitmap;
 	private int paintColor = 0xffff0000;
 	private float brushSize = (float) 20.0;
@@ -102,7 +95,7 @@ public class DrawingView extends View {
 		super.onSizeChanged(w, h, oldw, oldh);
 
 		canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-		drawCanvas = new Canvas(canvasBitmap);
+		new Canvas(canvasBitmap);
 		width = w;
 		height = h;
 		Log.i(SB, "inside onSizeChanged Canvas in " + width + "x" + height);

@@ -6,20 +6,22 @@ import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.TextView;
 
 public class IntroActivity extends Activity implements OnClickListener {
 
+	TextView title, version;
 	Button startGame, howToPlay, bestScores;
+	Typeface tf_thin, tf_reg;
 
 	// for sound
 	public static SoundPool soundPool;
@@ -45,10 +47,20 @@ public class IntroActivity extends Activity implements OnClickListener {
 		startGame = (Button) findViewById(R.id.btnStartGame);
 		howToPlay = (Button) findViewById(R.id.btnHowToPlay);
 		bestScores = (Button) findViewById(R.id.btnHighScores);
+		title = (TextView) findViewById(R.id.tVwTitle);
+		version = (TextView) findViewById(R.id.tVwVersion);
 		startGame.setOnClickListener(this);
 		howToPlay.setOnClickListener(this);
 		bestScores.setOnClickListener(this);
 		Modes = getResources().getStringArray(R.array.string_array_levels);
+		// set font
+		Typeface tf_thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
+		Typeface tf_reg = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
+		title.setTypeface(tf_reg);
+		version.setTypeface(tf_thin);
+		startGame.setTypeface(tf_thin);
+		howToPlay.setTypeface(tf_thin);
+		bestScores.setTypeface(tf_thin);
 
 		if (soundPool == null) {
 			//to prevent loading unneccesary loads when returning from finished game

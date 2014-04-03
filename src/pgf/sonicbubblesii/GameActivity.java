@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,6 +39,8 @@ public class GameActivity extends Activity implements OnClickListener {
 	DrawingView drawView;
 	static Theme theme;
 	public static int numDots, numSamples;
+	private static TextView scoreTxt, lifeTxt, levelTxt, roundTxt;
+	Typeface tf2;
 
 	// an arraylist of int to define wich samples are used in each level
 	static List<Integer> chosenSamples = new ArrayList<Integer>();
@@ -45,7 +48,6 @@ public class GameActivity extends Activity implements OnClickListener {
 	// scores
 	private static SharedPreferences gamePrefs;
 	public static final String GAME_PREFS = "Arithmetic_File";
-	private static TextView scoreTxt, lifeTxt, levelTxt, roundTxt;
 	public static int presentScore = 0;
 	public static int Life = 5;
 	public static int Hand = 1;
@@ -74,6 +76,13 @@ public class GameActivity extends Activity implements OnClickListener {
 		lifeTxt = (TextView) findViewById(R.id.lifeView);
 		levelTxt = (TextView) findViewById(R.id.tvLevel);
 		roundTxt = (TextView) findViewById(R.id.tvRound);
+		Typeface tf2 = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
+		listenAgain.setTypeface(tf2);
+		scoreTxt.setTypeface(tf2);
+		lifeTxt.setTypeface(tf2);
+		levelTxt.setTypeface(tf2);
+		roundTxt.setTypeface(tf2);
+		
 		listenAgain.setOnClickListener(this);
 		
 		if(savedInstanceState != null) {
