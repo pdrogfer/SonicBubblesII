@@ -48,7 +48,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:background="@drawable/custom_btn_selector"
+        android:background="@drawable/btn_sel_red"
         android:text="@string/btn_start_game"
         android:textSize="40sp" />
 
@@ -60,7 +60,7 @@
         android:layout_marginTop="15dp"
         android:layout_weight="1"
         android:text="@string/how_to_play"
-        android:background="@drawable/custom_btn_selector"
+        android:background="@drawable/btn_sel_blue"
         android:textSize="40sp" />
 
     <Button
@@ -70,7 +70,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:layout_weight="1"
-        android:background="@drawable/custom_btn_selector"
+        android:background="@drawable/btn_sel_yellow"
         android:text="@string/btn_high_scores"
         android:textSize="40sp" />
 

@@ -49,7 +49,7 @@
         android:layout_marginTop="15dp"
         android:textSize="35sp"
         android:layout_weight="0.7"
-        android:background="@drawable/custom_btn_selector"
+        android:background="@drawable/btn_sel_red"
         android:text="@string/btn_start_game" />
 
     <Button
@@ -60,7 +60,7 @@
         android:layout_marginTop="7dp"
         android:layout_weight="0.7"
         android:textSize="35sp"
-        android:background="@drawable/custom_btn_selector"
+        android:background="@drawable/btn_sel_blue"
         android:text="@string/how_to_play" />
     <Button
         android:id="@+id/btnHighScores"
@@ -70,7 +70,7 @@
         android:layout_marginTop="7dp"
         android:layout_weight="0.7"
         android:textSize="35sp"
-        android:background="@drawable/custom_btn_selector"
+        android:background="@drawable/btn_sel_yellow"
         android:text="@string/btn_high_scores" />
 
 </LinearLayout>
