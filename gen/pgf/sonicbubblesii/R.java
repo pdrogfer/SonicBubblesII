@@ -175,12 +175,15 @@ public final class R {
         public static final int activity_vertical_margin=0x7f070001;
     }
     public static final class drawable {
-        public static final int button_color=0x7f020000;
-        public static final int custom_btn_selector=0x7f020001;
-        public static final int fondo1=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int intro_logo=0x7f020004;
-        public static final int logo_original=0x7f020005;
+        public static final int btn_sel_blue=0x7f020000;
+        public static final int btn_sel_red=0x7f020001;
+        public static final int btn_sel_yellow=0x7f020002;
+        public static final int button_color=0x7f020003;
+        public static final int custom_btn_selector=0x7f020004;
+        public static final int fondo1=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int intro_logo=0x7f020007;
+        public static final int logo_original=0x7f020008;
     }
     public static final class id {
         public static final int best_scores=0x7f0c0011;
@@ -281,6 +284,7 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0a0001;
+        public static final int btnIntroNormal=0x7f0a0003;
         public static final int btnStyleopal=0x7f0a0002;
     }
 }

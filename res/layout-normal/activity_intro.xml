@@ -14,10 +14,10 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:gravity="center_horizontal"
         android:text="@string/app_name"
-        android:textSize="40sp" />
+        android:textSize="45sp" />
 
     <TextView
         android:id="@+id/tVwVersion"
@@ -32,42 +32,35 @@
 
     <ImageView
         android:id="@+id/intro_image"
-        android:layout_width="180dp"
+        android:layout_width="80dp"
         android:layout_height="0dp"
         android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        android:layout_weight="3"
+        android:layout_weight="1"
         android:contentDescription="@string/sonic_bubbles_logo"
         android:src="@drawable/intro_logo" />
 
     <Button
         android:id="@+id/btnStartGame"
-        android:layout_width="250dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:background="@drawable/custom_btn_selector"
+        style="@style/btnIntroNormal"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/btn_sel_red"
         android:text="@string/btn_start_game" />
 
     <Button
         android:id="@+id/btnHowToPlay"
-        android:layout_width="250dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
+        style="@style/btnIntroNormal"
+        android:background="@drawable/btn_sel_blue"
         android:layout_marginTop="5dp"
-        android:layout_weight="1"
-        android:background="@drawable/custom_btn_selector"
         android:text="@string/how_to_play" />
 
     <Button
         android:id="@+id/btnHighScores"
-        android:layout_width="250dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
+        style="@style/btnIntroNormal"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/btn_sel_yellow"
         android:layout_marginTop="5dp"
-        android:layout_weight="1"
-        android:background="@drawable/custom_btn_selector"
         android:text="@string/btn_high_scores" />
 
 </LinearLayout>
