@@ -6,11 +6,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.CornerPathEffect;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Bitmap.Config;
+import android.graphics.PorterDuff.Mode;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -28,6 +35,7 @@ public class DrawingView extends View {
 	private int ringSpeed = 3;
 	// drawing and canvas paint
 	private Paint fingerPaint, canvasPaint, dotPaint, animPaint, dotShadowPaint, animShadowPaint;
+	private static Paint paint;
 	// drawing path
 	private Path fingerPath;
 	// shadow offset
@@ -57,7 +65,7 @@ public class DrawingView extends View {
 	public DrawingView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setupDrawing();
-		
+
 	}
 
 	// methods
@@ -93,16 +101,80 @@ public class DrawingView extends View {
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
-
-		canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-		new Canvas(canvasBitmap);
 		width = w;
 		height = h;
+		canvasBitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.fondo1);
+		canvasBitmap = Bitmap.createScaledBitmap(canvasBitmap, width, height, true);
+		canvasBitmap = getRoundedCornerBitmap(canvasBitmap);
+		new Canvas(canvasBitmap);
 		Log.i(SB, "inside onSizeChanged Canvas in " + width + "x" + height);
 
 		// Funny and crazy that setUpDots() must be placed here to get it
 		// working properly!!
 		setupDots(GameActivity.numDots, GameActivity.numSamples);
+	}
+
+	public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
+		Bitmap output = Bitmap
+				.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Config.ARGB_8888);
+		Canvas canvas = new Canvas(output);
+		final int color = 0xff424242;
+		paint = new Paint();
+		final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+		final RectF rectF = new RectF(rect);
+		final float roundPx = 24; // Corners radius
+		paint.setAntiAlias(true);
+		canvas.drawARGB(0, 0, 0, 0);
+		paint.setColor(color);
+		canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+		paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
+		canvas.drawBitmap(bitmap, rect, rect, paint);
+		return output;
+	}
+
+	@Override
+	protected void onDraw(Canvas canvas) {
+		// draw DrawingView
+		canvas.drawBitmap(canvasBitmap, 0, 0, null);
+		// draw the dot objects
+		for (int d = 0; d < dots.length; d++) {
+			/*
+			 * The ring stops drawing if the user lifts finger and touches the
+			 * screen again, because this calls the restartHand method which
+			 * sets all sample-triggered to false again, so it's necessary to
+			 * add a second condition. Also: create two functions to put the
+			 * drawing of dots and rings in nice separated cleaned places
+			 */
+			if (dots[d].getWaveOn()) {
+				// draw the dot animation and it's shade
+				animPaint.setColor(dots[d].getColor());
+				animPaint.setStrokeWidth((float) dots[d].getRingStrokeWidth());
+				animShadowPaint.setStrokeWidth((float) dots[d].getRingStrokeWidth());
+				canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff,
+						dots[d].getRingRadius(), animShadowPaint);
+				canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRingRadius(),
+						animPaint);
+				// increase ring size by 1 step (ringSpeed)
+				dots[d].setRingRadius(dots[d].getRingRadius() + ringSpeed);
+				// decrease ring stroke width
+				dots[d].setRingStrokeWidth(dots[d].getRingStrokeWidth() - 0.3);
+			}
+			// return ring to dot size
+			if (dots[d].getRingStrokeWidth() <= 0) {
+				dots[d].setRingRadius(dots[d].getRadius());
+				dots[d].setWaveOn(false);
+				dots[d].resetRingStrokeWidth();
+			}
+			// draw the dot
+			dotPaint.setColor(dots[d].getColor());
+			// draw dot shade first
+			canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff,
+					dots[d].getRadius(), dotShadowPaint);
+			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRadius(), dotPaint);
+
+		}
+		canvas.drawPath(fingerPath, fingerPaint);
+		invalidate();
 
 	}
 
@@ -165,52 +237,6 @@ public class DrawingView extends View {
 	}
 
 	@Override
-	protected void onDraw(Canvas canvas) {
-		// draw DrawingView
-		canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
-		// draw the dot objects
-		for (int d = 0; d < dots.length; d++) {
-			/*
-			 * The ring stops drawing if the user lifts finger and touches the
-			 * screen again, because this calls the restartHand method which
-			 * sets all sample-triggered to false again, so it's necessary to
-			 * add a second condition. Also: create two functions to put the
-			 * drawing of dots and rings in nice separated cleaned places
-			 */
-			if (dots[d].getWaveOn()) {
-				// draw the dot animation and it's shade
-				animPaint.setColor(dots[d].getColor());
-				animPaint.setStrokeWidth((float) dots[d].getRingStrokeWidth());
-				animShadowPaint.setStrokeWidth((float) dots[d].getRingStrokeWidth());
-				canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff,
-						dots[d].getRingRadius(), animShadowPaint);
-				canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRingRadius(),
-						animPaint);
-				// increase ring size by 1 step (ringSpeed)
-				dots[d].setRingRadius(dots[d].getRingRadius() + ringSpeed);
-				// decrease ring stroke width
-				dots[d].setRingStrokeWidth(dots[d].getRingStrokeWidth() - 0.3);
-			}
-			// return ring to dot size
-			if (dots[d].getRingStrokeWidth() <= 0) {
-				dots[d].setRingRadius(dots[d].getRadius());
-				dots[d].setWaveOn(false);
-				dots[d].resetRingStrokeWidth();
-			}
-			// draw the dot
-			dotPaint.setColor(dots[d].getColor());
-			// draw dot shade first
-			canvas.drawCircle(dots[d].getPosX() + shadowOff, dots[d].getPosY() + shadowOff,
-					dots[d].getRadius(), dotShadowPaint);
-			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRadius(), dotPaint);
-
-		}
-		canvas.drawPath(fingerPath, fingerPaint);
-		invalidate();
-
-	}
-
-	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// handle finger proximity to Dots for sound triggering
 		touchX = event.getX();
@@ -265,8 +291,7 @@ public class DrawingView extends View {
 	private void updateScore(boolean equalLength, boolean answer) {
 		if (equalLength == false && answer == false) {
 			// incomplete Hand, do nothing
-		}
-		else if (equalLength == true && answer == false) {
+		} else if (equalLength == true && answer == false) {
 			GameActivity.Life--;
 			// show wrong message
 			displayToast(false, GameActivity.Life);
@@ -330,7 +355,7 @@ public class DrawingView extends View {
 
 	protected void returnToIntro() {
 		Intent intent = new Intent(getContext(), IntroActivity.class);
-		((Activity)getContext()).startActivity(intent);
+		((Activity) getContext()).startActivity(intent);
 		resetScores();
 	}
 
@@ -339,11 +364,11 @@ public class DrawingView extends View {
 		AlertDialog.Builder levelDialog = new AlertDialog.Builder(getContext());
 		levelDialog.setTitle(R.string.dialog_level_title);
 		levelDialog.setItems(R.array.string_array_levels, new DialogInterface.OnClickListener() {
-		
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// manage level choice
-				
+
 				switch (which) {
 				case 0:
 					nDots = 4;
@@ -372,7 +397,7 @@ public class DrawingView extends View {
 				GameActivity.theme.playTheme(750, 1000);
 			}
 		});
-		levelDialog.show();	
+		levelDialog.show();
 	}
 
 	public void resetScores() {
@@ -444,6 +469,8 @@ public class DrawingView extends View {
 	public void startNew() {
 		//
 		// drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
+
+		// TODO wait some time before actually starting a new hand
 
 		GameActivity.theme.setNumSamples(GameActivity.numSamples);
 		setupDots(GameActivity.numDots, GameActivity.numSamples);

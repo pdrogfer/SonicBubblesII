@@ -138,6 +138,8 @@ public class GameActivity extends Activity implements OnClickListener {
 		}
 	}
 
+	
+	
 	private void themeSetup() {
 		// retrieve data from IntroActivity's level selector and generate a
 		// theme
