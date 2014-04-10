@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.CornerPathEffect;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuffXfermode;
@@ -57,6 +56,7 @@ public class DrawingView extends View {
 	float touchX, touchY;
 	boolean equalLength, rightAnswer;
 	int nDots, nSamples;
+	double currTime, delTime;
 
 	public static int[] theTheme;
 	public static int[] theHand;
@@ -467,8 +467,6 @@ public class DrawingView extends View {
 	}
 
 	public void startNew() {
-		//
-		// drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
 
 		// TODO wait some time before actually starting a new hand
 
