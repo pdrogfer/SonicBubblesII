@@ -19,6 +19,7 @@ import android.graphics.Bitmap.Config;
 import android.graphics.PorterDuff.Mode;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -284,7 +285,8 @@ public class DrawingView extends View {
 		}
 		updateScore(equalLength, rightAnswer);
 		if (equalLength && rightAnswer) {
-			startNew();
+			// delayNewHand waits for 2 seconds before executing startNew()
+			((GameActivity) getContext()).delayNewHand();
 		}
 	}
 
@@ -320,6 +322,7 @@ public class DrawingView extends View {
 			feedback = answer ? getContext().getString(R.string.right) : getContext().getString(
 					R.string.wrong);
 			Toast t = Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT);
+			t.setGravity(Gravity.CENTER, 0, 0);
 			t.show();
 		} else {
 			newGameDialog();
@@ -469,7 +472,6 @@ public class DrawingView extends View {
 	public void startNew() {
 
 		// TODO wait some time before actually starting a new hand
-
 		GameActivity.theme.setNumSamples(GameActivity.numSamples);
 		setupDots(GameActivity.numDots, GameActivity.numSamples);
 		invalidate();

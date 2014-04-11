@@ -82,10 +82,10 @@ public class GameActivity extends Activity implements OnClickListener {
 		lifeTxt.setTypeface(tf2);
 		levelTxt.setTypeface(tf2);
 		roundTxt.setTypeface(tf2);
-		
+
 		listenAgain.setOnClickListener(this);
-		
-		if(savedInstanceState != null) {
+
+		if (savedInstanceState != null) {
 			// there is saved instance state data
 			Level = savedInstanceState.getInt("level");
 			Round = savedInstanceState.getInt("round");
@@ -138,8 +138,6 @@ public class GameActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	
-	
 	private void themeSetup() {
 		// retrieve data from IntroActivity's level selector and generate a
 		// theme
@@ -155,7 +153,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			Hand = extras.getInt("hand");
 			setMode(extras.getString("mode"));
 		}
-		
+
 		theme = new Theme(numDots, numSamples);
 		// depending in the number of samples, select which ones to use
 		chooseSamples(theme.getNumSamples());
@@ -168,7 +166,8 @@ public class GameActivity extends Activity implements OnClickListener {
 		case R.id.btnListenAgain:
 			// play again the sequence, at 0.75 sec intervals
 			theme.playTheme(750, 0);
-			if (presentScore > 0) presentScore --;
+			if (presentScore > 0)
+				presentScore--;
 			drawView.writeScores();
 			break;
 		default:
@@ -184,18 +183,18 @@ public class GameActivity extends Activity implements OnClickListener {
 		 * TODO This works, but is not accurate. It starts a new HAND, not a new
 		 * GAME.
 		 */
-		
+
 		drawView.startNew();
 		drawView.resetScores();
 		theme.playTheme(750, 1000);
 	}
-	
+
 	private void selectLevel() {
 		// choose level and set variables for the new game
 		AlertDialog.Builder levelDialog = new AlertDialog.Builder(this);
 		levelDialog.setTitle(R.string.dialog_level_title);
 		levelDialog.setItems(R.array.string_array_levels, new DialogInterface.OnClickListener() {
-		
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// manage level choice
@@ -223,7 +222,7 @@ public class GameActivity extends Activity implements OnClickListener {
 				newGame();
 			}
 		});
-		levelDialog.show();	
+		levelDialog.show();
 	}
 
 	private static int getScore() {
@@ -268,7 +267,8 @@ public class GameActivity extends Activity implements OnClickListener {
 				scoreEdit.commit();
 			} else {
 				// no existing scores
-				scoreEdit.putString("highScores", "" + dateOutput + " - " + getMode() + " - " + exScore);
+				scoreEdit.putString("highScores", "" + dateOutput + " - " + getMode() + " - "
+						+ exScore);
 				scoreEdit.commit();
 			}
 		}
@@ -282,11 +282,11 @@ public class GameActivity extends Activity implements OnClickListener {
 	public void setScoreTxt(TextView scoreTxt) {
 		this.scoreTxt = scoreTxt;
 	}
-	
+
 	public static TextView getLifeTxt() {
 		return lifeTxt;
 	}
-	
+
 	public void setLifeTxt(TextView lifeTxt) {
 		this.lifeTxt = lifeTxt;
 	}
@@ -401,7 +401,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			Log.i(SB, "sampleTriggered");
 		}
 	}
-	
+
 	@Override
 	protected void onStart() {
 		Log.i(SB_LifeCycle, "Game Activity On Start");
@@ -475,5 +475,30 @@ public class GameActivity extends Activity implements OnClickListener {
 		Modes = modes;
 	}
 
+	public void delayNewHand() {
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+
+				// Block this thread for 2 seconds.
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+				}
+
+				// After sleep finished blocking, create a Runnable to run on
+				// the UI Thread.
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						drawView.startNew();
+					}
+				});
+			}
+		};
+
+		// Don't forget to start the thread.
+		thread.start();
+	}
 
 }
