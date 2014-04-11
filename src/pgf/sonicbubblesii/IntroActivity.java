@@ -156,7 +156,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 				switch (which) {
 				case 0:
 					numBubbles = 4;
-					numSounds = 4;
+					numSounds = 3;
 					break;
 				case 1:
 					numBubbles = 4;
@@ -164,7 +164,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 					break;
 				case 2:
 					numBubbles = 4;
-					numSounds = 12;
+					numSounds = 13;
 					break;
 				default:
 					break;

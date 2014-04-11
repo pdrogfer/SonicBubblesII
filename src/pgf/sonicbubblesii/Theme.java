@@ -5,7 +5,9 @@ public class Theme {
 	// variables
 	// game size, as the number of dots. Init = 4
 	public int nDots;
-	// the level of difficulty, as the number of possible samples. Init = 4
+	/* the level of difficulty, as the number of possible samples:
+	 * Easy: 3, Medium 7, Difficult 13
+	 */
 	public int nSamples;
 
 	// constructors

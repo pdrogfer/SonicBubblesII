@@ -64,7 +64,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		// Number of Dots initialized here
 		// TODO There is something wrong with which samples are chosen
 		numDots = 4;
-		numSamples = 4;
+		numSamples = 3;
 		setModes(getResources().getStringArray(R.array.string_array_levels));
 		themeSetup();
 
@@ -167,7 +167,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			// play again the sequence, at 0.75 sec intervals
 			theme.playTheme(750, 0);
 			if (presentScore > 0)
-				presentScore--;
+				presentScore -= 10;
 			drawView.writeScores();
 			break;
 		default:
@@ -201,7 +201,7 @@ public class GameActivity extends Activity implements OnClickListener {
 				switch (which) {
 				case 0:
 					numDots = 4;
-					numSamples = 4;
+					numSamples = 3;
 					Life = 5;
 					break;
 				case 1:
@@ -211,7 +211,7 @@ public class GameActivity extends Activity implements OnClickListener {
 					break;
 				case 2:
 					numDots = 4;
-					numSamples = 12;
+					numSamples = 13;
 					Life = 5;
 					break;
 				default:
@@ -314,6 +314,13 @@ public class GameActivity extends Activity implements OnClickListener {
 		 * whole-tone, etc
 		 */
 		switch (levels) {
+		case 3:
+			// C, E, G
+			chosenSamples.clear();
+			chosenSamples.add(0);
+			chosenSamples.add(4);
+			chosenSamples.add(7);
+			break;
 		case 4:
 			// C, D, E, G
 			chosenSamples.clear();
@@ -334,14 +341,14 @@ public class GameActivity extends Activity implements OnClickListener {
 			break;
 
 		case 6:
-			// C, D, E, F, G, A
+			// C, D, E, G, A, B
 			chosenSamples.clear();
 			chosenSamples.add(0);
 			chosenSamples.add(2);
 			chosenSamples.add(4);
-			chosenSamples.add(5);
 			chosenSamples.add(7);
 			chosenSamples.add(9);
+			chosenSamples.add(11);
 			break;
 
 		case 7:
@@ -357,7 +364,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			break;
 
 		case 8:
-			// C, D, E, F, G, A, B and C octave up
+			// C, D, E, F, G, A, B and C octave up (C')
 			chosenSamples.clear();
 			chosenSamples.add(0);
 			chosenSamples.add(2);
@@ -369,13 +376,65 @@ public class GameActivity extends Activity implements OnClickListener {
 			chosenSamples.add(12);
 			break;
 		case 9:
+			// C, D, E, F, G, A, Bb, B, C'
+			chosenSamples.clear();
+			chosenSamples.add(0);
+			chosenSamples.add(2);
+			chosenSamples.add(4);
+			chosenSamples.add(5);
+			chosenSamples.add(7);
+			chosenSamples.add(9);
+			chosenSamples.add(10);
+			chosenSamples.add(11);
+			chosenSamples.add(12);
 			break;
 		case 10:
+			// C, D, E, F, F#, G, A, Bb, B, C'
+			chosenSamples.clear();
+			chosenSamples.add(0);
+			chosenSamples.add(2);
+			chosenSamples.add(4);
+			chosenSamples.add(5);
+			chosenSamples.add(6);
+			chosenSamples.add(7);
+			chosenSamples.add(9);
+			chosenSamples.add(10);
+			chosenSamples.add(11);
+			chosenSamples.add(12);
 			break;
 		case 11:
+			// C, D, Eb, E, F, F#, G, A, Bb, B, C'
+			chosenSamples.clear();
+			chosenSamples.add(0);
+			chosenSamples.add(2);
+			chosenSamples.add(3);
+			chosenSamples.add(4);
+			chosenSamples.add(5);
+			chosenSamples.add(6);
+			chosenSamples.add(7);
+			chosenSamples.add(9);
+			chosenSamples.add(10);
+			chosenSamples.add(11);
+			chosenSamples.add(12);
 			break;
 		case 12:
-			// Full chromatic scale (no C up)
+			// C, C#, D, Eb, E, F, F#, G, A, Bb, B, C'
+			chosenSamples.clear();
+			chosenSamples.add(0);
+			chosenSamples.add(1);
+			chosenSamples.add(2);
+			chosenSamples.add(3);
+			chosenSamples.add(4);
+			chosenSamples.add(5);
+			chosenSamples.add(6);
+			chosenSamples.add(7);
+			chosenSamples.add(9);
+			chosenSamples.add(10);
+			chosenSamples.add(11);
+			chosenSamples.add(12);
+			break;
+		case 13:
+			// Full chromatic scale
 			chosenSamples.clear();
 			chosenSamples.add(0);
 			chosenSamples.add(1);
@@ -389,6 +448,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			chosenSamples.add(9);
 			chosenSamples.add(10);
 			chosenSamples.add(11);
+			chosenSamples.add(12);
 			break;
 		}
 

@@ -294,21 +294,32 @@ public class DrawingView extends View {
 		if (equalLength == false && answer == false) {
 			// incomplete Hand, do nothing
 		} else if (equalLength == true && answer == false) {
-			GameActivity.Life--;
+			// avoid negative values for Life
+			if (GameActivity.Life > 0) {
+				GameActivity.Life--;
+			}
 			// show wrong message
 			displayToast(false, GameActivity.Life);
 		} else if (equalLength == true && answer == true) {
 			// update score, Level and Round
-			GameActivity.presentScore += dots.length;
+			GameActivity.presentScore += dots.length * 100;
 			GameActivity.Hand++;
-			GameActivity.Level++;
-			if (GameActivity.Level > 4) {
-				GameActivity.Level = 1;
+			if (GameActivity.Hand > 4 && (GameActivity.Hand - 1) % 4 == 0) {
 				GameActivity.Round++;
 				// Give an extra life every Round;
 				GameActivity.Life++;
 				// increase numDots by 1 every 4 points of score
-				GameActivity.numDots = 4 + GameActivity.Hand / 4;
+				GameActivity.numDots++;
+				// GameActivity.numDots = 4 + GameActivity.Hand / 4;
+				if (GameActivity.Round == 2) {
+					GameActivity.Round = 1;
+					GameActivity.Level++;
+					GameActivity.numDots = 4;
+					if (GameActivity.numSamples < 13) {
+						GameActivity.numSamples++;
+						GameActivity.chooseSamples(GameActivity.numSamples);
+					}
+				}
 			}
 			displayToast(true, GameActivity.Life);
 		}
@@ -375,7 +386,7 @@ public class DrawingView extends View {
 				switch (which) {
 				case 0:
 					nDots = 4;
-					nSamples = 4;
+					nSamples = 3;
 					break;
 				case 1:
 					nDots = 4;
@@ -383,7 +394,7 @@ public class DrawingView extends View {
 					break;
 				case 2:
 					nDots = 4;
-					nSamples = 12;
+					nSamples = 13;
 					break;
 				default:
 					break;
