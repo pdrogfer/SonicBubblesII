@@ -311,7 +311,7 @@ public class DrawingView extends View {
 				// increase numDots by 1 every 4 points of score
 				GameActivity.numDots++;
 				// GameActivity.numDots = 4 + GameActivity.Hand / 4;
-				if (GameActivity.Round == 2) {
+				if (GameActivity.Round == 9) {
 					GameActivity.Round = 1;
 					GameActivity.Level++;
 					GameActivity.numDots = 4;
