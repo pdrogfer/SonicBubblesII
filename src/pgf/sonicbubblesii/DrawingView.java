@@ -302,6 +302,7 @@ public class DrawingView extends View {
 				GameActivity.Life++;
 				// increase numDots by 1 every 4 points of score
 				GameActivity.numDots++;
+				// each level has 5 rounds
 				if (GameActivity.Round > 5) {
 					GameActivity.Round = 1;
 					GameActivity.Level++;
