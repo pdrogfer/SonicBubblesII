@@ -22,6 +22,8 @@
             android:id="@+id/btnListenAgain"
             style="@style/GameTextXLarge"
             android:layout_weight="1.5"
+                        android:layout_marginRight="8dp"
+            
             android:background="@drawable/btn_sel_grey"
             android:text="@string/listen_again" />
 

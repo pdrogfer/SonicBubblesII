@@ -139,13 +139,6 @@ public class DrawingView extends View {
 		canvas.drawBitmap(canvasBitmap, 0, 0, null);
 		// draw the dot objects
 		for (int d = 0; d < dots.length; d++) {
-			/*
-			 * The ring stops drawing if the user lifts finger and touches the
-			 * screen again, because this calls the restartHand method which
-			 * sets all sample-triggered to false again, so it's necessary to
-			 * add a second condition. Also: create two functions to put the
-			 * drawing of dots and rings in nice separated cleaned places
-			 */
 			if (dots[d].getWaveOn()) {
 				// draw the dot animation and it's shade
 				animPaint.setColor(dots[d].getColor());
@@ -194,7 +187,6 @@ public class DrawingView extends View {
 			dot.setSample(numSamples);
 			dot.setSampleTriggered(false);
 			dot.setColor();
-			// dot.setRingStrokeWidth(20);
 			dots[n] = dot;
 			// populate both the Theme and the hand(this, with default 999)
 			theTheme[n] = dot.getSample();
@@ -310,8 +302,7 @@ public class DrawingView extends View {
 				GameActivity.Life++;
 				// increase numDots by 1 every 4 points of score
 				GameActivity.numDots++;
-				// GameActivity.numDots = 4 + GameActivity.Hand / 4;
-				if (GameActivity.Round == 9) {
+				if (GameActivity.Round > 5) {
 					GameActivity.Round = 1;
 					GameActivity.Level++;
 					GameActivity.numDots = 4;
@@ -382,7 +373,6 @@ public class DrawingView extends View {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// manage level choice
-
 				switch (which) {
 				case 0:
 					nDots = 4;
@@ -448,11 +438,6 @@ public class DrawingView extends View {
 	}
 
 	private void checkBubble(float touchX, float touchY) {
-		/*
-		 * Handle proximity events and also associated animations like changing
-		 * the color of the dots, size... Consider also using images and png
-		 * based animations
-		 */
 		for (Dot eachDot : dots) {
 			// To avoid duplicated sound triggerings
 			x = touchX - eachDot.getPosX();
@@ -481,8 +466,6 @@ public class DrawingView extends View {
 	}
 
 	public void startNew() {
-
-		// TODO wait some time before actually starting a new hand
 		GameActivity.theme.setNumSamples(GameActivity.numSamples);
 		setupDots(GameActivity.numDots, GameActivity.numSamples);
 		invalidate();

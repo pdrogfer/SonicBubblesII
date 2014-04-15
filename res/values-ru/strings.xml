@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_settings">конфигурация</string>
+    <string name="best_scores">Ваши результаты</string>
+    <string name="btn_start_game">Новая игра</string>
+    <string name="exit">оставлять</string>
+    <string name="how_to_play">Как играть</string>
+    <string name="instructions">Соник Пузыри это простая игра. . Слушайте звуковой последовательности и пальцем на пузыри, чтобы присоединиться к ним в том же порядке, что и при условии \ п По мере прохождения игры усложняется: ​​последовательности звуков намного дольше и используемые также увеличивается.\n  Удачи!</string>
+    <string name="listen_again">Слушайте снова</string>
+    <string name="new_game">Новая игра</string>
+    <string name="tv_score">"счет: "</string>
+    <string name="tv_life">"Вы жизнь: "</string>
+    <string name="right">¡верный!</string>
+    <string name="wrong">неправильный</string>
+    <string name="tv_level">"уровень: "</string>
+    <string name="tv_round">"круглый: "</string>
+    <string name="dialog_level_title">Геймплей:</string>
+    <string name="btn_high_scores">Оценки</string>
+    <string name="one_more">Готовые игры! Играть Другой?</string>
+    <string name="yes">Si, por favor</string>
+    <string name="no">Нет, спасибо</string>
+    
+</resources>

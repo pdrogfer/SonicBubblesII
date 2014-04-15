@@ -62,7 +62,6 @@ public class GameActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_game);
 
 		// Number of Dots initialized here
-		// TODO There is something wrong with which samples are chosen
 		numDots = 4;
 		numSamples = 3;
 		setModes(getResources().getStringArray(R.array.string_array_levels));
@@ -70,7 +69,6 @@ public class GameActivity extends Activity implements OnClickListener {
 
 		gamePrefs = getSharedPreferences(GAME_PREFS, 0);
 		drawView = (DrawingView) findViewById(R.id.drawing);
-		// drawView.setLayerType(drawView.LAYER_TYPE_SOFTWARE, null);
 		listenAgain = (Button) findViewById(R.id.btnListenAgain);
 		scoreTxt = (TextView) findViewById(R.id.scoreView);
 		lifeTxt = (TextView) findViewById(R.id.lifeView);
@@ -179,11 +177,6 @@ public class GameActivity extends Activity implements OnClickListener {
 	private void newGame() {
 		// start a new game.
 		// set score to 0, and numDots and numSamples to default value
-		/*
-		 * TODO This works, but is not accurate. It starts a new HAND, not a new
-		 * GAME.
-		 */
-
 		drawView.startNew();
 		drawView.resetScores();
 		theme.playTheme(750, 1000);
@@ -236,7 +229,6 @@ public class GameActivity extends Activity implements OnClickListener {
 			// check valid value for exScore
 			SharedPreferences.Editor scoreEdit = gamePrefs.edit();
 			// create an editor object to write the scores
-			// TODO Locale this format for english, french, etc
 			DateFormat dateForm = new SimpleDateFormat("dd MMMM yyyy");
 			String dateOutput = dateForm.format(new Date());
 			String scores = gamePrefs.getString("highScores", "");
