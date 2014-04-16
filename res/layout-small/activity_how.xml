@@ -10,5 +10,5 @@
         android:layout_height="wrap_content"
         android:gravity="fill_horizontal"
         android:text="@string/instructions" 
-        android:textSize="24sp"/>
+        android:textSize="22sp"/>
 </ScrollView>
