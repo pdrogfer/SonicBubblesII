@@ -25,6 +25,9 @@
     <string name="one_more">Game Over! Play Again?</string>
     <string name="yes">Yes, please</string>
     <string name="no">No, thanks</string>
+    <string name="share">Share</string>
+    <string name="share_txt_1">"I just scored "</string>
+    <string name="share_txt_2">" on Sonic Bubbles! Check this out "</string>
 
 
 </resources>

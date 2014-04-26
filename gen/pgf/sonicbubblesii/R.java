@@ -198,6 +198,7 @@ public final class R {
         public static final int intro=0x7f0c0006;
         public static final int intro_image=0x7f0c000c;
         public static final int lifeView=0x7f0c0002;
+        public static final int menu_item_share=0x7f0c0014;
         public static final int new_game=0x7f0c0010;
         public static final int scoreView=0x7f0c0001;
         public static final int tVwTitle=0x7f0c000a;
@@ -213,6 +214,7 @@ public final class R {
     }
     public static final class menu {
         public static final int general_menu=0x7f0b0000;
+        public static final int share_menu=0x7f0b0001;
     }
     public static final class raw {
         public static final int a=0x7f050000;
@@ -245,6 +247,9 @@ public final class R {
         public static final int no=0x7f090017;
         public static final int one_more=0x7f090015;
         public static final int right=0x7f09000d;
+        public static final int share=0x7f090018;
+        public static final int share_txt_1=0x7f090019;
+        public static final int share_txt_2=0x7f09001a;
         public static final int sonic_bubbles_logo=0x7f090009;
         public static final int title_activity_game=0x7f090002;
         public static final int tv_level=0x7f09000f;
