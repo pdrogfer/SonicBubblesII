@@ -17,6 +17,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
+import android.widget.Toast;
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class GameActivity extends Activity implements OnClickListener {
@@ -53,7 +55,9 @@ public class GameActivity extends Activity implements OnClickListener {
 	public static int Round = 1;
 	private static String[] Modes;
 	private static String Mode;
-	private static String shareText;
+	private static String shareText = "empty text";
+	private static Intent intentShare, intentShareUpdated;
+	private static ShareActionProvider myShareActionProvider;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -108,14 +112,13 @@ public class GameActivity extends Activity implements OnClickListener {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.general_menu, menu);
 		MenuItem item = menu.findItem(R.id.menu_item_share);
-		ShareActionProvider myShareActionProvider = (ShareActionProvider) item.getActionProvider();
-		
+		myShareActionProvider = (ShareActionProvider) item
+				.getActionProvider();
 		Intent intentShare = new Intent();
 		intentShare.setAction(Intent.ACTION_SEND);
 		shareText = getString(R.string.share_txt_1) + presentScore + getString(R.string.share_txt_2);
 		intentShare.putExtra(Intent.EXTRA_TEXT, shareText);
 		intentShare.setType("text/plain");
-		
 		myShareActionProvider.setShareIntent(intentShare);
 		return true;
 	}
@@ -136,15 +139,27 @@ public class GameActivity extends Activity implements OnClickListener {
 			startActivity(intentHow);
 			return true;
 		case R.id.exit:
-			// quit
 			Intent intentIntro = new Intent(this, IntroActivity.class);
 			startActivity(intentIntro);
 			return true;
+		case R.id.menu_item_share:
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 
+	// Call to update the share intent
+	private void updateShareIntent() {
+	    if (myShareActionProvider != null) {
+			Intent intentShareUpdated = new Intent();
+			intentShareUpdated.setAction(Intent.ACTION_SEND);
+			shareText = getString(R.string.share_txt_1) + presentScore + getString(R.string.share_txt_2);
+			intentShareUpdated.putExtra(Intent.EXTRA_TEXT, shareText);
+			intentShareUpdated.setType("text/plain");
+			myShareActionProvider.setShareIntent(intentShareUpdated);
+	    }
+	}
+	
 	private void themeSetup() {
 		// retrieve data from IntroActivity's level selector and generate a
 		// theme
