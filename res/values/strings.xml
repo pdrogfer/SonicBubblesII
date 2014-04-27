@@ -28,6 +28,6 @@
     <string name="share">Share</string>
     <string name="share_txt_1">"I just scored "</string>
     <string name="share_txt_2">" on Sonic Bubbles! Check this out "</string>
-
+    <string name="sonic_bubbles_web">" "<a href="https://play.google.com/store/apps/details?id=pgf.sonicbubblesii">https://play.google.com/store/apps/details?id=pgf.sonicbubblesii</a></string>
 
 </resources>
