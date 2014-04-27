@@ -19,5 +19,8 @@
     <string name="one_more">Partida Acabada! Jugar Otra?</string>
     <string name="yes">Si, por favor</string>
     <string name="no">No, gracias</string>
+    <string name="share">Compartir</string>
+    <string name="share_txt_1">"¡¡He conseguido "</string>
+    <string name="share_txt_2">" puntos en Sonic Bubbles!! Échale un vistazo "</string>
 
 </resources>

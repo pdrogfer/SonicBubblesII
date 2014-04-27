@@ -17,7 +17,10 @@
     <string name="dialog_level_title">Sélectionnez Mode:</string>
     <string name="btn_high_scores">Ponctuations</string>
     <string name="one_more">Partie Finie! Jouer Encore?</string>
-    <string name="yes">Yes, please</string>
-    <string name="no">No, thanks</string>
+    <string name="yes">Oui, s\'il vous plaît</string>
+    <string name="no">Non, merci</string>
+    <string name="share">Partager</string>
+    <string name="share_txt_1">"I just scored "</string>
+    <string name="share_txt_2">" on Sonic Bubbles! Check this out "</string>
 
 </resources>
