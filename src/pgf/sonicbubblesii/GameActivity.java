@@ -56,6 +56,7 @@ public class GameActivity extends Activity implements OnClickListener {
 	private static String[] Modes;
 	private static String Mode;
 	private static String shareText = "empty text";
+	private static String shareText_sub1, shareText_sub2;
 	private static Intent intentShare, intentShareUpdated;
 	private static ShareActionProvider myShareActionProvider;
 
@@ -116,7 +117,9 @@ public class GameActivity extends Activity implements OnClickListener {
 				.getActionProvider();
 		Intent intentShare = new Intent();
 		intentShare.setAction(Intent.ACTION_SEND);
-		shareText = getString(R.string.share_txt_1) + presentScore + getString(R.string.share_txt_2);
+		shareText_sub1 = getString(R.string.share_txt_1);
+		shareText_sub2 = getString(R.string.share_txt_2);
+		shareText = shareText_sub1 + presentScore + shareText_sub2;
 		intentShare.putExtra(Intent.EXTRA_TEXT, shareText);
 		intentShare.setType("text/plain");
 		myShareActionProvider.setShareIntent(intentShare);
@@ -149,11 +152,11 @@ public class GameActivity extends Activity implements OnClickListener {
 	}
 
 	// Call to update the share intent
-	private void updateShareIntent() {
+	public static void updateShareIntent() {
 	    if (myShareActionProvider != null) {
 			Intent intentShareUpdated = new Intent();
 			intentShareUpdated.setAction(Intent.ACTION_SEND);
-			shareText = getString(R.string.share_txt_1) + presentScore + getString(R.string.share_txt_2);
+			shareText = shareText_sub1 + presentScore + shareText_sub2;
 			intentShareUpdated.putExtra(Intent.EXTRA_TEXT, shareText);
 			intentShareUpdated.setType("text/plain");
 			myShareActionProvider.setShareIntent(intentShareUpdated);

@@ -317,6 +317,7 @@ public class DrawingView extends View {
 		}
 		// Show right message and write new scores on screen
 		writeScores();
+		GameActivity.updateShareIntent();
 	}
 
 	private void displayToast(boolean answer, int lifeCount) {
