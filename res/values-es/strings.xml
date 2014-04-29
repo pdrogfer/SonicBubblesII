@@ -22,5 +22,6 @@
     <string name="share">Compartir</string>
     <string name="share_txt_1">"¡¡He conseguido "</string>
     <string name="share_txt_2">" puntos en Sonic Bubbles!! Échale un vistazo "</string>
+    <string name="share_txt_3">"¡Estoy jugando a Sonic Bubbles! Échale un vistazo "</string>
 
 </resources>

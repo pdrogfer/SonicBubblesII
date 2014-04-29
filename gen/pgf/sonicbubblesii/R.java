@@ -250,8 +250,9 @@ public final class R {
         public static final int share=0x7f090018;
         public static final int share_txt_1=0x7f090019;
         public static final int share_txt_2=0x7f09001a;
+        public static final int share_txt_3=0x7f09001b;
         public static final int sonic_bubbles_logo=0x7f090009;
-        public static final int sonic_bubbles_web=0x7f09001b;
+        public static final int sonic_bubbles_web=0x7f09001c;
         public static final int title_activity_game=0x7f090002;
         public static final int tv_level=0x7f09000f;
         public static final int tv_life=0x7f090011;

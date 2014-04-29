@@ -3,7 +3,9 @@ package pgf.sonicbubblesii;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
+import android.os.Build;
 import android.os.Bundle;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,13 +19,18 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
+@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class IntroActivity extends Activity implements OnClickListener {
 
 	TextView title, version;
 	Button startGame, howToPlay, bestScores;
 	Typeface tf_thin, tf_reg;
+	// for share intent
+	private String shareText_web, shareText_intro;
+	private String shareText;
 
 	// for sound
 	public static SoundPool soundPool;
@@ -73,7 +80,18 @@ public class IntroActivity extends Activity implements OnClickListener {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.general_menu, menu);
+		getMenuInflater().inflate(R.menu.share_menu, menu);
+		MenuItem item = menu.findItem(R.id.menu_item_share);
+		ShareActionProvider myShareActionProvider = (ShareActionProvider) item
+				.getActionProvider();
+		Intent intentShare = new Intent();
+		intentShare.setAction(Intent.ACTION_SEND);
+		shareText_web = getString(R.string.sonic_bubbles_web);
+		shareText_intro = getString(R.string.share_txt_3);
+		shareText = shareText_intro + shareText_web;
+		intentShare.putExtra(Intent.EXTRA_TEXT, shareText);
+		intentShare.setType("text/plain");
+		myShareActionProvider.setShareIntent(intentShare);
 		return true;
 	}
 
@@ -81,18 +99,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// handle selection on general_menu items
 		switch (item.getItemId()) {
-		case R.id.new_game:
-			// chooseLevel calls newGame
-			chooseLevel();
-			return true;
-		case R.id.best_scores:
-			bestScores();
-			return true;
-		case R.id.hot_to_play:
-			instructions();
-			return true;
-		case R.id.exit:
-			exitAll();
+		case R.id.menu_item_share:
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

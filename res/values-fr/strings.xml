@@ -20,7 +20,8 @@
     <string name="yes">Oui, s\'il vous plaît</string>
     <string name="no">Non, merci</string>
     <string name="share">Partager</string>
-    <string name="share_txt_1">"I just scored "</string>
-    <string name="share_txt_2">" on Sonic Bubbles! Check this out "</string>
+    <string name="share_txt_1">"Je viens de faire "</string>
+    <string name="share_txt_2">" points au Sonic Bubbles! Tu peux le télécharger ici "</string>
+    <string name="share_txt_3">"Je viens de jouer au Sonic Bubbles! Tu peux le télécharger ici "</string>
 
 </resources>
