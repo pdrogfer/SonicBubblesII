@@ -7,7 +7,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -27,7 +29,6 @@ import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
-@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class GameActivity extends Activity implements OnClickListener {
 
 	// Log tags
@@ -108,9 +109,11 @@ public class GameActivity extends Activity implements OnClickListener {
 
 	}
 
+	@SuppressLint("NewApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+		// Inflate the menu depending on API version; this adds items to the action bar if it is present.
+		 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 		getMenuInflater().inflate(R.menu.general_menu, menu);
 		MenuItem item = menu.findItem(R.id.menu_item_share);
 		myShareActionProvider = (ShareActionProvider) item
@@ -124,6 +127,10 @@ public class GameActivity extends Activity implements OnClickListener {
 		intentShare.putExtra(Intent.EXTRA_TEXT, shareText);
 		intentShare.setType("text/plain");
 		myShareActionProvider.setShareIntent(intentShare);
+		 }
+		 else {
+			 getMenuInflater().inflate(R.menu.general_menu_api_10, menu);
+		 }
 		return true;
 	}
 
@@ -138,7 +145,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			Intent intentBest = new Intent(this, HighScores.class);
 			startActivity(intentBest);
 			return true;
-		case R.id.hot_to_play:
+		case R.id.how_to_play:
 			Intent intentHow = new Intent(this, HowToPlay.class);
 			startActivity(intentHow);
 			return true;
@@ -147,12 +154,15 @@ public class GameActivity extends Activity implements OnClickListener {
 			startActivity(intentIntro);
 			return true;
 		case R.id.menu_item_share:
+			// handled in OnCreatedOptionsMenu
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 
 	// Call to update the share intent
+	@SuppressLint("NewApi")
 	public static void updateShareIntent() {
 	    if (myShareActionProvider != null) {
 			Intent intentShareUpdated = new Intent();

@@ -190,15 +190,14 @@ public final class R {
         public static final int btnListenAgain=0x7f0c0000;
         public static final int btnStartGame=0x7f0c000d;
         public static final int drawing=0x7f0c0003;
-        public static final int exit=0x7f0c0013;
+        public static final int exit=0x7f0c0012;
         public static final int high_head=0x7f0c0007;
         public static final int high_scores_list=0x7f0c0008;
-        public static final int hot_to_play=0x7f0c0012;
         public static final int how_to_play=0x7f0c0009;
         public static final int intro=0x7f0c0006;
         public static final int intro_image=0x7f0c000c;
         public static final int lifeView=0x7f0c0002;
-        public static final int menu_item_share=0x7f0c0014;
+        public static final int menu_item_share=0x7f0c0013;
         public static final int new_game=0x7f0c0010;
         public static final int scoreView=0x7f0c0001;
         public static final int tVwTitle=0x7f0c000a;
@@ -214,7 +213,8 @@ public final class R {
     }
     public static final class menu {
         public static final int general_menu=0x7f0b0000;
-        public static final int share_menu=0x7f0b0001;
+        public static final int general_menu_api_10=0x7f0b0001;
+        public static final int share_menu=0x7f0b0002;
     }
     public static final class raw {
         public static final int a=0x7f050000;
