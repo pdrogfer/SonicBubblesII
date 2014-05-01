@@ -229,6 +229,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 		// show activity_how
 		Intent intentHow = new Intent(this, HowToPlay.class);
 		startActivity(intentHow);
+		
 	}
 
 	public void exitAll() {
