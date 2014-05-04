@@ -227,8 +227,10 @@ public class IntroActivity extends Activity implements OnClickListener {
 
 	public void instructions() {
 		// show activity_how
-		Intent intentHow = new Intent(this, HowToPlay.class);
-		startActivity(intentHow);
+//		Intent intentHow = new Intent(this, HowToPlay.class);
+//		startActivity(intentHow);
+		Intent intentGallery = new Intent(this, Gallery.class);
+		startActivity(intentGallery);
 		
 	}
 

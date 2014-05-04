@@ -39,7 +39,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="pgf.sonicbubblesii.DemoActivity1"
+            android:name="pgf.sonicbubblesii.Gallery"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
