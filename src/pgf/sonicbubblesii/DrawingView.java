@@ -206,7 +206,7 @@ public class DrawingView extends View {
 			return true;
 		else if (tempPosX > (width - dotRadius * 1.5))
 			return true;
-		else if (tempPosY > (width - dotRadius * 1.5))
+		else if (tempPosY > (height - dotRadius * 1.5))
 			return true;
 		else
 			return false;
