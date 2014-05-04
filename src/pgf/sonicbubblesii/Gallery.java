@@ -2,6 +2,7 @@ package pgf.sonicbubblesii;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -21,8 +22,10 @@ import android.widget.ViewSwitcher.ViewFactory;
 public class Gallery extends Activity implements OnClickListener {
 
 	private Button btnPrevious, btnNext;
-	private ViewFlipper vFlip;
 	private Animation slide_in_left, slide_out_right;
+	private ImageView imgView1;
+	private int imgIndex = 0;
+	private int images[] = { R.drawable.eng, R.drawable.eng22, R.drawable.eng33 };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,23 +34,85 @@ public class Gallery extends Activity implements OnClickListener {
 
 		btnPrevious = (Button) findViewById(R.id.btnPrev);
 		btnNext = (Button) findViewById(R.id.btnNext);
-		vFlip = (ViewFlipper) findViewById(R.id.viewFlipper);
+		imgView1 = (ImageView) findViewById(R.id.imgView1);
+		btnPrevious.setOnClickListener(this);
+		btnNext.setOnClickListener(this);
 
 		slide_in_left = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
 		slide_out_right = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
-		vFlip.setInAnimation(slide_in_left);
-		vFlip.setOutAnimation(slide_out_right);	
+
+		imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(), images[imgIndex],
+				400, 400));
 	}
 
 	@Override
 	public void onClick(View v) {
-		switch(v.getId()) {
-		case R.id.btnPrev: 
-			vFlip.showPrevious();
+		switch (v.getId()) {
+		case R.id.btnPrev:
+			if (imgIndex == 0) {
+				imgIndex = images.length - 1;
+				imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+						images[imgIndex], 400, 400));				
+			} else {
+				imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+						images[--imgIndex], 400, 400));
+			}
 			break;
+
 		case R.id.btnNext:
-			vFlip.showNext();
+			if (imgIndex == images.length - 1) {
+				imgIndex = 0;
+				imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+						images[imgIndex], 400, 400));
+			} else {
+				imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+						images[++imgIndex], 400, 400));
+			}
 			break;
 		}
 	}
+
+	public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth,
+			int reqHeight) {
+		// Raw height and width of image
+		final int height = options.outHeight;
+		final int width = options.outWidth;
+		int inSampleSize = 1;
+
+		if (height > reqHeight || width > reqWidth) {
+
+			final int halfHeight = height / 2;
+			final int halfWidth = width / 2;
+
+			// Calculate the largest inSampleSize value that is a power of 2 and
+			// keeps both
+			// height and width larger than the requested height and width.
+			while ((halfHeight / inSampleSize) > reqHeight && (halfWidth / inSampleSize) > reqWidth) {
+				inSampleSize *= 2;
+			}
+		}
+
+		return inSampleSize;
+	}
+
+	public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId, int reqWidth,
+			int reqHeight) {
+
+		// First decode with inJustDecodeBounds=true to check dimensions
+		final BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inJustDecodeBounds = true;
+		BitmapFactory.decodeResource(res, resId, options);
+
+		// Calculate inSampleSize
+		options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+		// Decode bitmap with inSampleSize set
+		options.inJustDecodeBounds = false;
+		return BitmapFactory.decodeResource(res, resId, options);
+	}
+
+	// Example of call to load an image into an ImageView using the above
+	// methods to decode
+	// mImageView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+	// R.id.myimage, 100, 100));
 }
