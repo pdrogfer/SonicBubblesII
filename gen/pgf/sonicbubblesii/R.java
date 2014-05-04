@@ -187,28 +187,32 @@ public final class R {
         public static final int intro_logo=0x7f020009;
     }
     public static final class id {
-        public static final int best_scores=0x7f0c0013;
-        public static final int btnHighScores=0x7f0c0011;
-        public static final int btnHowToPlay=0x7f0c0010;
-        public static final int btnListenAgain=0x7f0c0002;
-        public static final int btnStartGame=0x7f0c000f;
-        public static final int button1=0x7f0c0001;
-        public static final int drawing=0x7f0c0005;
-        public static final int exit=0x7f0c0014;
-        public static final int high_head=0x7f0c0009;
-        public static final int high_scores_list=0x7f0c000a;
-        public static final int how_to_play=0x7f0c000b;
-        public static final int imageSwitcher1=0x7f0c0000;
-        public static final int intro=0x7f0c0008;
-        public static final int intro_image=0x7f0c000e;
-        public static final int lifeView=0x7f0c0004;
-        public static final int menu_item_share=0x7f0c0015;
-        public static final int new_game=0x7f0c0012;
-        public static final int scoreView=0x7f0c0003;
-        public static final int tVwTitle=0x7f0c000c;
-        public static final int tVwVersion=0x7f0c000d;
-        public static final int tvLevel=0x7f0c0006;
-        public static final int tvRound=0x7f0c0007;
+        public static final int best_scores=0x7f0c0017;
+        public static final int btnHighScores=0x7f0c0015;
+        public static final int btnHowToPlay=0x7f0c0014;
+        public static final int btnListenAgain=0x7f0c0006;
+        public static final int btnNext=0x7f0c0001;
+        public static final int btnPrev=0x7f0c0000;
+        public static final int btnStartGame=0x7f0c0013;
+        public static final int drawing=0x7f0c0009;
+        public static final int exit=0x7f0c0018;
+        public static final int high_head=0x7f0c000d;
+        public static final int high_scores_list=0x7f0c000e;
+        public static final int how_to_play=0x7f0c000f;
+        public static final int imgView1=0x7f0c0003;
+        public static final int imgView2=0x7f0c0004;
+        public static final int imgView3=0x7f0c0005;
+        public static final int intro=0x7f0c000c;
+        public static final int intro_image=0x7f0c0012;
+        public static final int lifeView=0x7f0c0008;
+        public static final int menu_item_share=0x7f0c0019;
+        public static final int new_game=0x7f0c0016;
+        public static final int scoreView=0x7f0c0007;
+        public static final int tVwTitle=0x7f0c0010;
+        public static final int tVwVersion=0x7f0c0011;
+        public static final int tvLevel=0x7f0c000a;
+        public static final int tvRound=0x7f0c000b;
+        public static final int viewFlipper=0x7f0c0002;
     }
     public static final class layout {
         public static final int activity_gallery=0x7f030000;

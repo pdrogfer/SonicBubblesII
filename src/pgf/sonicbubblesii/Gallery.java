@@ -11,57 +11,43 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 import android.widget.ViewSwitcher.ViewFactory;
 
 public class Gallery extends Activity implements OnClickListener {
 
-	private ImageSwitcher iSwitch;
-	private int imgCount = 0;
-	private int[] images = {R.drawable.eng, R.drawable.eng22, R.drawable.eng33};
-	//private int[] images = {android.R.drawable.ic_dialog_alert, android.R.drawable.ic_lock_lock, android.R.drawable.ic_menu_more};
+	private Button btnPrevious, btnNext;
+	private ViewFlipper vFlip;
+	private Animation slide_in_left, slide_out_right;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gallery);
 
-		iSwitch = (ImageSwitcher) findViewById(R.id.imageSwitcher1);
+		btnPrevious = (Button) findViewById(R.id.btnPrev);
+		btnNext = (Button) findViewById(R.id.btnNext);
+		vFlip = (ViewFlipper) findViewById(R.id.viewFlipper);
 
-		Animation in = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-		Animation out = AnimationUtils.loadAnimation(this, R.anim.fade_out);
-		iSwitch.setInAnimation(in);
-		iSwitch.setOutAnimation(out);
-		
-		iSwitch.setFactory(new ViewFactory() {
-			public View makeView() {
-				ImageView myView = new ImageView(getApplicationContext());
-				myView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-				myView.setLayoutParams(new ImageSwitcher.LayoutParams(LayoutParams.MATCH_PARENT,
-						LayoutParams.MATCH_PARENT));
-				return myView;
-			}
-		});
-		iSwitch.setImageResource(images[imgCount]);
-		iSwitch.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				if (imgCount == images.length - 1) {
-					imgCount = 0;
-					iSwitch.setImageResource(images[imgCount]);
-				} else {
-					iSwitch.setImageResource(images[++imgCount]);
-				}
-			}
-		});
+		slide_in_left = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
+		slide_out_right = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
+		vFlip.setInAnimation(slide_in_left);
+		vFlip.setOutAnimation(slide_out_right);	
 	}
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
-
+		switch(v.getId()) {
+		case R.id.btnPrev: 
+			vFlip.showPrevious();
+			break;
+		case R.id.btnNext:
+			vFlip.showNext();
+			break;
+		}
 	}
 }
