@@ -23,7 +23,7 @@ public class Gallery extends Activity implements OnClickListener {
 
 	private Button btnPrevious, btnNext;
 	private Animation slide_in_left, slide_out_right;
-	private ImageView imgView1;
+	private ImageView imgView;
 	private int imgIndex = 0;
 	private int images[] = { R.drawable.eng, R.drawable.eng22, R.drawable.eng33 };
 
@@ -34,14 +34,11 @@ public class Gallery extends Activity implements OnClickListener {
 
 		btnPrevious = (Button) findViewById(R.id.btnPrev);
 		btnNext = (Button) findViewById(R.id.btnNext);
-		imgView1 = (ImageView) findViewById(R.id.imgView1);
+		imgView = (ImageView) findViewById(R.id.imgView1);
 		btnPrevious.setOnClickListener(this);
 		btnNext.setOnClickListener(this);
 
-		slide_in_left = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
-		slide_out_right = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
-
-		imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(), images[imgIndex],
+		imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(), images[imgIndex],
 				400, 400));
 	}
 
@@ -51,10 +48,10 @@ public class Gallery extends Activity implements OnClickListener {
 		case R.id.btnPrev:
 			if (imgIndex == 0) {
 				imgIndex = images.length - 1;
-				imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
 						images[imgIndex], 400, 400));				
 			} else {
-				imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
 						images[--imgIndex], 400, 400));
 			}
 			break;
@@ -62,10 +59,10 @@ public class Gallery extends Activity implements OnClickListener {
 		case R.id.btnNext:
 			if (imgIndex == images.length - 1) {
 				imgIndex = 0;
-				imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
 						images[imgIndex], 400, 400));
 			} else {
-				imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
 						images[++imgIndex], 400, 400));
 			}
 			break;

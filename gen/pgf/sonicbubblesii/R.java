@@ -184,7 +184,8 @@ public final class R {
         public static final int eng33=0x7f020006;
         public static final int fondo1=0x7f020007;
         public static final int ic_launcher=0x7f020008;
-        public static final int intro_logo=0x7f020009;
+        public static final int image_border=0x7f020009;
+        public static final int intro_logo=0x7f02000a;
     }
     public static final class id {
         public static final int best_scores=0x7f0c0014;
@@ -308,5 +309,6 @@ public final class R {
         public static final int btnIntroSw600=0x7f0a0006;
         public static final int btnIntroSw720=0x7f0a0007;
         public static final int btnIntroXLarge=0x7f0a0005;
+        public static final int demoImageView=0x7f0a000e;
     }
 }
