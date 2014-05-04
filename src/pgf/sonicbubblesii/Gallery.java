@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager.LayoutParams;
@@ -15,6 +16,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 import android.widget.ViewSwitcher.ViewFactory;
@@ -22,6 +25,8 @@ import android.widget.ViewSwitcher.ViewFactory;
 public class Gallery extends Activity implements OnClickListener {
 
 	private Button btnPrevious, btnNext;
+	private RadioGroup radGr;
+	private RadioButton radBtn1, radBtn2, radBtn3;
 	private Animation slide_in_left, slide_out_right;
 	private ImageView imgView;
 	private int imgIndex = 0;
@@ -34,10 +39,13 @@ public class Gallery extends Activity implements OnClickListener {
 
 		btnPrevious = (Button) findViewById(R.id.btnPrev);
 		btnNext = (Button) findViewById(R.id.btnNext);
+	
 		imgView = (ImageView) findViewById(R.id.imgView1);
 		btnPrevious.setOnClickListener(this);
 		btnNext.setOnClickListener(this);
 
+		DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(), images[imgIndex],
 				400, 400));
 	}
