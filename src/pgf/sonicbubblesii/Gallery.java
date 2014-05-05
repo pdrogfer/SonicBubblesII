@@ -16,6 +16,7 @@ import android.view.WindowManager.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -26,7 +27,7 @@ import android.widget.ViewSwitcher.ViewFactory;
 
 public class Gallery extends Activity implements OnClickListener {
 
-	private Button btnPrevious, btnNext;
+	private ImageButton btnPrevious, btnNext;
 	private RadioGroup radGr;
 	private RadioButton radBtn1, radBtn2, radBtn3;
 	private Animation slide_in_left, slide_out_right;
@@ -46,8 +47,8 @@ public class Gallery extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gallery);
 
-		btnPrevious = (Button) findViewById(R.id.btnPrev);
-		btnNext = (Button) findViewById(R.id.btnNext);
+		btnPrevious = (ImageButton) findViewById(R.id.btnPrev);
+		btnNext = (ImageButton) findViewById(R.id.btnNext);
 		imgView = (ImageView) findViewById(R.id.imgView1);
 		radGr = (RadioGroup) findViewById(R.id.demo_RadioGroup);
 		radBtn1 = (RadioButton) findViewById(R.id.demo_radio1);

@@ -13,23 +13,23 @@
         android:background="#FFFFFFFF"
         android:orientation="horizontal" >
 
-        <Button
+        <ImageButton
             android:id="@+id/btnPrev"
             style="@style/GameTextNormal"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
             android:layout_weight="0.5"
             android:background="@drawable/btn_sel_grey"
-            android:text="Previous" />
+            android:src="@android:drawable/ic_media_rew" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnNext"
             style="@style/GameTextNormal"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
             android:layout_weight="0.5"
             android:background="@drawable/btn_sel_grey"
-            android:text="Next" />
+            android:src="@android:drawable/ic_media_ff" />
     </LinearLayout>
 
     <View
