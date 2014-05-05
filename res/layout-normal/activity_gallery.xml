@@ -32,35 +32,29 @@
             android:text="Next" />
     </LinearLayout>
 
-    <LinearLayout
+    <View
+        android:id="@+id/demo_separator"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFFFF"
-        android:orientation="vertical" >
+        android:layout_height="5dp"
+        android:background="@color/Black"
+        android:paddingBottom="5dp"
+        android:paddingTop="8dp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@color/Black"
-            android:paddingBottom="5dp"
-            android:paddingTop="8dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/White"
-            android:paddingBottom="5dp"
-            android:paddingTop="8dp" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
         <ImageView
             android:id="@+id/imgView1"
             android:layout_width="wrap_content"
-            android:layout_height="400dp" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
         <RadioGroup
             android:id="@+id/demo_RadioGroup"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
             android:background="@android:color/transparent"
             android:gravity="center"
             android:orientation="horizontal" >
@@ -84,6 +78,6 @@
                 android:layout_height="wrap_content"
                 android:onClick="onRadioButtonClicked" />
         </RadioGroup>
-    </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>
