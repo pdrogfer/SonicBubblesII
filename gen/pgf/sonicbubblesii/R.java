@@ -179,40 +179,50 @@ public final class R {
         public static final int btn_sel_grey=0x7f020001;
         public static final int btn_sel_red=0x7f020002;
         public static final int btn_sel_yellow=0x7f020003;
-        public static final int eng1=0x7f020004;
-        public static final int eng2=0x7f020005;
-        public static final int eng3=0x7f020006;
+        public static final int eng=0x7f020004;
+        public static final int eng22=0x7f020005;
+        public static final int eng33=0x7f020006;
         public static final int fondo1=0x7f020007;
         public static final int ic_launcher=0x7f020008;
-        public static final int intro_logo=0x7f020009;
+        public static final int image_border=0x7f020009;
+        public static final int intro_logo=0x7f02000a;
     }
     public static final class id {
-        public static final int best_scores=0x7f0c0011;
-        public static final int btnHighScores=0x7f0c000f;
-        public static final int btnHowToPlay=0x7f0c000e;
-        public static final int btnListenAgain=0x7f0c0000;
-        public static final int btnStartGame=0x7f0c000d;
-        public static final int drawing=0x7f0c0003;
-        public static final int exit=0x7f0c0012;
-        public static final int high_head=0x7f0c0007;
-        public static final int high_scores_list=0x7f0c0008;
-        public static final int how_to_play=0x7f0c0009;
-        public static final int intro=0x7f0c0006;
-        public static final int intro_image=0x7f0c000c;
-        public static final int lifeView=0x7f0c0002;
-        public static final int menu_item_share=0x7f0c0013;
-        public static final int new_game=0x7f0c0010;
-        public static final int scoreView=0x7f0c0001;
-        public static final int tVwTitle=0x7f0c000a;
-        public static final int tVwVersion=0x7f0c000b;
-        public static final int tvLevel=0x7f0c0004;
-        public static final int tvRound=0x7f0c0005;
+        public static final int best_scores=0x7f0c0019;
+        public static final int btnHighScores=0x7f0c0017;
+        public static final int btnHowToPlay=0x7f0c0016;
+        public static final int btnListenAgain=0x7f0c0008;
+        public static final int btnNext=0x7f0c0001;
+        public static final int btnPrev=0x7f0c0000;
+        public static final int btnStartGame=0x7f0c0015;
+        public static final int demo_RadioGroup=0x7f0c0004;
+        public static final int demo_radio1=0x7f0c0005;
+        public static final int demo_radio2=0x7f0c0006;
+        public static final int demo_radio3=0x7f0c0007;
+        public static final int demo_separator=0x7f0c0002;
+        public static final int drawing=0x7f0c000b;
+        public static final int exit=0x7f0c001a;
+        public static final int high_head=0x7f0c000f;
+        public static final int high_scores_list=0x7f0c0010;
+        public static final int how_to_play=0x7f0c0011;
+        public static final int imgView1=0x7f0c0003;
+        public static final int intro=0x7f0c000e;
+        public static final int intro_image=0x7f0c0014;
+        public static final int lifeView=0x7f0c000a;
+        public static final int menu_item_share=0x7f0c001b;
+        public static final int new_game=0x7f0c0018;
+        public static final int scoreView=0x7f0c0009;
+        public static final int tVwTitle=0x7f0c0012;
+        public static final int tVwVersion=0x7f0c0013;
+        public static final int tvLevel=0x7f0c000c;
+        public static final int tvRound=0x7f0c000d;
     }
     public static final class layout {
-        public static final int activity_game=0x7f030000;
-        public static final int activity_high=0x7f030001;
-        public static final int activity_how=0x7f030002;
-        public static final int activity_intro=0x7f030003;
+        public static final int activity_gallery=0x7f030000;
+        public static final int activity_game=0x7f030001;
+        public static final int activity_high=0x7f030002;
+        public static final int activity_how=0x7f030003;
+        public static final int activity_intro=0x7f030004;
     }
     public static final class menu {
         public static final int general_menu=0x7f0b0000;
@@ -304,5 +314,6 @@ public final class R {
         public static final int btnIntroSw600=0x7f0a0006;
         public static final int btnIntroSw720=0x7f0a0007;
         public static final int btnIntroXLarge=0x7f0a0005;
+        public static final int demoImageView=0x7f0a000e;
     }
 }

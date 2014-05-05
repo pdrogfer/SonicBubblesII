@@ -146,8 +146,8 @@ public class GameActivity extends Activity implements OnClickListener {
 			startActivity(intentBest);
 			return true;
 		case R.id.how_to_play:
-			Intent intentHow = new Intent(this, HowToPlay.class);
-			startActivity(intentHow);
+			Intent intentGallery = new Intent(this, Gallery.class);
+			startActivity(intentGallery);
 			return true;
 		case R.id.exit:
 			Intent intentIntro = new Intent(this, IntroActivity.class);

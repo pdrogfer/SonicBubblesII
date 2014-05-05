@@ -86,5 +86,12 @@
     <style name="GameTextSw720" parent="@style/GameTextNormal">
         <item name="android:textSize">30sp</item>
     </style>
+       
+    <style name="demoImageView">
+    <!-- 3dp so the background border to be visible -->
+    <item name="android:padding">3dp</item>
+    <item name="android:background">@drawable/image_border</item>
+    <item name="android:scaleType">fitCenter</item>
+</style>
 
 </resources>
