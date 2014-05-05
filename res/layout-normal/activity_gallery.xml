@@ -58,7 +58,7 @@
             android:layout_height="400dp" />
 
         <RadioGroup
-            android:id="@+id/radioGroup1"
+            android:id="@+id/demo_RadioGroup"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@android:color/transparent"
@@ -66,20 +66,23 @@
             android:orientation="horizontal" >
 
             <RadioButton
-                android:id="@+id/demo_radio0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true" />
-
-            <RadioButton
                 android:id="@+id/demo_radio1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:onClick="onRadioButtonClicked" />
 
             <RadioButton
                 android:id="@+id/demo_radio2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked" />
+
+            <RadioButton
+                android:id="@+id/demo_radio3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked" />
         </RadioGroup>
     </LinearLayout>
 

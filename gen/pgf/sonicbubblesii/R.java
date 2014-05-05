@@ -195,9 +195,10 @@ public final class R {
         public static final int btnNext=0x7f0c0001;
         public static final int btnPrev=0x7f0c0000;
         public static final int btnStartGame=0x7f0c0014;
-        public static final int demo_radio0=0x7f0c0004;
-        public static final int demo_radio1=0x7f0c0005;
-        public static final int demo_radio2=0x7f0c0006;
+        public static final int demo_RadioGroup=0x7f0c0003;
+        public static final int demo_radio1=0x7f0c0004;
+        public static final int demo_radio2=0x7f0c0005;
+        public static final int demo_radio3=0x7f0c0006;
         public static final int drawing=0x7f0c000a;
         public static final int exit=0x7f0c0019;
         public static final int high_head=0x7f0c000e;
@@ -209,7 +210,6 @@ public final class R {
         public static final int lifeView=0x7f0c0009;
         public static final int menu_item_share=0x7f0c001a;
         public static final int new_game=0x7f0c0017;
-        public static final int radioGroup1=0x7f0c0003;
         public static final int scoreView=0x7f0c0008;
         public static final int tVwTitle=0x7f0c0011;
         public static final int tVwVersion=0x7f0c0012;

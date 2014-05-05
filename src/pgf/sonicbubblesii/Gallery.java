@@ -1,5 +1,6 @@
 package pgf.sonicbubblesii;
 
+import pgf.sonicbubblesii.R.string;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -8,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager.LayoutParams;
@@ -29,9 +31,16 @@ public class Gallery extends Activity implements OnClickListener {
 	private RadioButton radBtn1, radBtn2, radBtn3;
 	private Animation slide_in_left, slide_out_right;
 	private ImageView imgView;
+	private int imgView_Width = 400;
+	private int imgView_Height = 400;
 	private int imgIndex = 0;
+	private int indexRadBtnChecked = 0;
 	private int images[] = { R.drawable.eng, R.drawable.eng22, R.drawable.eng33 };
 
+	// Log tags
+	public final static String SB = "Sonic Bubbles II";
+	public final static String SB_LifeCycle = "SB II LifeCycle";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,15 +48,18 @@ public class Gallery extends Activity implements OnClickListener {
 
 		btnPrevious = (Button) findViewById(R.id.btnPrev);
 		btnNext = (Button) findViewById(R.id.btnNext);
-	
 		imgView = (ImageView) findViewById(R.id.imgView1);
+		radGr = (RadioGroup) findViewById(R.id.demo_RadioGroup);
+		radBtn1 = (RadioButton) findViewById(R.id.demo_radio1);
+		radBtn2 = (RadioButton) findViewById(R.id.demo_radio2);
+		radBtn3 = (RadioButton) findViewById(R.id.demo_radio3);
 		btnPrevious.setOnClickListener(this);
 		btnNext.setOnClickListener(this);
-
+		
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(), images[imgIndex],
-				400, 400));
+				imgView_Width, imgView_Height));
 	}
 
 	@Override
@@ -57,10 +69,10 @@ public class Gallery extends Activity implements OnClickListener {
 			if (imgIndex == 0) {
 				imgIndex = images.length - 1;
 				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
-						images[imgIndex], 400, 400));				
+						images[imgIndex], imgView_Width, imgView_Height));
 			} else {
 				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
-						images[--imgIndex], 400, 400));
+						images[--imgIndex], imgView_Width, imgView_Height));
 			}
 			break;
 
@@ -68,13 +80,47 @@ public class Gallery extends Activity implements OnClickListener {
 			if (imgIndex == images.length - 1) {
 				imgIndex = 0;
 				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
-						images[imgIndex], 400, 400));
+						images[imgIndex], imgView_Width, imgView_Height));
 			} else {
 				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
-						images[++imgIndex], 400, 400));
+						images[++imgIndex], imgView_Width, imgView_Height));
 			}
 			break;
 		}
+		indexRadBtnChecked = imgIndex;
+		switch (indexRadBtnChecked) {
+		case 0:
+			radGr.check(R.id.demo_radio1);
+			break;
+		case 1:
+			radGr.check(R.id.demo_radio2);
+			break;
+		case 2:
+			radGr.check(R.id.demo_radio3);
+			break;
+		case -1:
+			Toast.makeText(this, "Warning! no radioBtn selected", Toast.LENGTH_SHORT).show();
+		}
+	}
+	public void onRadioButtonClicked(View view) {
+	    // Is the button now checked?
+	    boolean checked = ((RadioButton) view).isChecked();
+	    
+	    // Check which radio button was clicked
+	    switch(view.getId()) {
+	        case R.id.demo_radio1:
+	            if (checked) imgIndex = 0;
+	            break;
+	        case R.id.demo_radio2:
+	        	if (checked) imgIndex = 1;
+	        		break;
+	        case R.id.demo_radio3:
+	        	if (checked) imgIndex = 2;
+	        		break;
+	    }
+	    imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+	    		images[imgIndex], imgView_Width, imgView_Height));
+	    indexRadBtnChecked = imgIndex;
 	}
 
 	public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth,
