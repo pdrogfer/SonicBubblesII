@@ -36,7 +36,7 @@ public class Gallery extends Activity implements OnClickListener {
 	private int imgView_Height = 400;
 	private int imgIndex = 0;
 	private int indexRadBtnChecked = 0;
-	private int images[] = { R.drawable.eng, R.drawable.eng22, R.drawable.eng33 };
+	private int images_demo[] = { R.drawable.demo1, R.drawable.demo2, R.drawable.demo3 };
 
 	// Log tags
 	public final static String SB = "Sonic Bubbles II";
@@ -59,7 +59,7 @@ public class Gallery extends Activity implements OnClickListener {
 		
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(), images[imgIndex],
+		imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(), images_demo[imgIndex],
 				imgView_Width, imgView_Height));
 	}
 
@@ -68,23 +68,23 @@ public class Gallery extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.btnPrev:
 			if (imgIndex == 0) {
-				imgIndex = images.length - 1;
+				imgIndex = images_demo.length - 1;
 				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
-						images[imgIndex], imgView_Width, imgView_Height));
+						images_demo[imgIndex], imgView_Width, imgView_Height));
 			} else {
 				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
-						images[--imgIndex], imgView_Width, imgView_Height));
+						images_demo[--imgIndex], imgView_Width, imgView_Height));
 			}
 			break;
 
 		case R.id.btnNext:
-			if (imgIndex == images.length - 1) {
+			if (imgIndex == images_demo.length - 1) {
 				imgIndex = 0;
 				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
-						images[imgIndex], imgView_Width, imgView_Height));
+						images_demo[imgIndex], imgView_Width, imgView_Height));
 			} else {
 				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
-						images[++imgIndex], imgView_Width, imgView_Height));
+						images_demo[++imgIndex], imgView_Width, imgView_Height));
 			}
 			break;
 		}
@@ -120,7 +120,7 @@ public class Gallery extends Activity implements OnClickListener {
 	        		break;
 	    }
 	    imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
-	    		images[imgIndex], imgView_Width, imgView_Height));
+	    		images_demo[imgIndex], imgView_Width, imgView_Height));
 	    indexRadBtnChecked = imgIndex;
 	}
 
