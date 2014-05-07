@@ -25,11 +25,12 @@ public class Gallery extends Activity implements OnClickListener, OnTouchListene
 	private RadioGroup radGr;
 	private RadioButton radBtn1, radBtn2, radBtn3;
 	private Animation in, out;
-	private ImageView imgView, imgView2;
-	private int imgView_Width = 400;
+	private ImageView imgView1, imgView2;
+	private int imgView_Width = 400; // TODO check on different density devices. Is it necessary?
 	private int imgView_Height = 400;
 	private int imgIndex = 0;
 	private int indexRadBtnChecked = 0;
+	private int visible; // which ImageView is visible, imgView1 or imgView2
 	private int images_demo[] = { R.drawable.demo1, R.drawable.demo2, R.drawable.demo3 };
 
 	// Log tags
@@ -43,7 +44,7 @@ public class Gallery extends Activity implements OnClickListener, OnTouchListene
 
 		btnPrevious = (ImageButton) findViewById(R.id.btnPrev);
 		btnNext = (ImageButton) findViewById(R.id.btnNext);
-		imgView = (ImageView) findViewById(R.id.imgView1);
+		imgView1 = (ImageView) findViewById(R.id.imgView1);
 		imgView2 = (ImageView) findViewById(R.id.imgView2);
 		radGr = (RadioGroup) findViewById(R.id.demo_RadioGroup);
 		radBtn1 = (RadioButton) findViewById(R.id.demo_radio1);
@@ -52,11 +53,14 @@ public class Gallery extends Activity implements OnClickListener, OnTouchListene
 		btnPrevious.setOnClickListener(this);
 		btnNext.setOnClickListener(this);
 		
+		in = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+		out = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 		
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(), images_demo[imgIndex],
+		imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(), images_demo[imgIndex],
 				imgView_Width, imgView_Height));
+		visible = 1;
 	}
 
 	@Override
@@ -70,27 +74,58 @@ public class Gallery extends Activity implements OnClickListener, OnTouchListene
 		case R.id.btnPrev:
 			if (imgIndex == 0) {
 				imgIndex = images_demo.length - 1;
-				
-				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
-						images_demo[imgIndex], imgView_Width, imgView_Height));
+				if (visible == 1) {
+					imgView2.startAnimation(in);
+					imgView2.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+							images_demo[imgIndex], imgView_Width, imgView_Height));
+					visible = 2;
+					} else {
+						imgView2.startAnimation(out);
+						imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+								images_demo[imgIndex], imgView_Width, imgView_Height));
+						visible = 1;
+					}
 			} else {
-				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+				if (visible == 1) {
+				imgView2.startAnimation(in);
+				imgView2.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
 						images_demo[--imgIndex], imgView_Width, imgView_Height));
+				visible = 2;
+				} else {
+					imgView2.startAnimation(out);
+					imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+							images_demo[--imgIndex], imgView_Width, imgView_Height));
+					visible = 1;
+				}
 			}
 			break;
 
 		case R.id.btnNext:
 			if (imgIndex == images_demo.length - 1) {
 				imgIndex = 0;
-				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
-						images_demo[imgIndex], imgView_Width, imgView_Height));
+				if (visible == 1) {
+					imgView2.startAnimation(in);
+					imgView2.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+							images_demo[imgIndex], imgView_Width, imgView_Height));
+					visible = 2;
+					} else {
+						imgView2.startAnimation(out);
+						imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+								images_demo[imgIndex], imgView_Width, imgView_Height));
+						visible = 1;
+					}
 			} else {
-				Animation in = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-				Animation out = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
-				//imgView.startAnimation(out);
+				if (visible == 1) {
 				imgView2.startAnimation(in);
 				imgView2.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
 						images_demo[++imgIndex], imgView_Width, imgView_Height));
+				visible = 2;
+				} else {
+					imgView2.startAnimation(out);
+					imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+							images_demo[++imgIndex], imgView_Width, imgView_Height));
+					visible = 1;
+				}
 			}
 			break;
 		}
@@ -125,7 +160,7 @@ public class Gallery extends Activity implements OnClickListener, OnTouchListene
 	        	if (checked) imgIndex = 2;
 	        		break;
 	    }
-	    imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+	    imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
 	    		images_demo[imgIndex], imgView_Width, imgView_Height));
 	    indexRadBtnChecked = imgIndex;
 	}
