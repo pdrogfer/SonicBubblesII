@@ -5,33 +5,6 @@
     android:background="#FFFFFFFF"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginBottom="3dp"
-        android:layout_marginTop="3dp"
-        android:background="#FFFFFFFF"
-        android:orientation="horizontal" >
-
-        <ImageButton
-            android:id="@+id/btnPrev"
-            style="@style/GameTextNormal"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
-            android:layout_weight="0.5"
-            android:background="@drawable/btn_sel_grey"
-            android:src="@android:drawable/ic_media_rew" />
-
-        <ImageButton
-            android:id="@+id/btnNext"
-            style="@style/GameTextNormal"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
-            android:layout_weight="0.5"
-            android:background="@drawable/btn_sel_grey"
-            android:src="@android:drawable/ic_media_ff" />
-    </LinearLayout>
-
     <View
         android:id="@+id/demo_separator"
         android:layout_width="match_parent"
@@ -49,6 +22,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
+        <ImageView
+            android:id="@+id/imgView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <ImageButton
+            android:id="@+id/btnPrev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_gravity="left|center_vertical"
+            android:background="@android:color/black"
+            android:src="@android:drawable/ic_media_rew" />
+
+        <ImageButton
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_gravity="right|center_vertical"
+            android:background="@android:color/black"
+            android:src="@android:drawable/ic_media_ff" />
 
         <RadioGroup
             android:id="@+id/demo_RadioGroup"

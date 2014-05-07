@@ -1,37 +1,31 @@
 package pgf.sonicbubblesii;
 
-import pgf.sonicbubblesii.R.string;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager.LayoutParams;
+import android.view.View.OnTouchListener;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-import android.widget.ViewFlipper;
-import android.widget.ViewSwitcher.ViewFactory;
 
-public class Gallery extends Activity implements OnClickListener {
+public class Gallery extends Activity implements OnClickListener, OnTouchListener{
 
 	private ImageButton btnPrevious, btnNext;
 	private RadioGroup radGr;
 	private RadioButton radBtn1, radBtn2, radBtn3;
-	private Animation slide_in_left, slide_out_right;
-	private ImageView imgView;
+	private Animation in, out;
+	private ImageView imgView, imgView2;
 	private int imgView_Width = 400;
 	private int imgView_Height = 400;
 	private int imgIndex = 0;
@@ -50,12 +44,14 @@ public class Gallery extends Activity implements OnClickListener {
 		btnPrevious = (ImageButton) findViewById(R.id.btnPrev);
 		btnNext = (ImageButton) findViewById(R.id.btnNext);
 		imgView = (ImageView) findViewById(R.id.imgView1);
+		imgView2 = (ImageView) findViewById(R.id.imgView2);
 		radGr = (RadioGroup) findViewById(R.id.demo_RadioGroup);
 		radBtn1 = (RadioButton) findViewById(R.id.demo_radio1);
 		radBtn2 = (RadioButton) findViewById(R.id.demo_radio2);
 		radBtn3 = (RadioButton) findViewById(R.id.demo_radio3);
 		btnPrevious.setOnClickListener(this);
 		btnNext.setOnClickListener(this);
+		
 		
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -64,11 +60,17 @@ public class Gallery extends Activity implements OnClickListener {
 	}
 
 	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnPrev:
 			if (imgIndex == 0) {
 				imgIndex = images_demo.length - 1;
+				
 				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
 						images_demo[imgIndex], imgView_Width, imgView_Height));
 			} else {
@@ -83,7 +85,11 @@ public class Gallery extends Activity implements OnClickListener {
 				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
 						images_demo[imgIndex], imgView_Width, imgView_Height));
 			} else {
-				imgView.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
+				Animation in = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+				Animation out = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
+				//imgView.startAnimation(out);
+				imgView2.startAnimation(in);
+				imgView2.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
 						images_demo[++imgIndex], imgView_Width, imgView_Height));
 			}
 			break;
@@ -162,6 +168,8 @@ public class Gallery extends Activity implements OnClickListener {
 		options.inJustDecodeBounds = false;
 		return BitmapFactory.decodeResource(res, resId, options);
 	}
+
+
 
 	// Example of call to load an image into an ImageView using the above
 	// methods to decode
