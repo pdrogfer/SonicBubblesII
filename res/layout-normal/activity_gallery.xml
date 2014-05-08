@@ -22,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
+
         <ImageView
             android:id="@+id/imgView2"
             android:layout_width="wrap_content"
@@ -32,18 +33,18 @@
             android:id="@+id/btnPrev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
             android:layout_gravity="left|center_vertical"
-            android:background="@android:color/black"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:background="@drawable/btn_demo_arrows"
             android:src="@android:drawable/ic_media_rew" />
 
         <ImageButton
             android:id="@+id/btnNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
             android:layout_gravity="right|center_vertical"
-            android:background="@android:color/black"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:background="@drawable/btn_demo_arrows"
             android:src="@android:drawable/ic_media_ff" />
 
         <RadioGroup
@@ -51,28 +52,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
+            android:layout_marginBottom="2dp"
             android:background="@android:color/transparent"
             android:gravity="center"
             android:orientation="horizontal" >
 
             <RadioButton
                 android:id="@+id/demo_radio1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:checked="true"
-                android:onClick="onRadioButtonClicked" />
+                style="@style/radBtnDemoNormal"/>
 
             <RadioButton
                 android:id="@+id/demo_radio2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onRadioButtonClicked" />
+                style="@style/radBtnDemoNormal"/>
 
             <RadioButton
                 android:id="@+id/demo_radio3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onRadioButtonClicked" />
+                style="@style/radBtnDemoNormal"/>
         </RadioGroup>
     </FrameLayout>
 

@@ -25,44 +25,62 @@
         <item name="android:textSize">24sp</item>
     </style>
 
-    <style name="btnIntroSmall" parent="@android:style/Widget.Button">
+    <style name="btnIntroSmall" parent="@style/btnIntroNormal">
         <item name="android:layout_width">180dp</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_gravity">center</item>
         <item name="android:layout_weight">0.5</item>
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="btnIntroLarge" parent="@android:style/Widget.Button">
+    <style name="btnIntroLarge" parent="@style/btnIntroNormal">
         <item name="android:layout_width">300dp</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_gravity">center</item>
         <item name="android:layout_weight">0.5</item>
         <item name="android:textSize">30sp</item>
     </style>
 
-    <style name="btnIntroXLarge" parent="@android:style/Widget.Button">
+    <style name="btnIntroXLarge" parent="@style/btnIntroNormal">
         <item name="android:layout_width">460dp</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_gravity">center</item>
         <item name="android:layout_weight">0.7</item>
         <item name="android:textSize">40sp</item>
     </style>
 
-    <style name="btnIntroSw600" parent="@android:style/Widget.Button">
+    <style name="btnIntroSw600" parent="@style/btnIntroNormal">
         <item name="android:layout_width">320dp</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_gravity">center</item>
         <item name="android:layout_weight">0.5</item>
         <item name="android:textSize">36sp</item>
     </style>
 
-    <style name="btnIntroSw720" parent="@android:style/Widget.Button">
+    <style name="btnIntroSw720" parent="@style/btnIntroNormal">
         <item name="android:layout_width">400dp</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_gravity">center</item>
         <item name="android:layout_weight">0.7</item>
         <item name="android:textSize">40sp</item>
+    </style>
+
+    <style name="radBtnDemoNormal" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@drawable/rad_btn_demo_selector</item>
+        <item name="android:onClick">onRadioButtonClicked</item>
+        <item name="android:padding">6dp</item>
+    </style>
+
+    <style name="radBtnDemoSmall" parent="@style/radBtnDemoNormal">
+        <item name="android:padding">6dp</item>
+    </style>
+
+    <style name="radBtnDemoLarge" parent="@style/radBtnDemoNormal">
+        <item name="android:padding">6dp</item>
+    </style>
+
+    <style name="radBtnDemoXLarge" parent="@style/radBtnDemoNormal">
+        <item name="android:padding">6dp</item>
+    </style>
+
+    <style name="radBtnDemoSw600" parent="@style/radBtnDemoNormal">
+        <item name="android:padding">6dp</item>
+    </style>
+
+    <style name="radBtnDemoSw720" parent="@style/radBtnDemoNormal">
+        <item name="android:padding">6dp</item>
     </style>
 
     <style name="GameTextNormal">
@@ -71,27 +89,33 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">16sp</item>
     </style>
+
     <style name="GameTextSmall" parent="@style/GameTextNormal">
         <item name="android:textSize">12sp</item>
     </style>
+
     <style name="GameTextLarge" parent="@style/GameTextNormal">
         <item name="android:textSize">20sp</item>
     </style>
+
     <style name="GameTextXLarge" parent="@style/GameTextNormal">
         <item name="android:textSize">30sp</item>
     </style>
+
     <style name="GameTextSw600" parent="@style/GameTextNormal">
         <item name="android:textSize">24sp</item>
     </style>
+
     <style name="GameTextSw720" parent="@style/GameTextNormal">
         <item name="android:textSize">30sp</item>
     </style>
-       
+
     <style name="demoImageView">
-    <!-- 3dp so the background border to be visible -->
-    <item name="android:padding">3dp</item>
-    <item name="android:background">@drawable/image_border</item>
-    <item name="android:scaleType">fitCenter</item>
-</style>
+
+        <!-- 3dp so the background border to be visible -->
+        <item name="android:padding">3dp</item>
+        <item name="android:background">@drawable/image_border</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
 
 </resources>

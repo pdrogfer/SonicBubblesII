@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_checked="true"><shape android:shape="oval">
+            <size android:height="@dimen/rad_btn_demo_size" android:width="@dimen/rad_btn_demo_size" />
+
+            <solid android:color="#5FC3FF" />
+
+            <stroke android:width="2dp" android:color="#CCA7E0FF" />
+        </shape></item>
+    <item android:state_checked="false"><shape android:shape="oval">
+            <size android:height="@dimen/rad_btn_demo_size" android:width="@dimen/rad_btn_demo_size" />
+
+            <solid android:color="#335FC3FF" />
+
+            <stroke android:width="2dp" android:color="#33A7E0FF" />
+        </shape></item>
+
+</selector>

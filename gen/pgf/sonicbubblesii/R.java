@@ -173,19 +173,22 @@ public final class R {
          */
         public static final int activity_horizontal_margin=0x7f070000;
         public static final int activity_vertical_margin=0x7f070001;
+        public static final int rad_btn_demo_size=0x7f070002;
     }
     public static final class drawable {
-        public static final int btn_sel_blue=0x7f020000;
-        public static final int btn_sel_grey=0x7f020001;
-        public static final int btn_sel_red=0x7f020002;
-        public static final int btn_sel_yellow=0x7f020003;
-        public static final int demo1=0x7f020004;
-        public static final int demo2=0x7f020005;
-        public static final int demo3=0x7f020006;
-        public static final int fondo1=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int image_border=0x7f020009;
-        public static final int intro_logo=0x7f02000a;
+        public static final int btn_demo_arrows=0x7f020000;
+        public static final int btn_sel_blue=0x7f020001;
+        public static final int btn_sel_grey=0x7f020002;
+        public static final int btn_sel_red=0x7f020003;
+        public static final int btn_sel_yellow=0x7f020004;
+        public static final int demo1=0x7f020005;
+        public static final int demo2=0x7f020006;
+        public static final int demo3=0x7f020007;
+        public static final int fondo1=0x7f020008;
+        public static final int ic_launcher=0x7f020009;
+        public static final int image_border=0x7f02000a;
+        public static final int intro_logo=0x7f02000b;
+        public static final int rad_btn_demo_selector=0x7f02000c;
     }
     public static final class id {
         public static final int best_scores=0x7f0c001a;
@@ -303,18 +306,24 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0a0001;
-        public static final int GameTextLarge=0x7f0a000a;
-        public static final int GameTextNormal=0x7f0a0008;
-        public static final int GameTextSmall=0x7f0a0009;
-        public static final int GameTextSw600=0x7f0a000c;
-        public static final int GameTextSw720=0x7f0a000d;
-        public static final int GameTextXLarge=0x7f0a000b;
+        public static final int GameTextLarge=0x7f0a0010;
+        public static final int GameTextNormal=0x7f0a000e;
+        public static final int GameTextSmall=0x7f0a000f;
+        public static final int GameTextSw600=0x7f0a0012;
+        public static final int GameTextSw720=0x7f0a0013;
+        public static final int GameTextXLarge=0x7f0a0011;
         public static final int btnIntroLarge=0x7f0a0004;
         public static final int btnIntroNormal=0x7f0a0002;
         public static final int btnIntroSmall=0x7f0a0003;
         public static final int btnIntroSw600=0x7f0a0006;
         public static final int btnIntroSw720=0x7f0a0007;
         public static final int btnIntroXLarge=0x7f0a0005;
-        public static final int demoImageView=0x7f0a000e;
+        public static final int demoImageView=0x7f0a0014;
+        public static final int radBtnDemoLarge=0x7f0a000a;
+        public static final int radBtnDemoNormal=0x7f0a0008;
+        public static final int radBtnDemoSmall=0x7f0a0009;
+        public static final int radBtnDemoSw600=0x7f0a000c;
+        public static final int radBtnDemoSw720=0x7f0a000d;
+        public static final int radBtnDemoXLarge=0x7f0a000b;
     }
 }
