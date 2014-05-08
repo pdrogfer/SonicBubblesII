@@ -23,13 +23,13 @@
 
         <ImageButton
             android:id="@+id/btnPrev"
-            style="@style/arrowBtnDemoNormal"
+            style="@style/arrowBtnDemoXLarge"
             android:layout_gravity="left|center_vertical"
             android:src="@android:drawable/ic_media_rew" />
 
         <ImageButton
             android:id="@+id/btnNext"
-            style="@style/arrowBtnDemoNormal"
+            style="@style/arrowBtnDemoXLarge"
             android:layout_gravity="right|center_vertical"
             android:src="@android:drawable/ic_media_ff" />
 

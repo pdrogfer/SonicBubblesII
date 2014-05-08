@@ -23,13 +23,13 @@
 
         <ImageButton
             android:id="@+id/btnPrev"
-            style="@style/arrowBtnDemoNormal"
+            style="@style/arrowBtnDemoLarge"
             android:layout_gravity="left|center_vertical"
             android:src="@android:drawable/ic_media_rew" />
 
         <ImageButton
             android:id="@+id/btnNext"
-            style="@style/arrowBtnDemoNormal"
+            style="@style/arrowBtnDemoLarge"
             android:layout_gravity="right|center_vertical"
             android:src="@android:drawable/ic_media_ff" />
 
@@ -45,16 +45,16 @@
 
             <RadioButton
                 android:id="@+id/demo_radio1"
-                android:checked="true"
-                style="@style/radBtnDemoNormal"/>
+                style="@style/radBtnDemoNormal"
+                android:checked="true" />
 
             <RadioButton
                 android:id="@+id/demo_radio2"
-                style="@style/radBtnDemoNormal"/>
+                style="@style/radBtnDemoNormal" />
 
             <RadioButton
                 android:id="@+id/demo_radio3"
-                style="@style/radBtnDemoNormal"/>
+                style="@style/radBtnDemoNormal" />
         </RadioGroup>
     </FrameLayout>
 

@@ -17,6 +17,7 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <!-- Intro Button -->
     <style name="btnIntroNormal" parent="@android:style/Widget.Button">
         <item name="android:layout_width">200dp</item>
         <item name="android:layout_height">0dp</item>
@@ -55,6 +56,40 @@
         <item name="android:textSize">40sp</item>
     </style>
 
+    <!-- Demo Arrows Button -->
+    <style name="arrowBtnDemoNormal" parent="@android:style/Widget.ImageButton">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:background">@drawable/btn_demo_arrows</item>
+    </style>
+    <style name="arrowBtnDemoSmall" parent="@style/arrowBtnDemoNormal">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_margin">18dp</item>
+    </style>
+    <style name="arrowBtnDemoLarge" parent="@style/arrowBtnDemoNormal">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_margin">32dp</item>
+    </style>
+    <style name="arrowBtnDemoXLarge" parent="@style/arrowBtnDemoNormal">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_margin">48dp</item>
+    </style>
+    <style name="arrowBtnDemoSw600" parent="@style/arrowBtnDemoNormal">
+        <item name="android:layout_width">52dp</item>
+        <item name="android:layout_height">52dp</item>
+        <item name="android:layout_margin">40dp</item>
+    </style>
+    <style name="arrowBtnDemoSw720" parent="@style/arrowBtnDemoNormal">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_margin">58dp</item>
+    </style>
+    
+    <!-- Demo Radio Buttons -->
     <style name="radBtnDemoNormal" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -64,7 +99,7 @@
     </style>
 
     <style name="radBtnDemoSmall" parent="@style/radBtnDemoNormal">
-        <item name="android:padding">6dp</item>
+        <item name="android:padding">4dp</item>
     </style>
 
     <style name="radBtnDemoLarge" parent="@style/radBtnDemoNormal">
@@ -80,9 +115,10 @@
     </style>
 
     <style name="radBtnDemoSw720" parent="@style/radBtnDemoNormal">
-        <item name="android:padding">6dp</item>
+        <item name="android:padding">8dp</item>
     </style>
 
+    <!-- Game Text Buttons -->
     <style name="GameTextNormal">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">fill_parent</item>
@@ -110,6 +146,7 @@
         <item name="android:textSize">30sp</item>
     </style>
 
+    <!-- Demo Image View -->
     <style name="demoImageView">
 
         <!-- 3dp so the background border to be visible -->

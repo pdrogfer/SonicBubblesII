@@ -191,35 +191,34 @@ public final class R {
         public static final int rad_btn_demo_selector=0x7f02000c;
     }
     public static final class id {
-        public static final int best_scores=0x7f0c001a;
-        public static final int btnHighScores=0x7f0c0018;
-        public static final int btnHowToPlay=0x7f0c0017;
-        public static final int btnListenAgain=0x7f0c0009;
-        public static final int btnNext=0x7f0c0004;
-        public static final int btnPrev=0x7f0c0003;
-        public static final int btnStartGame=0x7f0c0016;
-        public static final int demo_RadioGroup=0x7f0c0005;
-        public static final int demo_radio1=0x7f0c0006;
-        public static final int demo_radio2=0x7f0c0007;
-        public static final int demo_radio3=0x7f0c0008;
-        public static final int demo_separator=0x7f0c0000;
-        public static final int drawing=0x7f0c000c;
-        public static final int exit=0x7f0c001b;
-        public static final int high_head=0x7f0c0010;
-        public static final int high_scores_list=0x7f0c0011;
-        public static final int how_to_play=0x7f0c0012;
-        public static final int imgView1=0x7f0c0001;
-        public static final int imgView2=0x7f0c0002;
-        public static final int intro=0x7f0c000f;
-        public static final int intro_image=0x7f0c0015;
-        public static final int lifeView=0x7f0c000b;
-        public static final int menu_item_share=0x7f0c001c;
-        public static final int new_game=0x7f0c0019;
-        public static final int scoreView=0x7f0c000a;
-        public static final int tVwTitle=0x7f0c0013;
-        public static final int tVwVersion=0x7f0c0014;
-        public static final int tvLevel=0x7f0c000d;
-        public static final int tvRound=0x7f0c000e;
+        public static final int best_scores=0x7f0c0019;
+        public static final int btnHighScores=0x7f0c0017;
+        public static final int btnHowToPlay=0x7f0c0016;
+        public static final int btnListenAgain=0x7f0c0008;
+        public static final int btnNext=0x7f0c0003;
+        public static final int btnPrev=0x7f0c0002;
+        public static final int btnStartGame=0x7f0c0015;
+        public static final int demo_RadioGroup=0x7f0c0004;
+        public static final int demo_radio1=0x7f0c0005;
+        public static final int demo_radio2=0x7f0c0006;
+        public static final int demo_radio3=0x7f0c0007;
+        public static final int drawing=0x7f0c000b;
+        public static final int exit=0x7f0c001a;
+        public static final int high_head=0x7f0c000f;
+        public static final int high_scores_list=0x7f0c0010;
+        public static final int how_to_play=0x7f0c0011;
+        public static final int imgView1=0x7f0c0000;
+        public static final int imgView2=0x7f0c0001;
+        public static final int intro=0x7f0c000e;
+        public static final int intro_image=0x7f0c0014;
+        public static final int lifeView=0x7f0c000a;
+        public static final int menu_item_share=0x7f0c001b;
+        public static final int new_game=0x7f0c0018;
+        public static final int scoreView=0x7f0c0009;
+        public static final int tVwTitle=0x7f0c0012;
+        public static final int tVwVersion=0x7f0c0013;
+        public static final int tvLevel=0x7f0c000c;
+        public static final int tvRound=0x7f0c000d;
     }
     public static final class layout {
         public static final int activity_gallery=0x7f030000;
@@ -306,24 +305,40 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0a0001;
-        public static final int GameTextLarge=0x7f0a0010;
-        public static final int GameTextNormal=0x7f0a000e;
-        public static final int GameTextSmall=0x7f0a000f;
-        public static final int GameTextSw600=0x7f0a0012;
-        public static final int GameTextSw720=0x7f0a0013;
-        public static final int GameTextXLarge=0x7f0a0011;
+        public static final int GameTextLarge=0x7f0a0016;
+        /**  Game Text Buttons 
+         */
+        public static final int GameTextNormal=0x7f0a0014;
+        public static final int GameTextSmall=0x7f0a0015;
+        public static final int GameTextSw600=0x7f0a0018;
+        public static final int GameTextSw720=0x7f0a0019;
+        public static final int GameTextXLarge=0x7f0a0017;
+        public static final int arrowBtnDemoLarge=0x7f0a000a;
+        /**  Demo Arrows Button 
+         */
+        public static final int arrowBtnDemoNormal=0x7f0a0008;
+        public static final int arrowBtnDemoSmall=0x7f0a0009;
+        public static final int arrowBtnDemoSw600=0x7f0a000c;
+        public static final int arrowBtnDemoSw720=0x7f0a000d;
+        public static final int arrowBtnDemoXLarge=0x7f0a000b;
         public static final int btnIntroLarge=0x7f0a0004;
+        /**  Intro Button 
+         */
         public static final int btnIntroNormal=0x7f0a0002;
         public static final int btnIntroSmall=0x7f0a0003;
         public static final int btnIntroSw600=0x7f0a0006;
         public static final int btnIntroSw720=0x7f0a0007;
         public static final int btnIntroXLarge=0x7f0a0005;
-        public static final int demoImageView=0x7f0a0014;
-        public static final int radBtnDemoLarge=0x7f0a000a;
-        public static final int radBtnDemoNormal=0x7f0a0008;
-        public static final int radBtnDemoSmall=0x7f0a0009;
-        public static final int radBtnDemoSw600=0x7f0a000c;
-        public static final int radBtnDemoSw720=0x7f0a000d;
-        public static final int radBtnDemoXLarge=0x7f0a000b;
+        /**  Demo Image View 
+         */
+        public static final int demoImageView=0x7f0a001a;
+        public static final int radBtnDemoLarge=0x7f0a0010;
+        /**  Demo Radio Buttons 
+         */
+        public static final int radBtnDemoNormal=0x7f0a000e;
+        public static final int radBtnDemoSmall=0x7f0a000f;
+        public static final int radBtnDemoSw600=0x7f0a0012;
+        public static final int radBtnDemoSw720=0x7f0a0013;
+        public static final int radBtnDemoXLarge=0x7f0a0011;
     }
 }

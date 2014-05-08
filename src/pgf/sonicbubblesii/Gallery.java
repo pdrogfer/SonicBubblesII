@@ -62,11 +62,22 @@ public class Gallery extends Activity implements OnClickListener, OnTouchListene
 
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(),
-				images_demo[imgIndex], imgView_Width, imgView_Height));
+	    float density  = getResources().getDisplayMetrics().density;
+	    float dpHeight = dm.heightPixels / density;
+	    float dpWidth  = dm.widthPixels / density;
+	    if (dpWidth < 600) {
+	    	imgView_Width = 400;
+	    	imgView_Height = 400;
+	    } else  {
+	    	imgView_Width = (int) dpWidth;
+	    	imgView_Height = (int) dpHeight;
+	    }
+		Log.i(SB, "view dimensions: " + imgView_Width + "x" + imgView_Height);
+		imgView1.setImageBitmap(decodeSampledBitmapFromResource(getResources(), images_demo[imgIndex], imgView_Width, imgView_Height));
 		visible = 1;
 	}
 
+	
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		// TODO implement and clean: declare all temp variables above
