@@ -6,4 +6,10 @@
         <item>нормальный</item>
         <item>эксперт</item>
     </string-array>
+    
+        <string-array 
+        name="string_array_sounds">
+        <item>Селеста</item>
+        <item>Колокола</item>
+    </string-array>
 </resources>

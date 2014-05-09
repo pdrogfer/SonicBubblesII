@@ -15,7 +15,9 @@
     <string name="tv_level">"Nivel: "</string>
     <string name="tv_round">"Ronda: "</string>
     <string name="dialog_level_title">Modo de Juego:</string>
+    <string name="dialog_sound_title">"Elige un sonido: "</string>
     <string name="btn_high_scores">Puntuaciones</string>
+    <string name="btn_sound_set">Sonidos</string>
     <string name="one_more">Partida Acabada! Jugar Otra?</string>
     <string name="yes">Si, por favor</string>
     <string name="no">No, gracias</string>

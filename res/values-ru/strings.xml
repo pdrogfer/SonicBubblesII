@@ -15,10 +15,12 @@
     <string name="wrong">неправильный</string>
     <string name="tv_level">"уровень: "</string>
     <string name="tv_round">"круглый: "</string>
+    <string name="dialog_sound_title">"Выберите звук: "</string>
+    <string name="btn_sound_set">Звуки</string>
     <string name="dialog_level_title">Геймплей:</string>
     <string name="btn_high_scores">Оценки</string>
     <string name="one_more">Готовые игры! Играть Другой?</string>
     <string name="yes">Si, por favor</string>
     <string name="no">Нет, спасибо</string>
-    
+
 </resources>
