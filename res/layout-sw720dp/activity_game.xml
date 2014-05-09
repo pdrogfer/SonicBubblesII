@@ -23,7 +23,8 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1.5"
             android:background="@drawable/btn_sel_grey"
-            android:text="@string/listen_again" />
+            android:text="@string/listen_again"
+            android:textColor="@color/White" />
 
         <TextView
             android:id="@+id/scoreView"

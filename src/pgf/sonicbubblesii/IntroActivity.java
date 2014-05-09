@@ -27,7 +27,7 @@ import android.widget.TextView;
 public class IntroActivity extends Activity implements OnClickListener {
 
 	TextView title, version;
-	Button startGame, howToPlay, bestScores;
+	Button startGame, howToPlay, bestScores, setSounds;
 	Typeface tf_thin, tf_reg;
 	// for share intent
 	private String shareText_web, shareText_intro;
@@ -47,7 +47,7 @@ public class IntroActivity extends Activity implements OnClickListener {
 	// Log tags
 	public final static String SB = "Sonic Bubbles II";
 	public final static String SB_LifeCycle = "SB II LifeCycle";
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,11 +57,13 @@ public class IntroActivity extends Activity implements OnClickListener {
 		startGame = (Button) findViewById(R.id.btnStartGame);
 		howToPlay = (Button) findViewById(R.id.btnHowToPlay);
 		bestScores = (Button) findViewById(R.id.btnHighScores);
+		setSounds = (Button) findViewById(R.id.btnSetSounds);
 		title = (TextView) findViewById(R.id.tVwTitle);
 		version = (TextView) findViewById(R.id.tVwVersion);
 		startGame.setOnClickListener(this);
 		howToPlay.setOnClickListener(this);
 		bestScores.setOnClickListener(this);
+		setSounds.setOnClickListener(this);
 		Modes = getResources().getStringArray(R.array.string_array_levels);
 		// set font
 		Typeface tf_thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
@@ -71,36 +73,38 @@ public class IntroActivity extends Activity implements OnClickListener {
 		startGame.setTypeface(tf_thin);
 		howToPlay.setTypeface(tf_thin);
 		bestScores.setTypeface(tf_thin);
+		setSounds.setTypeface(tf_thin);
 
 		if (soundPool == null) {
-			//to prevent loading unneccesary loads when returning from finished game
-			soundSetup();
+			// to prevent loading unneccesary loads when returning from finished
+			// game
+			soundSetup(0);
 		}
 	}
 
 	@SuppressLint("NewApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu depending on API version; this adds items to the action bar if it is present.
-	    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-	      
-	    	getMenuInflater().inflate(R.menu.share_menu, menu);
-	    	MenuItem item = menu.findItem(R.id.menu_item_share);
-	    	ShareActionProvider myShareActionProvider = (ShareActionProvider) item
-	    			.getActionProvider();
-	    	Intent intentShare = new Intent();
-	    	intentShare.setAction(Intent.ACTION_SEND);
-	    	shareText_web = getString(R.string.sonic_bubbles_web);
-	    	shareText_intro = getString(R.string.share_txt_3);
-	    	shareText = shareText_intro + shareText_web;
-	    	intentShare.putExtra(Intent.EXTRA_TEXT, shareText);
-	    	intentShare.setType("text/plain");
-	    	myShareActionProvider.setShareIntent(intentShare);
-	    }
-	    else {
-	    	getMenuInflater().inflate(R.menu.general_menu_api_10, menu);
-	    }
-	    return true;
+		// Inflate the menu depending on API version; this adds items to the
+		// action bar if it is present.
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+
+			getMenuInflater().inflate(R.menu.share_menu, menu);
+			MenuItem item = menu.findItem(R.id.menu_item_share);
+			ShareActionProvider myShareActionProvider = (ShareActionProvider) item
+					.getActionProvider();
+			Intent intentShare = new Intent();
+			intentShare.setAction(Intent.ACTION_SEND);
+			shareText_web = getString(R.string.sonic_bubbles_web);
+			shareText_intro = getString(R.string.share_txt_3);
+			shareText = shareText_intro + shareText_web;
+			intentShare.putExtra(Intent.EXTRA_TEXT, shareText);
+			intentShare.setType("text/plain");
+			myShareActionProvider.setShareIntent(intentShare);
+		} else {
+			getMenuInflater().inflate(R.menu.general_menu_api_10, menu);
+		}
+		return true;
 
 	}
 
@@ -122,10 +126,13 @@ public class IntroActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	private void soundSetup() {
+	private void soundSetup(int set) {
 		// Set the hardware buttons to control the app volume
 		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		// Load the sounds
+		if (soundPool != null) {
+			soundPool.release();
+		}
 		soundPool = new SoundPool(12, AudioManager.STREAM_MUSIC, 0);
 		soundPool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
 			@Override
@@ -134,19 +141,40 @@ public class IntroActivity extends Activity implements OnClickListener {
 			}
 		});
 		// the load function returns an int, the index of the loaded sound
-		soundC = soundPool.load(this, R.raw.c, 1);
-		soundCS = soundPool.load(this, R.raw.c_s, 1);
-		soundD = soundPool.load(this, R.raw.d, 1);
-		soundDS = soundPool.load(this, R.raw.d_s, 1);
-		soundE = soundPool.load(this, R.raw.e, 1);
-		soundF = soundPool.load(this, R.raw.f, 1);
-		soundFS = soundPool.load(this, R.raw.f_s, 1);
-		soundG = soundPool.load(this, R.raw.g, 1);
-		soundGS = soundPool.load(this, R.raw.g_s, 1);
-		soundA = soundPool.load(this, R.raw.a, 1);
-		soundAS = soundPool.load(this, R.raw.a_s, 1);
-		soundB = soundPool.load(this, R.raw.b, 1);
-		soundCC = soundPool.load(this, R.raw.cc, 1);
+		switch (set) {
+		case 0:
+			soundC = soundPool.load(this, R.raw.celesta_c, 1);
+			soundCS = soundPool.load(this, R.raw.celesta_c_s, 1);
+			soundD = soundPool.load(this, R.raw.celesta_d, 1);
+			soundDS = soundPool.load(this, R.raw.celesta_d_s, 1);
+			soundE = soundPool.load(this, R.raw.celesta_e, 1);
+			soundF = soundPool.load(this, R.raw.celesta_f, 1);
+			soundFS = soundPool.load(this, R.raw.celesta_f_s, 1);
+			soundG = soundPool.load(this, R.raw.celesta_g, 1);
+			soundGS = soundPool.load(this, R.raw.celesta_g_s, 1);
+			soundA = soundPool.load(this, R.raw.celesta_a, 1);
+			soundAS = soundPool.load(this, R.raw.celesta_a_s, 1);
+			soundB = soundPool.load(this, R.raw.celesta_b, 1);
+			soundCC = soundPool.load(this, R.raw.celesta_cc, 1);
+			break;
+		case 1:
+			soundC = soundPool.load(this, R.raw.delicate_bells_c, 1);
+			soundCS = soundPool.load(this, R.raw.delicate_bells_c_s, 1);
+			soundD = soundPool.load(this, R.raw.delicate_bells_d, 1);
+			soundDS = soundPool.load(this, R.raw.delicate_bells_d_s, 1);
+			soundE = soundPool.load(this, R.raw.delicate_bells_e, 1);
+			soundF = soundPool.load(this, R.raw.delicate_bells_f, 1);
+			soundFS = soundPool.load(this, R.raw.delicate_bells_f_s, 1);
+			soundG = soundPool.load(this, R.raw.delicate_bells_g, 1);
+			soundGS = soundPool.load(this, R.raw.delicate_bells_g_s, 1);
+			soundA = soundPool.load(this, R.raw.delicate_bells_a, 1);
+			soundAS = soundPool.load(this, R.raw.delicate_bells_a_s, 1);
+			soundB = soundPool.load(this, R.raw.delicate_bells_b, 1);
+			soundCC = soundPool.load(this, R.raw.delicate_bells_cc, 1);
+			break;
+		default:
+			break;
+		}
 	}
 
 	@Override
@@ -161,7 +189,35 @@ public class IntroActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.btnHighScores:
 			bestScores();
+			break;
+		case R.id.btnSetSounds:
+			changeSoundSet();
 		}
+
+	}
+
+	private void changeSoundSet() {
+		// Choose sound set and call soundSetup()
+		AlertDialog.Builder soundDialog = new AlertDialog.Builder(this);
+		soundDialog.setTitle(R.string.dialog_sound_title);
+		soundDialog.setItems(R.array.string_array_sounds, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// manage level choice
+				switch (which) {
+				case 0:
+					soundSetup(0);
+					break;
+				case 1:
+					soundSetup(1);
+					break;
+				default:
+					break;
+				}
+			}
+		});
+		soundDialog.show();
 
 	}
 

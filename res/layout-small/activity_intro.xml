@@ -55,9 +55,16 @@
     <Button
         android:id="@+id/btnHighScores"
         style="@style/btnIntroSmall"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="50dp"
         android:background="@drawable/btn_sel_yellow"
+        android:layout_marginTop="3dp"
         android:text="@string/btn_high_scores" />
+
+    <Button
+        android:id="@+id/btnSetSounds"
+        style="@style/btnIntroSmall"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/btn_sel_purple"
+        android:text="@string/btn_sound_set" />
 
 </LinearLayout>

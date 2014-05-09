@@ -14,6 +14,7 @@ public final class R {
     }
     public static final class array {
         public static final int string_array_levels=0x7f080000;
+        public static final int string_array_sounds=0x7f080001;
     }
     public static final class attr {
     }
@@ -179,30 +180,32 @@ public final class R {
         public static final int btn_demo_arrows=0x7f020000;
         public static final int btn_sel_blue=0x7f020001;
         public static final int btn_sel_grey=0x7f020002;
-        public static final int btn_sel_red=0x7f020003;
-        public static final int btn_sel_yellow=0x7f020004;
-        public static final int demo1=0x7f020005;
-        public static final int demo2=0x7f020006;
-        public static final int demo3=0x7f020007;
-        public static final int fondo1=0x7f020008;
-        public static final int ic_launcher=0x7f020009;
-        public static final int intro_logo=0x7f02000a;
-        public static final int rad_btn_demo_selector=0x7f02000b;
+        public static final int btn_sel_purple=0x7f020003;
+        public static final int btn_sel_red=0x7f020004;
+        public static final int btn_sel_yellow=0x7f020005;
+        public static final int demo1=0x7f020006;
+        public static final int demo2=0x7f020007;
+        public static final int demo3=0x7f020008;
+        public static final int fondo1=0x7f020009;
+        public static final int ic_launcher=0x7f02000a;
+        public static final int intro_logo=0x7f02000b;
+        public static final int rad_btn_demo_selector=0x7f02000c;
     }
     public static final class id {
-        public static final int best_scores=0x7f0c0019;
+        public static final int best_scores=0x7f0c001a;
         public static final int btnHighScores=0x7f0c0017;
         public static final int btnHowToPlay=0x7f0c0016;
         public static final int btnListenAgain=0x7f0c0008;
         public static final int btnNext=0x7f0c0003;
         public static final int btnPrev=0x7f0c0002;
+        public static final int btnSetSounds=0x7f0c0018;
         public static final int btnStartGame=0x7f0c0015;
         public static final int demo_RadioGroup=0x7f0c0004;
         public static final int demo_radio1=0x7f0c0005;
         public static final int demo_radio2=0x7f0c0006;
         public static final int demo_radio3=0x7f0c0007;
         public static final int drawing=0x7f0c000b;
-        public static final int exit=0x7f0c001a;
+        public static final int exit=0x7f0c001b;
         public static final int high_head=0x7f0c000f;
         public static final int high_scores_list=0x7f0c0010;
         public static final int how_to_play=0x7f0c0011;
@@ -211,8 +214,8 @@ public final class R {
         public static final int intro=0x7f0c000e;
         public static final int intro_image=0x7f0c0014;
         public static final int lifeView=0x7f0c000a;
-        public static final int menu_item_share=0x7f0c001b;
-        public static final int new_game=0x7f0c0018;
+        public static final int menu_item_share=0x7f0c001c;
+        public static final int new_game=0x7f0c0019;
         public static final int scoreView=0x7f0c0009;
         public static final int tVwTitle=0x7f0c0012;
         public static final int tVwVersion=0x7f0c0013;
@@ -232,50 +235,65 @@ public final class R {
         public static final int share_menu=0x7f0b0002;
     }
     public static final class raw {
-        public static final int a=0x7f050000;
-        public static final int a_s=0x7f050001;
-        public static final int b=0x7f050002;
-        public static final int c=0x7f050003;
-        public static final int c_s=0x7f050004;
-        public static final int cc=0x7f050005;
-        public static final int d=0x7f050006;
-        public static final int d_s=0x7f050007;
-        public static final int e=0x7f050008;
-        public static final int f=0x7f050009;
-        public static final int f_s=0x7f05000a;
-        public static final int g=0x7f05000b;
-        public static final int g_s=0x7f05000c;
+        public static final int celesta_a=0x7f050000;
+        public static final int celesta_a_s=0x7f050001;
+        public static final int celesta_b=0x7f050002;
+        public static final int celesta_c=0x7f050003;
+        public static final int celesta_c_s=0x7f050004;
+        public static final int celesta_cc=0x7f050005;
+        public static final int celesta_d=0x7f050006;
+        public static final int celesta_d_s=0x7f050007;
+        public static final int celesta_e=0x7f050008;
+        public static final int celesta_f=0x7f050009;
+        public static final int celesta_f_s=0x7f05000a;
+        public static final int celesta_g=0x7f05000b;
+        public static final int celesta_g_s=0x7f05000c;
+        public static final int delicate_bells_a=0x7f05000d;
+        public static final int delicate_bells_a_s=0x7f05000e;
+        public static final int delicate_bells_b=0x7f05000f;
+        public static final int delicate_bells_c=0x7f050010;
+        public static final int delicate_bells_c_s=0x7f050011;
+        public static final int delicate_bells_cc=0x7f050012;
+        public static final int delicate_bells_d=0x7f050013;
+        public static final int delicate_bells_d_s=0x7f050014;
+        public static final int delicate_bells_e=0x7f050015;
+        public static final int delicate_bells_f=0x7f050016;
+        public static final int delicate_bells_f_s=0x7f050017;
+        public static final int delicate_bells_g=0x7f050018;
+        public static final int delicate_bells_g_s=0x7f050019;
     }
     public static final class string {
         public static final int action_settings=0x7f090001;
         public static final int app_name=0x7f090000;
         public static final int best_scores=0x7f090004;
-        public static final int btn_high_scores=0x7f090014;
+        public static final int btn_high_scores=0x7f090015;
+        public static final int btn_sound_set=0x7f090016;
         public static final int btn_start_game=0x7f090008;
         public static final int dialog_level_title=0x7f090012;
+        public static final int dialog_sound_title=0x7f090013;
         public static final int exit=0x7f090006;
         public static final int feedback=0x7f090003;
         public static final int how_to_play=0x7f090005;
         public static final int instructions=0x7f09000c;
         public static final int listen_again=0x7f09000b;
         public static final int new_game=0x7f090007;
-        public static final int no=0x7f090017;
-        public static final int one_more=0x7f090015;
+        public static final int no=0x7f090019;
+        public static final int one_more=0x7f090017;
         public static final int right=0x7f09000d;
-        public static final int share=0x7f090018;
-        public static final int share_txt_1=0x7f090019;
-        public static final int share_txt_2=0x7f09001a;
-        public static final int share_txt_3=0x7f09001b;
+        public static final int share=0x7f09001a;
+        public static final int share_txt_1=0x7f09001b;
+        public static final int share_txt_2=0x7f09001c;
+        public static final int share_txt_3=0x7f09001d;
         public static final int sonic_bubbles_logo=0x7f090009;
-        public static final int sonic_bubbles_web=0x7f09001c;
+        public static final int sonic_bubbles_web=0x7f09001e;
         public static final int title_activity_game=0x7f090002;
         public static final int tv_level=0x7f09000f;
         public static final int tv_life=0x7f090011;
         public static final int tv_round=0x7f090010;
         public static final int tv_score=0x7f09000a;
-        public static final int version_number=0x7f090013;
+        public static final int version_number=0x7f090014;
         public static final int wrong=0x7f09000e;
-        public static final int yes=0x7f090016;
+        public static final int yes=0x7f090018;
     }
     public static final class style {
         /** 

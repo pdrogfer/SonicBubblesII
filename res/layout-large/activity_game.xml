@@ -23,6 +23,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/btn_sel_grey"
+            android:textColor="@color/White"
             android:text="@string/listen_again" />
 
         <TextView

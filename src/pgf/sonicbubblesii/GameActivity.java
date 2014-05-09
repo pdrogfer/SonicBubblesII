@@ -103,7 +103,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		roundTxt.setText(getString(R.string.tv_round) + Integer.toString(Round));
 
 		// play first theme
-		theme.playTheme(750, 1500);
+		theme.playTheme(850, 1500);
 
 		Log.i(SB_LifeCycle, "Game Activity On Create");
 
@@ -200,8 +200,8 @@ public class GameActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnListenAgain:
-			// play again the sequence, at 0.75 sec intervals
-			theme.playTheme(750, 0);
+			// play again the sequence, at 0.85 sec intervals
+			theme.playTheme(850, 0);
 			if (presentScore > 0)
 				presentScore -= 10;
 			drawView.writeScores();

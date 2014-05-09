@@ -6,4 +6,10 @@
         <item>Standard</item>
         <item>Expert</item>
     </string-array>
+    
+    <string-array 
+        name="string_array_sounds">
+        <item>Celesta</item>
+        <item>Bells</item>
+    </string-array>
 </resources>
