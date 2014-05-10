@@ -11,5 +11,6 @@
         name="string_array_sounds">
         <item>Celesta</item>
         <item>Campanillas</item>
+        <item>Flauta</item>
     </string-array>
 </resources>

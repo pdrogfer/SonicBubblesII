@@ -261,6 +261,19 @@ public final class R {
         public static final int delicate_bells_f_s=0x7f050017;
         public static final int delicate_bells_g=0x7f050018;
         public static final int delicate_bells_g_s=0x7f050019;
+        public static final int flauta_a=0x7f05001a;
+        public static final int flauta_a_s=0x7f05001b;
+        public static final int flauta_b=0x7f05001c;
+        public static final int flauta_c=0x7f05001d;
+        public static final int flauta_c_s=0x7f05001e;
+        public static final int flauta_cc=0x7f05001f;
+        public static final int flauta_d=0x7f050020;
+        public static final int flauta_d_s=0x7f050021;
+        public static final int flauta_e=0x7f050022;
+        public static final int flauta_f=0x7f050023;
+        public static final int flauta_f_s=0x7f050024;
+        public static final int flauta_g=0x7f050025;
+        public static final int flauta_g_s=0x7f050026;
     }
     public static final class string {
         public static final int action_settings=0x7f090001;
