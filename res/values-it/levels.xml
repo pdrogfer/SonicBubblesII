@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array 
+        name="string_array_levels">
+        <item>Relajado</item>
+        <item>Normal</item>
+        <item>Experto</item>
+    </string-array>
+    
+        <string-array 
+        name="string_array_sounds">
+        <item>Celesta</item>
+        <item>Campanillas</item>
+        <item>Flauta</item>
+    </string-array>
+</resources>

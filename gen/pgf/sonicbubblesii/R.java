@@ -274,6 +274,19 @@ public final class R {
         public static final int flauta_f_s=0x7f050024;
         public static final int flauta_g=0x7f050025;
         public static final int flauta_g_s=0x7f050026;
+        public static final int piano_a=0x7f050027;
+        public static final int piano_a_s=0x7f050028;
+        public static final int piano_b=0x7f050029;
+        public static final int piano_c=0x7f05002a;
+        public static final int piano_c_s=0x7f05002b;
+        public static final int piano_cc=0x7f05002c;
+        public static final int piano_d=0x7f05002d;
+        public static final int piano_d_s=0x7f05002e;
+        public static final int piano_e=0x7f05002f;
+        public static final int piano_f=0x7f050030;
+        public static final int piano_f_s=0x7f050031;
+        public static final int piano_g=0x7f050032;
+        public static final int piano_g_s=0x7f050033;
     }
     public static final class string {
         public static final int action_settings=0x7f090001;

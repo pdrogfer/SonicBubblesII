@@ -43,8 +43,11 @@ public class GameActivity extends Activity implements OnClickListener {
 	private static TextView scoreTxt, lifeTxt, levelTxt, roundTxt;
 	Typeface tf2;
 
-	// an arraylist of int to define wich samples are used in each level
+	// an arraylist of int to define which samples are used in each level
 	static List<Integer> chosenSamples = new ArrayList<Integer>();
+	// to store last sample played (to stop it in case it isn't already
+	// finished). None == -1
+	static int isPlaying = 0;
 
 	// scores
 	private static SharedPreferences gamePrefs;
@@ -112,25 +115,24 @@ public class GameActivity extends Activity implements OnClickListener {
 	@SuppressLint("NewApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu depending on API version; this adds items to the action bar if it is present.
-		 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-		getMenuInflater().inflate(R.menu.general_menu, menu);
-		MenuItem item = menu.findItem(R.id.menu_item_share);
-		myShareActionProvider = (ShareActionProvider) item
-				.getActionProvider();
-		Intent intentShare = new Intent();
-		intentShare.setAction(Intent.ACTION_SEND);
-		shareText_sub1 = getString(R.string.share_txt_1);
-		shareText_sub2 = getString(R.string.share_txt_2);
-		shareText_web = getString(R.string.sonic_bubbles_web);
-		shareText = shareText_sub1 + presentScore + shareText_sub2 + shareText_web;
-		intentShare.putExtra(Intent.EXTRA_TEXT, shareText);
-		intentShare.setType("text/plain");
-		myShareActionProvider.setShareIntent(intentShare);
-		 }
-		 else {
-			 getMenuInflater().inflate(R.menu.general_menu_api_10, menu);
-		 }
+		// Inflate the menu depending on API version; this adds items to the
+		// action bar if it is present.
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			getMenuInflater().inflate(R.menu.general_menu, menu);
+			MenuItem item = menu.findItem(R.id.menu_item_share);
+			myShareActionProvider = (ShareActionProvider) item.getActionProvider();
+			Intent intentShare = new Intent();
+			intentShare.setAction(Intent.ACTION_SEND);
+			shareText_sub1 = getString(R.string.share_txt_1);
+			shareText_sub2 = getString(R.string.share_txt_2);
+			shareText_web = getString(R.string.sonic_bubbles_web);
+			shareText = shareText_sub1 + presentScore + shareText_sub2 + shareText_web;
+			intentShare.putExtra(Intent.EXTRA_TEXT, shareText);
+			intentShare.setType("text/plain");
+			myShareActionProvider.setShareIntent(intentShare);
+		} else {
+			getMenuInflater().inflate(R.menu.general_menu_api_10, menu);
+		}
 		return true;
 	}
 
@@ -164,16 +166,16 @@ public class GameActivity extends Activity implements OnClickListener {
 	// Call to update the share intent
 	@SuppressLint("NewApi")
 	public static void updateShareIntent() {
-	    if (myShareActionProvider != null) {
+		if (myShareActionProvider != null) {
 			Intent intentShareUpdated = new Intent();
 			intentShareUpdated.setAction(Intent.ACTION_SEND);
 			shareText = shareText_sub1 + presentScore + shareText_sub2 + shareText_web;
 			intentShareUpdated.putExtra(Intent.EXTRA_TEXT, shareText);
 			intentShareUpdated.setType("text/plain");
 			myShareActionProvider.setShareIntent(intentShareUpdated);
-	    }
+		}
 	}
-	
+
 	private void themeSetup() {
 		// retrieve data from IntroActivity's level selector and generate a
 		// theme
@@ -487,9 +489,13 @@ public class GameActivity extends Activity implements OnClickListener {
 	public static void doSound(int sndId) {
 		float volume = 1;
 		if (IntroActivity.loaded) {
-			IntroActivity.soundPool.play(chosenSamples.get(sndId) + 1, volume, volume, 1, 0, 1f);
+			// first stop previous sound
+			IntroActivity.soundPool.stop(isPlaying);
+			// store the stream (thread) in which the new one is playing, to stop it in case
+			isPlaying = IntroActivity.soundPool.play(chosenSamples.get(sndId) + 1, volume, volume, 1, 0, 1f);
 			Log.i(SB, "sampleTriggered");
 		}
+
 	}
 
 	@Override
