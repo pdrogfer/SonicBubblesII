@@ -9,8 +9,11 @@
     
         <string-array 
         name="string_array_sounds">
-        <item>Celesta</item>
-        <item>Clochette</item>
         <item>Flûte</item>
+        <item>Célesta</item>
+        <item>Clarinet</item>
+        <item>Cor Français</item>
+        <item>Harpe</item>
+        <item>Piano</item>
     </string-array>
 </resources>

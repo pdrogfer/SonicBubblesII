@@ -143,6 +143,21 @@ public class IntroActivity extends Activity implements OnClickListener {
 		// the load function returns an int, the index of the loaded sound
 		switch (set) {
 		case 0:
+			soundC = soundPool.load(this, R.raw.flauta_c, 1);
+			soundCS = soundPool.load(this, R.raw.flauta_c_s, 1);
+			soundD = soundPool.load(this, R.raw.flauta_d, 1);
+			soundDS = soundPool.load(this, R.raw.flauta_d_s, 1);
+			soundE = soundPool.load(this, R.raw.flauta_e, 1);
+			soundF = soundPool.load(this, R.raw.flauta_f, 1);
+			soundFS = soundPool.load(this, R.raw.flauta_f_s, 1);
+			soundG = soundPool.load(this, R.raw.flauta_g, 1);
+			soundGS = soundPool.load(this, R.raw.flauta_g_s, 1);
+			soundA = soundPool.load(this, R.raw.flauta_a, 1);
+			soundAS = soundPool.load(this, R.raw.flauta_a_s, 1);
+			soundB = soundPool.load(this, R.raw.flauta_b, 1);
+			soundCC = soundPool.load(this, R.raw.flauta_cc, 1);
+			break;
+		case 1:
 			soundC = soundPool.load(this, R.raw.celesta_c, 1);
 			soundCS = soundPool.load(this, R.raw.celesta_c_s, 1);
 			soundD = soundPool.load(this, R.raw.celesta_d, 1);
@@ -157,35 +172,65 @@ public class IntroActivity extends Activity implements OnClickListener {
 			soundB = soundPool.load(this, R.raw.celesta_b, 1);
 			soundCC = soundPool.load(this, R.raw.celesta_cc, 1);
 			break;
-		case 1:
-			soundC = soundPool.load(this, R.raw.delicate_bells_c, 1);
-			soundCS = soundPool.load(this, R.raw.delicate_bells_c_s, 1);
-			soundD = soundPool.load(this, R.raw.delicate_bells_d, 1);
-			soundDS = soundPool.load(this, R.raw.delicate_bells_d_s, 1);
-			soundE = soundPool.load(this, R.raw.delicate_bells_e, 1);
-			soundF = soundPool.load(this, R.raw.delicate_bells_f, 1);
-			soundFS = soundPool.load(this, R.raw.delicate_bells_f_s, 1);
-			soundG = soundPool.load(this, R.raw.delicate_bells_g, 1);
-			soundGS = soundPool.load(this, R.raw.delicate_bells_g_s, 1);
-			soundA = soundPool.load(this, R.raw.delicate_bells_a, 1);
-			soundAS = soundPool.load(this, R.raw.delicate_bells_a_s, 1);
-			soundB = soundPool.load(this, R.raw.delicate_bells_b, 1);
-			soundCC = soundPool.load(this, R.raw.delicate_bells_cc, 1);
-			break;
 		case 2:
-			soundC = soundPool.load(this, R.raw.flauta_c, 1);
-			soundCS = soundPool.load(this, R.raw.flauta_c_s, 1);
-			soundD = soundPool.load(this, R.raw.flauta_d, 1);
-			soundDS = soundPool.load(this, R.raw.flauta_d_s, 1);
-			soundE = soundPool.load(this, R.raw.flauta_e, 1);
-			soundF = soundPool.load(this, R.raw.flauta_f, 1);
-			soundFS = soundPool.load(this, R.raw.flauta_f_s, 1);
-			soundG = soundPool.load(this, R.raw.flauta_g, 1);
-			soundGS = soundPool.load(this, R.raw.flauta_g_s, 1);
-			soundA = soundPool.load(this, R.raw.flauta_a, 1);
-			soundAS = soundPool.load(this, R.raw.flauta_a_s, 1);
-			soundB = soundPool.load(this, R.raw.flauta_b, 1);
-			soundCC = soundPool.load(this, R.raw.flauta_cc, 1);
+			soundC = soundPool.load(this, R.raw.clarinet_c, 1);
+			soundCS = soundPool.load(this, R.raw.clarinet_c_s, 1);
+			soundD = soundPool.load(this, R.raw.clarinet_d, 1);
+			soundDS = soundPool.load(this, R.raw.clarinet_d_s, 1);
+			soundE = soundPool.load(this, R.raw.clarinet_e, 1);
+			soundF = soundPool.load(this, R.raw.clarinet_f, 1);
+			soundFS = soundPool.load(this, R.raw.clarinet_f_s, 1);
+			soundG = soundPool.load(this, R.raw.clarinet_g, 1);
+			soundGS = soundPool.load(this, R.raw.clarinet_g_s, 1);
+			soundA = soundPool.load(this, R.raw.clarinet_a, 1);
+			soundAS = soundPool.load(this, R.raw.clarinet_a_s, 1);
+			soundB = soundPool.load(this, R.raw.clarinet_b, 1);
+			soundCC = soundPool.load(this, R.raw.clarinet_cc, 1);
+			break;
+		case 3:
+			soundC = soundPool.load(this, R.raw.f_horn_c, 1);
+			soundCS = soundPool.load(this, R.raw.f_horn_c_s, 1);
+			soundD = soundPool.load(this, R.raw.f_horn_d, 1);
+			soundDS = soundPool.load(this, R.raw.f_horn_d_s, 1);
+			soundE = soundPool.load(this, R.raw.f_horn_e, 1);
+			soundF = soundPool.load(this, R.raw.f_horn_f, 1);
+			soundFS = soundPool.load(this, R.raw.f_horn_f_s, 1);
+			soundG = soundPool.load(this, R.raw.f_horn_g, 1);
+			soundGS = soundPool.load(this, R.raw.f_horn_g_s, 1);
+			soundA = soundPool.load(this, R.raw.f_horn_a, 1);
+			soundAS = soundPool.load(this, R.raw.f_horn_a_s, 1);
+			soundB = soundPool.load(this, R.raw.f_horn_b, 1);
+			soundCC = soundPool.load(this, R.raw.f_horn_cc, 1);
+			break;
+		case 4:
+			soundC = soundPool.load(this, R.raw.harp_c, 1);
+			soundCS = soundPool.load(this, R.raw.harp_c_s, 1);
+			soundD = soundPool.load(this, R.raw.harp_d, 1);
+			soundDS = soundPool.load(this, R.raw.harp_d_s, 1);
+			soundE = soundPool.load(this, R.raw.harp_e, 1);
+			soundF = soundPool.load(this, R.raw.harp_f, 1);
+			soundFS = soundPool.load(this, R.raw.harp_f_s, 1);
+			soundG = soundPool.load(this, R.raw.harp_g, 1);
+			soundGS = soundPool.load(this, R.raw.harp_g_s, 1);
+			soundA = soundPool.load(this, R.raw.harp_a, 1);
+			soundAS = soundPool.load(this, R.raw.harp_a_s, 1);
+			soundB = soundPool.load(this, R.raw.harp_b, 1);
+			soundCC = soundPool.load(this, R.raw.harp_cc, 1);
+			break;
+		case 5:
+			soundC = soundPool.load(this, R.raw.piano_c, 1);
+			soundCS = soundPool.load(this, R.raw.piano_c_s, 1);
+			soundD = soundPool.load(this, R.raw.piano_d, 1);
+			soundDS = soundPool.load(this, R.raw.piano_d_s, 1);
+			soundE = soundPool.load(this, R.raw.piano_e, 1);
+			soundF = soundPool.load(this, R.raw.piano_f, 1);
+			soundFS = soundPool.load(this, R.raw.piano_f_s, 1);
+			soundG = soundPool.load(this, R.raw.piano_g, 1);
+			soundGS = soundPool.load(this, R.raw.piano_g_s, 1);
+			soundA = soundPool.load(this, R.raw.piano_a, 1);
+			soundAS = soundPool.load(this, R.raw.piano_a_s, 1);
+			soundB = soundPool.load(this, R.raw.piano_b, 1);
+			soundCC = soundPool.load(this, R.raw.piano_cc, 1);
 			break;
 		default:
 			break;
@@ -219,7 +264,6 @@ public class IntroActivity extends Activity implements OnClickListener {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// manage level choice
 				switch (which) {
 				case 0:
 					soundSetup(0);
@@ -229,6 +273,15 @@ public class IntroActivity extends Activity implements OnClickListener {
 					break;
 				case 2:
 					soundSetup(2);
+					break;
+				case 3:
+					soundSetup(3);
+					break;
+				case 4:
+					soundSetup(4);
+					break;
+				case 5:
+					soundSetup(5);
 					break;
 				default:
 					break;

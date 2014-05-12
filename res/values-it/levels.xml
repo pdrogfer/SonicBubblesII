@@ -9,8 +9,11 @@
     
         <string-array 
         name="string_array_sounds">
+        <item>Flauto</item>
         <item>Celesta</item>
-        <item>Campanillas</item>
-        <item>Flauta</item>
+        <item>Clarinetto</item>
+        <item>French Horn</item>
+        <item>Harp</item>
+        <item>Piano</item>
     </string-array>
 </resources>
