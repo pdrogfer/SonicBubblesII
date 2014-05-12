@@ -300,19 +300,6 @@ public final class R {
         public static final int harp_f_s=0x7f05003e;
         public static final int harp_g=0x7f05003f;
         public static final int harp_g_s=0x7f050040;
-        public static final int piano_a=0x7f050041;
-        public static final int piano_a_s=0x7f050042;
-        public static final int piano_b=0x7f050043;
-        public static final int piano_c=0x7f050044;
-        public static final int piano_c_s=0x7f050045;
-        public static final int piano_cc=0x7f050046;
-        public static final int piano_d=0x7f050047;
-        public static final int piano_d_s=0x7f050048;
-        public static final int piano_e=0x7f050049;
-        public static final int piano_f=0x7f05004a;
-        public static final int piano_f_s=0x7f05004b;
-        public static final int piano_g=0x7f05004c;
-        public static final int piano_g_s=0x7f05004d;
     }
     public static final class string {
         public static final int action_settings=0x7f090001;

@@ -217,21 +217,6 @@ public class IntroActivity extends Activity implements OnClickListener {
 			soundB = soundPool.load(this, R.raw.harp_b, 1);
 			soundCC = soundPool.load(this, R.raw.harp_cc, 1);
 			break;
-		case 5:
-			soundC = soundPool.load(this, R.raw.piano_c, 1);
-			soundCS = soundPool.load(this, R.raw.piano_c_s, 1);
-			soundD = soundPool.load(this, R.raw.piano_d, 1);
-			soundDS = soundPool.load(this, R.raw.piano_d_s, 1);
-			soundE = soundPool.load(this, R.raw.piano_e, 1);
-			soundF = soundPool.load(this, R.raw.piano_f, 1);
-			soundFS = soundPool.load(this, R.raw.piano_f_s, 1);
-			soundG = soundPool.load(this, R.raw.piano_g, 1);
-			soundGS = soundPool.load(this, R.raw.piano_g_s, 1);
-			soundA = soundPool.load(this, R.raw.piano_a, 1);
-			soundAS = soundPool.load(this, R.raw.piano_a_s, 1);
-			soundB = soundPool.load(this, R.raw.piano_b, 1);
-			soundCC = soundPool.load(this, R.raw.piano_cc, 1);
-			break;
 		default:
 			break;
 		}
@@ -279,9 +264,6 @@ public class IntroActivity extends Activity implements OnClickListener {
 					break;
 				case 4:
 					soundSetup(4);
-					break;
-				case 5:
-					soundSetup(5);
 					break;
 				default:
 					break;
