@@ -2,6 +2,8 @@ package pgf.sonicbubblesii;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,11 +19,14 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Bitmap.Config;
 import android.graphics.PorterDuff.Mode;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class DrawingView extends View {
@@ -323,14 +328,32 @@ public class DrawingView extends View {
 	private void displayToast(boolean answer, int lifeCount) {
 		// display a short message type: right/wrong
 		if (lifeCount > 0) {
-			feedback = answer ? getContext().getString(R.string.right) : getContext().getString(
-					R.string.wrong);
-			Toast t = Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT);
+			// customNotification();
+			feedback = answer ? getContext().getString(R.string.right) :
+			getContext().getString(
+			R.string.wrong);
+			Toast t = Toast.makeText(getContext(), feedback,
+			Toast.LENGTH_SHORT);
 			t.setGravity(Gravity.CENTER, 0, 0);
 			t.show();
 		} else {
 			newGameDialog();
 		}
+	}
+
+	private void customNotification() {
+		LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
+		View layout = inflater.inflate(R.layout.custom_toast,
+		                               null);
+
+		TextView text = (TextView) layout.findViewById(R.id.textView1);
+		text.setText("This is a custom toast");
+
+		Toast toast = new Toast(getContext());
+		toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+		toast.setDuration(Toast.LENGTH_SHORT);
+		toast.setView(layout);
+		toast.show();
 	}
 
 	private void newGameDialog() {

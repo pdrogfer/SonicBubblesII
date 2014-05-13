@@ -192,7 +192,7 @@ public final class R {
         public static final int rad_btn_demo_selector=0x7f02000c;
     }
     public static final class id {
-        public static final int best_scores=0x7f0c001a;
+        public static final int best_scores=0x7f0c001b;
         public static final int btnHighScores=0x7f0c0017;
         public static final int btnHowToPlay=0x7f0c0016;
         public static final int btnListenAgain=0x7f0c0008;
@@ -205,7 +205,7 @@ public final class R {
         public static final int demo_radio2=0x7f0c0006;
         public static final int demo_radio3=0x7f0c0007;
         public static final int drawing=0x7f0c000b;
-        public static final int exit=0x7f0c001b;
+        public static final int exit=0x7f0c001c;
         public static final int high_head=0x7f0c000f;
         public static final int high_scores_list=0x7f0c0010;
         public static final int how_to_play=0x7f0c0011;
@@ -214,11 +214,12 @@ public final class R {
         public static final int intro=0x7f0c000e;
         public static final int intro_image=0x7f0c0014;
         public static final int lifeView=0x7f0c000a;
-        public static final int menu_item_share=0x7f0c001c;
-        public static final int new_game=0x7f0c0019;
+        public static final int menu_item_share=0x7f0c001d;
+        public static final int new_game=0x7f0c001a;
         public static final int scoreView=0x7f0c0009;
         public static final int tVwTitle=0x7f0c0012;
         public static final int tVwVersion=0x7f0c0013;
+        public static final int textView1=0x7f0c0019;
         public static final int tvLevel=0x7f0c000c;
         public static final int tvRound=0x7f0c000d;
     }
@@ -228,6 +229,7 @@ public final class R {
         public static final int activity_high=0x7f030002;
         public static final int activity_how=0x7f030003;
         public static final int activity_intro=0x7f030004;
+        public static final int custom_toast=0x7f030005;
     }
     public static final class menu {
         public static final int general_menu=0x7f0b0000;
