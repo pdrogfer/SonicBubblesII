@@ -173,8 +173,8 @@ public class DrawingView extends View {
 			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRadius(), dotPaint);
 
 		}
-		canvas.drawPath(fingerOldPath, fingerPaint);
 		canvas.drawPath(fingerPath, fingerPaint);
+		canvas.drawPath(fingerOldPath, fingerPaint);
 		invalidate();
 
 	}
