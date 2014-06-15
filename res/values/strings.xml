@@ -20,7 +20,7 @@
     <string name="tv_life">"Life: "</string>
     <string name="dialog_level_title">"Select Mode: "</string>
     <string name="dialog_sound_title">"Select Sound: "</string>
-    <string name="version_number">v2.5</string>
+    <string name="version_number">v2.6</string>
     <string name="btn_high_scores">High Scores</string>
     <string name="btn_sound_set">Sound Sets</string>
     <string name="one_more">Game Over! Play Again?</string>

@@ -42,7 +42,7 @@ public class DrawingView extends View {
 	private Paint fingerPaint, canvasPaint, dotPaint, animPaint, dotShadowPaint, animShadowPaint;
 	private static Paint paint;
 	// drawing path
-	private Path fingerPath;
+	private Path fingerPath, fingerOldPath;
 	// shadow offset
 	private static int shadowOff = 10; // TODO Make it relative to canvas width
 	private static int shadowAlpha = 100;
@@ -59,7 +59,7 @@ public class DrawingView extends View {
 	 */
 	private double x, y;
 	double distX, distY;
-	float touchX, touchY;
+	float touchX, touchY, origX, origY, dotPlayingX, dotPlayingY;
 	boolean equalLength, rightAnswer;
 	int nDots, nSamples;
 	double currTime, delTime;
@@ -80,6 +80,7 @@ public class DrawingView extends View {
 		canvasPaint = new Paint(Paint.DITHER_FLAG);
 		canvasPaint.setAlpha(255);
 		fingerPath = new Path();
+		fingerOldPath = new Path();
 		fingerPaint = new Paint();
 		dotPaint = new Paint();
 		dotShadowPaint = new Paint();
@@ -172,6 +173,7 @@ public class DrawingView extends View {
 			canvas.drawCircle(dots[d].getPosX(), dots[d].getPosY(), dots[d].getRadius(), dotPaint);
 
 		}
+		canvas.drawPath(fingerOldPath, fingerPaint);
 		canvas.drawPath(fingerPath, fingerPaint);
 		invalidate();
 
@@ -239,19 +241,34 @@ public class DrawingView extends View {
 		// handle finger proximity to Dots for sound triggering
 		touchX = event.getX();
 		touchY = event.getY();
+		boolean inBubble;
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			restartHand();
-			fingerPath.moveTo(touchX, touchY);
-			checkBubble(touchX, touchY);
+			// checkBubble is now boolean, it returns true when the bubble is
+			// touched. Use it to "break" the line
+			if (checkBubble(touchX, touchY)) {
+				// set the origen of the lines to the center of the dot. See checkBubble
+				fingerPath.moveTo(dotPlayingX, dotPlayingY);
+				fingerOldPath.moveTo(dotPlayingX, dotPlayingY);
+			}
 			break;
 		case MotionEvent.ACTION_MOVE:
-			fingerPath.lineTo(touchX, touchY);
-			checkBubble(touchX, touchY);
+			// if finger in next bubble, add a corner
+			if (checkBubble(touchX, touchY)) {
+				fingerPath.reset();
+				fingerPath.moveTo(dotPlayingX, dotPlayingY);
+				fingerOldPath.lineTo(dotPlayingX, dotPlayingY);
+			} else {
+				fingerPath.reset();
+				fingerPath.moveTo(dotPlayingX, dotPlayingY);
+				fingerPath.lineTo(touchX, touchY);
+			}
 			break;
 		case MotionEvent.ACTION_UP:
 			checkHand();
+			fingerOldPath.reset();
 			fingerPath.reset();
 			break;
 		default:
@@ -329,11 +346,9 @@ public class DrawingView extends View {
 		// display a short message type: right/wrong
 		if (lifeCount > 0) {
 			// customNotification();
-			feedback = answer ? getContext().getString(R.string.right) :
-			getContext().getString(
-			R.string.wrong);
-			Toast t = Toast.makeText(getContext(), feedback,
-			Toast.LENGTH_SHORT);
+			feedback = answer ? getContext().getString(R.string.right) : getContext().getString(
+					R.string.wrong);
+			Toast t = Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT);
 			t.setGravity(Gravity.CENTER, 0, 0);
 			t.show();
 		} else {
@@ -343,8 +358,7 @@ public class DrawingView extends View {
 
 	private void customNotification() {
 		LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
-		View layout = inflater.inflate(R.layout.custom_toast,
-		                               null);
+		View layout = inflater.inflate(R.layout.custom_toast, null);
 
 		TextView text = (TextView) layout.findViewById(R.id.textView1);
 		text.setText("This is a custom toast");
@@ -462,7 +476,8 @@ public class DrawingView extends View {
 		}
 	}
 
-	private void checkBubble(float touchX, float touchY) {
+	private boolean checkBubble(float touchX, float touchY) {
+		boolean result = false;
 		for (Dot eachDot : dots) {
 			// To avoid duplicated sound triggerings
 			x = touchX - eachDot.getPosX();
@@ -486,8 +501,13 @@ public class DrawingView extends View {
 				GameActivity.doSound(eachDot.getSample());
 				eachDot.setSampleTriggered(true);
 				eachDot.setWaveOn(true);
+				// store the coordinates of the dot being played
+				dotPlayingX = eachDot.getPosX();
+				dotPlayingY = eachDot.getPosY();
+				result = true;
 			}
 		}
+		return result;
 	}
 
 	public void startNew() {
