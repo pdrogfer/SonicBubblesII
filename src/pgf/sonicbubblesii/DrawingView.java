@@ -241,7 +241,6 @@ public class DrawingView extends View {
 		// handle finger proximity to Dots for sound triggering
 		touchX = event.getX();
 		touchY = event.getY();
-		boolean inBubble;
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
@@ -249,7 +248,7 @@ public class DrawingView extends View {
 			// checkBubble is now boolean, it returns true when the bubble is
 			// touched. Use it to "break" the line
 			if (checkBubble(touchX, touchY)) {
-				// set the origen of the lines to the center of the dot. See checkBubble
+				// set the origin of the lines to the center of the dot. See checkBubble
 				fingerPath.moveTo(dotPlayingX, dotPlayingY);
 				fingerOldPath.moveTo(dotPlayingX, dotPlayingY);
 			}
